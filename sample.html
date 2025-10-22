@@ -660,8 +660,8 @@
 			const padN = "vocabulary_" + String(rawN).padStart(5, '0');
 
 			let newOption = document.createElement('option');
-			newOption.value = dict[padN]["key"];
-			newOption.textContent = dict[padN]["title"];
+			newOption.value = dict[padN]?.key;
+			newOption.textContent = dict[padN]?.title;
 
 			let l = dict[padN]["gloss"]["ko"];
 			l = l.join("; ")
