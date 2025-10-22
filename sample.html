@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>«켈트어 창작사전» 제1편: 아일랜드어</title>
+	
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0">
+	<meta name="MobileOptimized" content="300">
+	<meta name="HandheldFriendly" content="true">
+
+	<link rel="icon" href="resources/favicon.ico" sizes="any">
+	<style>
+		@font-face {
+		  font-family: 'font_ko';
+		  src: url('resources/fonts/onglyph_very.ttf');
+		  font-style: normal;
+		  font-weight: 400;
+		}
+		@font-face {
+		  font-family: 'font_en';
+		  src: url('resources/fonts/CormorantGaramond-Regular.ttf');
+		  font-style: normal;
+		  font-weight: 400;
+		}
+		@font-face {
+		  font-family: 'font_en';
+		  src: url('resources/fonts/CormorantGaramond-Italic.ttf');
+		  font-style: italic;
+		  font-weight: 400;
+		}
+		@font-face {
+		  font-family: 'font_en';
+		  src: url('resources/fonts/CormorantGaramond-Bold.ttf');
+		  font-style: normal;
+		  font-weight: 700;
+		}
+		@font-face {
+		  font-family: 'font_en';
+		  src: url('resources/fonts/CormorantGaramond-BoldItalic.ttf');
+		  font-style: italic;
+		  font-weight: 700;
+		}
+		@font-face {
+		  font-family: 'font_ipa';
+		  src: url('resources/fonts/CharisSIL-Regular.ttf');
+		  font-style: normal;
+		  font-weight: 400;
+		}
+		@font-face {
+		  font-family: 'font_de';
+		  src: url('resources/fonts/AlteSchwabacher.ttf');
+		  font-style: normal;
+		  font-weight: 400;
+		}
+
+		:root {
+		  --color_background: #000000;
+		  --color_shadow: #000001;
+		  --color_text: #000002;
+		  --color_anchor: #000003;
+		  --color_disabled: #000004;
+		  --color_check: #000005;
+		  --color_textbox: #000006;
+		}
+
+
+		body { font-family: 'font_en', 'font_ko', 'font_or'; font-size: 24px; padding: 0px; margin: 0px; background-color: var(--color_background); color: var(--color_text); overflow-x: hidden; overflow-y: scroll; }
+
+		a { text-decoration: none; color: var(--color_anchor); }
+
+		a:hover { text-decoration: underline; }
+
+		.add_favourites:hover { text-decoration: none; }
+
+		hr { border : solid 1px var(--color_anchor); }
+
+		img { border: 0px; max-width: 95%; height: auto; }
+
+		td { text-align: center; line-height: 100%; width: 200px; }
+
+		header { position: sticky; text-align: right; margin-right: -50px; bottom: 15px; font-size: 20pt; }
+		@media (max-width: 770px) {
+		  header { position: sticky; text-align: right; margin-right: 0px; bottom: 15px; font-size: 20pt; }
+		}
+
+		.original_script { font-family: 'font_or'; }
+
+		.ADFB { line-height: 200%; }
+
+		.IPA { font-family: 'font_ipa', 'font_ko'; }
+
+		.ko { font-family: 'font_ko'; }
+
+		.gramwiz_button { color: var(--color_textbox); }
+
+		.copyright { color: var(--color_anchor); }
+
+		input[type="search"]::-webkit-search-cancel-button {
+		  -webkit-appearance: none;
+		  appearance: none;
+		}
+
+		div.suggestions { margin-top: -45px; }
+
+		div.includes { margin-top: 15px; margin-bottom: -25px; line-height: 200%; }
+
+		div.abc { margin-top: 15px; margin-bottom: -25px; text-align: center;}
+
+		main { padding-bottom: 50px; position: relative; }
+
+		article { width: 770px; margin: 0px auto; position: relative; }
+
+		@media (max-width: 770px) {
+			article {width: auto; margin: auto 10px;}
+		}
+
+		div#topbar { xtext-shadow: var(--color_shadow) 1px 1px 0px; padding: 2px 0px; background-color: var(--color_shadow); position: sticky; top: 0; z-index: 1; border-bottom: 1px solid var(--color_anchor); }
+		div#topbar > div.inside { width: 770px; margin: 0px auto; padding: 7px 0px;  }
+		div#topbar a { font-weight: bold; color: var(--color_anchor); }
+		div#topbar div.clear { clear: both; }
+		div#topbar a.logo_image { cursor: pointer; display: inline; margin-right: -50px; }
+
+		@media (max-width: 770px) {
+			div#topbar > div.inside { width: auto; margin: auto 10px; }
+		}
+
+		@media (max-width: 600px) {
+		  div#topbar span.long { display: none; }
+		  div#topbar span.short { display: inline; }
+		}
+
+		div.topmenu { float: right; font-size: 24px; }
+		div.topmenu a { padding: 3px 10px; border-radius: 2px; display: block; float: left; }
+		div.topmenu a.current { background-color: var(--color_text); }
+
+		div.dropdown { float: right; margin-right: 10px; position: relative; cursor: default; z-index: 20; }
+		div.dropdown span.title { padding: 3px 10px; border-radius: 2px 2px 0px 0px; display: block; font-weight: bold;}
+		div.dropdown:hover span.title { background-color: var(--color_background); box-shadow: 2px 2px 2px var(--color_shadow);}
+		div.dropdown div.submenu { display: none; position: absolute; right: 0px; top: 1em; margin-top: 2px; white-space: nowrap; background-color: var(--color_background); padding: 15px 20px 15px 10px; box-shadow: 2px 2px 2px var(--color_shadow); border-radius: 2px 0px 2px 2px; min-width: 100px; z-index: 20; }
+		div.dropdown:hover div.submenu { display: block; }
+		div.dropdown div.submenu a { font-weight: normal; display: block; padding: 5px 10px; text-align: right; }
+		@media (max-width: 600px) {
+		  div.dropdown div.submenu { right: -200px; }
+		}
+
+		.search { margin: 0px 0px 65px 0px; padding: 0px; background-color: var(--color_shadow); border-radius: 0px 0px 3px 3px; box-shadow: 0px 0px 3px var(--color_text); }
+		.search > div.inside { padding: 15px 10px 10px 10px; }
+		.search div.textbox { position: relative; background-color: var(--color_textbox); padding: 8px 30px 8px 8px; }
+		.search div.textbox input.text { display: inline; border: 0px; font-family: inherit; font-size: inherit; width: 99%; background-color: var(--color_textbox); color: var(--color_text) }
+		.search div.textbox input.text:focus { outline: none; }
+		.search div.textbox img.img_query { display: inline-block; cursor: pointer; border: 0px; padding: 0px; width: 32px; position: absolute; top: 7px; right: 10px; bottom: 0px; }
+		.search div.message { margin: 10px 0px 0px 2px; font-weight: bold; text-align: right; margin-right: 42px;}
+
+		#gramwiz_input_1 { display: inline-block; width: 48%; }
+		#gramwiz_input_2 { display: inline-block; width: 48%; }
+		@media (max-width: 770px) {
+		  #gramwiz_input_1 { display: block; width: 100%; }
+		  #gramwiz_input_2 { display: block; width: 100%; margin-top: -50px; }
+		}
+
+		footer.footer { background-color: var(--color_shadow); font-size: 60%; border-top: 1px solid var(--color_anchor); border-bottom: 1px solid var(--color_anchor); }
+		footer.footer > div.inside { position: relative; width: 770px; margin: 0px auto; padding: 21px 0px 16px 0px; text-align: left; line-height: 1.5em; }
+		footer.footer a { font-weight: bold; }
+		@media (max-width: 770px) {
+			footer.footer > div.inside { width: auto; margin: auto 10px; text-align: left; }
+		}
+
+		label {
+		  display: inline-flex;
+		  align-items: center;
+		  gap: 0.5rem;
+		  cursor: pointer;
+		}
+
+		[type="checkbox"] {
+		  appearance: none;
+		  position: relative;
+		  border: max(2px, 0.16em) solid gray;
+		  border-radius: 2em;
+		  width: 3.6em;
+		  height: 2em;
+		}
+
+		[type="checkbox"]::before {
+		  content: "";
+		  position: absolute;
+		  left: 0;
+		  width: 1.6em;
+		  height: 1.6em;
+		  border-radius: 50%;
+		  transform: scale(0.8);
+		  background-color: gray;
+		  transition: left 250ms linear;
+		}
+
+		[type="checkbox"]:checked {
+		  background-color: var(--color_check);
+		  border-color: var(--color_check);
+		}
+
+		[type="checkbox"]:checked::before {
+		  background-color: white;
+		  left: 1.6em;
+		}
+
+		[type="checkbox"]:disabled {
+		  border-color: lightgray;
+		  opacity: 0.7;
+		  cursor: not-allowed;
+		}
+
+		[type="checkbox"]:disabled:before {
+		  background-color: lightgray;
+		}
+
+		[type="checkbox"]:disabled + span {
+		  opacity: 0.7;
+		  cursor: not-allowed;
+		}
+
+		[type="checkbox"]:focus-visible {
+		  outline-offset: max(3.2px, 0.16em);
+		  outline: max(2px, 0.1em) solid var(--color_textbox);
+		}
+
+		[type="checkbox"]:enabled:hover {
+		  box-shadow: 0 0 0 max(4px, 0.32em) lightgray;
+		}
+
+		fieldset {
+		  border: none;
+		  display: flex;
+		  flex-direction: column;
+		  gap: 0.8rem;
+		}
+
+		*,
+		*::before,
+		*::after {
+		  box-sizing: border-box;
+		}
+	</style>
+</head>
+
+<body>
+<div id="topbar">
+	<div class="inside">
+		<div class="topmenu">
+			<a href="#top" id="topmenu_dict" onclick="load_main(0)"><span>사전</span></a>
+			<a href="#top" id="topmenu_gramwiz" onclick="load_gramwiz_main(0)"><span>문법</span></a>
+			<a href="#top" id="topmenu_favourites" onclick="load_favourites(0)"><span>책갈피</span></a>
+			<a href="#top" id="topmenu_properties" onclick = "load_property()"><span>설정</span></a>
+			<span>&nbsp;&nbsp;</span>
+			<a href="#top" style = "color: #909090;" id = "topcontrol_left" onclick='undo_call()'>◀<span class="long"> 뒤로</span><span class="short"></span></a>&nbsp;
+			<a href="#top" style = "color: #909090;" id = "topcontrol_right" onclick='redo_call()'><span class="long">앞으로 </span><span class="short"></span>▶</a>
+		</div>
+
+		<div class="dropdown">
+			<span class="title">부록&nbsp;▼</span>
+			<div class="submenu" id="submenu" style="text-align: right;">
+				<a href="#top" id="appdendix_1" onclick="load_appendix(1)"></a>
+				<a href="#top" id="appdendix_2" onclick="load_appendix(2)"></a>
+				<a href="#top" id="appdendix_3" onclick="load_appendix(3)"></a>
+			</div>
+		</div>
+		<a href="#top" onclick="load_main()" style="cursor: pointer"><img class="logo" src="resources/logo.png"></a>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<main><article>
+	<div id = "AlphabetList" style = "font-size: 18pt; text-align: center; font-weight: bold; display: block;"></div><hr><br>
+
+	<form class="search" id="search_form" style="display: none;">
+		<div class="inside">
+			<div class="inset textbox">
+				<input id="text" type="search" class="text" name="text" autocomplete="off" placeholder="검색어를 입력하세요." value="">
+				<img class="img_query" src="resources/zoom.png" onclick="load_adfb(false);">
+			</div>
+		</div>
+	</form>
+
+	<datalist id="dd_fav"></datalist>
+
+	<div id="gramwiz_input" style="text-align: center; display: none;">
+		<form class="search" id="gramwiz_input_1">
+			<div class="inside">
+				<div class="inset textbox">
+					<input id="text_gw_input_1" type="search" class="text" name="text" list="dd_fav" placeholder="1번 단어를 입력하세요." autocomplete="off">
+					<img class="img_query" src="resources/zoom.png" onclick="gramwiz_input(1);">
+				</div>
+				<div class="message"></div>
+			</div>
+		</form>
+		<span style="display: inline-block; width: 1%;">&nbsp;</span>
+		<form class="search" id="gramwiz_input_2">
+			<div class="inside">
+				<div class="inset textbox">
+					<input id="text_gw_input_2" type="search" class="text" name="text" list="dd_fav" placeholder="2번 단어를 입력하세요." autocomplete="off">
+					<img class="img_query" src="resources/zoom.png" onclick="gramwiz_input(2);">
+				</div>
+				<div class="message"></div>
+			</div>
+		</form>
+	</div>
+
+	<div class="suggestions" id="suggestions" style="display: none;">
+		<small style="display: inline;">이것을 찾으셨나요?&nbsp;</small>
+		<div id = "suggestions_search" style="display: inline;"> </div>
+		<hr style="margin-top: 15px">
+	</div>
+
+	<div class="suggestions" id="gramwiz_suggestions" style="display: none;">
+		<small id = "findthis" style="display: inline;"></small>
+		<div id = "gramwiz_suggestions_search" style="display: inline;"> </div>
+		<hr style="margin-top: 15px">
+	</div>
+
+	<div id="gramwiz_output" style="display: block; text-align: center; line-height: 100%; font-size: 36px;">
+		<p><strong><em><span id="text_gw_display_1"></span><span> + </span><span id="text_gw_display_2"></span><span> =</span></em></strong></p>
+		<p><strong><em><span id="text_gw_output"></span></em></strong></p>
+		<br>
+		<div id="text_gw_output_detail" style="display: block; text-align: center; line-height: 100%; font-size: 24px;"></div>
+		<br>
+		<button class="gramwiz_button" id="gramwiz_reverse" onclick="gramwiz_reverse()" style="font-size: 18px; font-family: 'font_ko'; color: #000000;">순서 뒤집기</button>
+		&nbsp;&nbsp;&nbsp;
+		<button class="gramwiz_button" id="gramwiz_clear" onclick="gramwiz_clear()" style="font-size: 18px; font-family: 'font_ko'; color: #000000;">초기화</button>
+		<br><hr>
+	</div>
+
+	<div id="mainpage">
+		<p>mainpage</p>
+	</div>
+
+	<div id="propertysettings" style="display: none;">
+		<p style="text-align: center; font-family: 'font_de'; font-size: 48px; margin-top: -24px;">Airíonna</p>
+		<p style="text-align: center; font-size: 30px; margin-top: -24px;"><strong>«환경 설정»</strong></p>
+
+		<hr>
+
+		<div>
+			<fieldset>
+				<label>
+					<span><strong>가독성 중시</strong></span>
+					<input id="useReadingFont" role="switch" type="checkbox"/>
+				</label>
+			</fieldset>
+			<div style="margin-left: 50px; line-height: 150%;">
+				이 설정을 활성화하면 페이지의 한글 글꼴을 읽기 편한 <strong>본문용 글꼴</strong>로 변경합니다. 비활성화하면 귀엽고 발랄한 느낌의 <strong>디자인 글꼴</strong>을 사용합니다. <em>※ 페이지를 새로고침하셔야 적용됩니다!</em> <small>(기본값: OFF)</small>
+			</div>
+		</div>
+
+		<br><div>
+			<fieldset>
+				<label>
+					<span><strong>다크 모드</strong></span>
+					<input id="darkMode" role="switch" type="checkbox"/>
+				</label>
+			</fieldset>
+			<div style="margin-left: 50px; line-height: 150%;">
+				«켈트어 창작사전»을 어둡게 만들어 드립니다. 어둠을 사랑하시는 분들께 추천해요. <small>(기본값: OFF)</small>
+			</div>
+		</div>
+
+		<br><div>
+			<fieldset>
+				<label>
+					<span><strong>한글 발음 표시하기</strong></span>
+					<input id="showHangulInsteadOfIPA" role="switch" type="checkbox"/>
+				</label>
+			</fieldset>
+			<div style="margin-left: 50px; line-height: 150%;">
+				이 설정을 활성화하면 아일랜드어 단어의 발음을 <strong>한글</strong>로 표시합니다. 비활성화하면 한글 대신 <strong>IPA</strong><small>(국제음성기호)</small>를 표시합니다. <small>(기본값: ON)</small>
+			</div>
+		</div>
+
+		<br><div style="display: none"> <!--임시-->
+			<fieldset>
+				<label>
+					<span><strong>대용 한글 표기</strong></span>
+					<input id="preciseHangul" role="switch" type="checkbox"/>
+				</label>
+			</fieldset>
+			<div style="margin-left: 50px; line-height: 150%;">
+				<p>이 설정을 활성화하면 아일랜드어 단어의 발음을 한글로 표시할 때 <strong>완성형 한글</strong>에 기반한 대용 표기를 사용합니다. 비활성화하면 <strong>국제음성기호에 기반한 표기</strong>를 사용합니다. “한글 발음 표시하기”가 “OFF”로 설정되어 있다면 이 설정은 아무 역할도 하지 않습니다. <small>(기본값: OFF)</small></p>
+				<p>※ 폰트 문제로 “댠”, “쿌”, “퓍” 같은 글자가 깨져서 고민이시라면 ON!</p>
+			</div>
+		</div>
+
+		<br><div style="display: none"> <!--임시-->
+			<fieldset>
+				<label>
+					<span><strong>게일 서체 표시하기</strong></span>
+					<input id="showOriginalScript" role="switch" type="checkbox"/>
+				</label>
+			</fieldset>
+			<div style="margin-left: 50px; line-height: 150%;">
+				비활성화하면 <strong>로마자</strong> 표기만을 표시합니다. <small>(기본값: OFF)</small>
+			</div>
+		</div>
+	</div>
+
+	<div class="not_found" id="not_found" style="display: none;">
+		<p>일치하는 검색 결과가 없습니다.</p>
+	</div>
+
+	<div class = "ADFB" id = "ADFB" style = "display: none;">
+		<span id = "ADFB_word_class" style = "font-family: 'font_ko'; font-size: 18px;"> </span>
+		<strong><span id = "ADFB_head_word" style = "font-family: 'font_en'; font-size: 36px;"> </span></strong>
+		<span>&nbsp;</span>
+		<span id = "ADFB_head_sound" style = "font-family: 'Charis SIL'; font-size: 24px;"> </span>
+		<span id = "ADFB_head_favourites" style = "font-family: 'Charis SIL'; font-size: 24px;"> </span>
+
+		<div id = "gram"></div>
+		
+		<dl>
+			<hr>
+			<dt><strong>«풀이»</strong></dt>
+			<dd id = "ADFB_gloss_ko"></dd>
+			<hr>
+			<dt><strong>«영문역»</strong></dt>
+			<dd id = "ADFB_gloss_en" style = "font-family: 'font_en';"></dd>
+
+			<hr id = "ADFB_gloss_ex_isExist_hr">
+			<strong><dt id = "ADFB_gloss_ex_isExist"></dt></strong>
+			<dd id = "ADFB_gloss_ex"></dd>
+
+			<hr id = "ADFB_gloss_ep_isExist_hr">
+			<strong><dt id = "ADFB_gloss_ep_isExist"></dt></strong>
+			<dd id = "ADFB_gloss_ep"></dd>
+		</dl>
+ 	</div>
+
+	<div class="includes" id="includes" style="display: none;">
+		<dl>
+			<hr>
+			<dt><strong>«검색 결과»</strong></dt>
+			<dd id = "includes_search"></dd>
+		</dl>
+	</div>
+
+	<div class="abc" id="abc" style="display: none;">
+	</div>
+
+	<br><hr>
+
+	<header>
+		<nav>
+			<a href="#top" id = "topcontrol_up" style = "font-size: 24pt;">▲</a>&nbsp;
+		</nav>
+	</header>
+</article></main>
+
+<footer class="footer">
+	<div class="inside">
+		<p>본 사이트는 적절한 경로로 후원 또는 구매하신 분께서만 접근하여 이용하실 수 있습니다. 본 사이트의 컨텐츠의 일부 또는 전부 및 본 페이지에 접근할 수 있는 비밀번호를 전재, 양도, 재배포하는 행위는 저작권법에 의하여 금지됩니다. 비밀번호는 예고 없이 변경될 수 있습니다.</p>
+		<div style="line-height: 60%; text-align: right;">
+		<p>
+			트위터(X): <a href="https://x.com/lena_briongloid" target="_blank">@lena_briongloid</a>
+		</p>
+		<p>
+			이메일: <a>lenabriongloid@gmail.com</a>
+		</p>
+		</div>
+		<p id="copyright" style="text-align:right;"><em>Copyright 2025. 유월공방 All rights reserved. Latest revision: 22. 10. 2025.</em></p>
+	</div>
+</footer>
+
+<!-- -------------------------------------------------------------------- -->
+<!-- -----------------------------JAVASCRIPT----------------------------- -->
+<!-- -------------------------------------------------------------------- -->
+
+<!-- input diacritics with mouse clicks and auto-change -->
+<script>
+	document.querySelectorAll(".char_input").forEach(link => {
+		link.addEventListener("click", function(event) {
+		event.preventDefault();
+		const char = link.getAttribute("data-char");
+		if (document.getElementById("search_form").style.display != "none") {
+			document.getElementById("text").value += char;
+		}
+		});
+	});
+
+	const searchForms = document.querySelectorAll('form.search');
+	const handleInput = (event) => {
+	// Check if the event target is a text input
+	if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+		const inputValue = event.target.value;
+		const lastChar = inputValue[inputValue.length - 1];
+
+		if (lastChar && /[a-zA-Z\s\.\~\']/.test(lastChar)) {
+			clearTimeout(event.target.typingTimeout);
+			event.target.typingTimeout = setTimeout(() => {
+				for (let i = 0; i < InputBef.length; i ++) {
+					event.target.value = event.target.value.replaceAll(InputBef[i], InputAft[i]);
+				}
+			}, 50); // 50ms delay after the last key press
+		}
+	}};
+
+	searchForms.forEach(form => {
+		form.addEventListener('input', handleInput);
+	});
+</script>
+
+<!-- Enter Input -->
+<script>
+	let input = document.getElementById("text");
+	input.addEventListener("keydown", function(event) {
+		if ((event.key === "Enter" || event.keyCode === 13) && document.getElementById("search_form").style.display != "none") {
+			event.preventDefault();
+			load_adfb(false);
+		}
+	});
+
+	let input_gw_1 = document.getElementById("text_gw_input_1");
+	input_gw_1.addEventListener("keydown", function(event) {
+		if ((event.key === "Enter" || event.keyCode === 13) && document.getElementById("gramwiz_input_1").style.display != "none") {
+			event.preventDefault();
+			gramwiz_input(1);
+		}
+	});
+	input_gw_1.addEventListener("input", function(event) {
+		let t = document.getElementById("text_gw_input_1").value;
+		for (let i = 0; i < favourites.length; i ++) {
+			let voc = Object.values(dict).find(e => e.index === favourites[i] + 1);
+			if (t == voc["key"]) {
+				gramwiz_input(1);
+				document.getElementById("text_gw_input_1").value = "";
+				break;
+			}
+		}
+	});
+
+	let input_gw_2 = document.getElementById("text_gw_input_2");
+	input_gw_2.addEventListener("keydown", function(event) {
+		if ((event.key === "Enter" || event.keyCode === 13) && document.getElementById("gramwiz_input_2").style.display != "none") {
+			event.preventDefault();
+			gramwiz_input(2);
+		}
+	});
+	input_gw_2.addEventListener("input", function(event) {
+		let t = document.getElementById("text_gw_input_2").value;
+		for (let i = 0; i < favourites.length; i ++) {
+			let voc = Object.values(dict).find(e => e.index === favourites[i] + 1);
+			if (t == voc["key"]) {
+				gramwiz_input(2);
+				document.getElementById("text_gw_input_2").value = "";
+				break;
+			}
+		}
+	});
+</script>
+
+<!-- Favourites -->
+<script>
+	function add_favourites(index) {
+		//add
+		if (!favourites.includes(index)) {
+			favourites.push(index);
+		}
+		//remove
+		else {
+			favourites = favourites.filter(item => item !== index);
+		}
+
+		//graphics
+		let t4 = document.getElementById("ADFB_head_favourites");
+		let t4_check = check_favourites(index) ? "★" : "☆";
+		t4.innerHTML = "&nbsp;&nbsp;<span><a class=\"add_favourites\" onclick=\"add_favourites(" + index + ")\">" + t4_check + "</a></span>"
+
+		let t5 = document.getElementById("ABC_fav_" + index.toString().padStart(5, '0'));
+		if (t5 != null) {
+			let t5_check = check_favourites(index) ? "★" : "☆";
+			t5.innerHTML = t5_check;
+		}
+
+		//cookies
+		localStorage.setItem("favourites", JSON.stringify(favourites));
+	}
+
+	function clear_favourites() {
+		favourites = [];
+		localStorage.setItem("favourites", JSON.stringify(favourites));
+		load_favourites(true);
+	}
+
+	function check_favourites(index) {
+		if (favourites.includes(index)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	//load page
+	function load_favourites(call = false) {
+		topmenu_set_graphic("topmenu_favourites");
+		show_page(["search_form", "mainpage"], ["gramwiz_input", "suggestions", "gramwiz_suggestions", "gramwiz_output", "propertysettings", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack("#favourites"); }
+
+		let source_main = `<p style="text-align: center; font-family: 'font_de'; font-size: 48px;">Leabharmharcanna</p>
+			<p style="text-align: center; font-size: 30px; margin-top: -24px;"><strong>«책갈피»</strong></p>`;
+
+		if (favourites.length == 0) {
+			source_main += "<br><p style=\"text-align: center;\">등록된 책갈피가 없어요!</p><p	style=\"text-align: center;\">단어 옆의 ☆표를 클릭해서 등록할 수 있어요.</p>"
+			document.getElementById("mainpage").innerHTML = source_main; return 0;
+		}
+
+		for (let i = 0; i < favourites.length; i ++) {
+			const rawN = favourites[i] + 1;
+			const padN = "vocabulary_" + String(rawN).padStart(5, '0');
+
+			let check = check_favourites(favourites[i]) ? "★" : "☆";
+
+			source_main += `<p><a class="add_favourites" id="ABC_fav_${favourites[i].toString().padStart(5, '0')}" onclick="add_favourites(${favourites[i]})" style="font-family: 'Charis SIL';">${check}</a><strong># ${((i + 1).toString())}. <a onclick="link('${dict[padN]["key"]}')">${dict[padN]["title"]}</a></strong>&nbsp;<span class="IPA">[${get_sound(dict[padN]["title"], true)}]</span>&nbsp;:&nbsp;&nbsp;${dict[padN]["gloss"]["ko"].join("; ")}</p>`;
+		}
+
+		source_main += "<br><hr><p style=\"text-align:right;\"><strong><a onclick=\"clear_favourites()\">책갈피 전부 삭제 <em>(클릭하면 되돌릴 수 없어요!)</em></a></strong></p>";
+
+		document.getElementById("mainpage").innerHTML = source_main;
+	}
+</script>
+
+<!-- Grammar Wizard -->
+<script>
+	let gramwizInput = [undefined, undefined, undefined];
+
+	function load_gramwiz_main(call = false) {
+		topmenu_set_graphic("topmenu_gramwiz");
+		show_page(["mainpage", "gramwiz_input", "gramwiz_output", "gramwiz_suggestions"], ["search_form", "suggestions", "propertysettings", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack("#gramwiz"); }
+
+		let text_gw_input_1 = gramwizInput[1] == undefined ? "" : gramwizInput[1].title;
+		let text_gw_input_2 = gramwizInput[2] == undefined ? "" : gramwizInput[2].title;
+
+		let source_main = `<div id="gramwiz_output" style="display: block; line-height: 200%;">
+		<p style="text-align: center; font-family: 'font_de'; font-size: 48px;">Draoi na Gramadaigh</p>
+		<p style="text-align: center; font-size: 30px; margin-top: -24px;"><strong>«아일랜드어 문법 마법사»</strong></p><hr>
+		<p>두 개의 단어를 합쳐 <strong>A의 B</strong>, <strong>A한 B</strong>로 만드는 도구입니다! 결과물은 자동 완성된 것이므로 실제 문헌과 다를 수 있습니다. <u><strong>※ 팁</strong>: 책갈피에 꽂아 둔 단어는 바로 투입할 수 있어요!</u></p>
+		<hr>
+		<p>※ <strong>(A한 B)의 (C한 D)</strong>를 만들고 싶다면?</p>
+		<p>&nbsp;&nbsp;1. 문법 마법사로 각각 “A한 B<strong>의</strong>”와 “C한 D”를 합성합니다.</p>
+		<p>&nbsp;&nbsp;2. 합성한 두 단어를 <strong>역순으로</strong> 연결합니다.</p>
+		</div>`;
+
+		document.getElementById("mainpage").innerHTML = source_main;
+
+		//set dd_fav
+		let datalist = document.getElementById('dd_fav');
+		datalist.innerHTML = '';
+
+		for (let i = 0; i < favourites.length; i ++) {
+			const rawN = favourites[i] + 1;
+			const padN = "vocabulary_" + String(rawN).padStart(5, '0');
+
+			let newOption = document.createElement('option');
+			newOption.value = dict[padN]["key"];
+			newOption.textContent = dict[padN]["title"];
+
+			let l = dict[padN]["gloss"]["ko"];
+			l = l.join("; ")
+			newOption.label = l.replace(/\<.*?\>/g, "");
+
+			datalist.appendChild(newOption);
+		}
+
+		gramwiz_output();
+	}
+</script>
+
+<!-- Temporary Links -->
+<script>
+	function link(address) {
+		if (address == Page) { return 0; }
+
+		let anchor = document.getElementById(address);
+		document.getElementById("text").value = address;
+
+		document.getElementById("topcontrol_up").click();
+
+		load_adfb(false);
+	}
+</script>
+
+<!-- All words start with A, B, C... -->
+<script>
+	function load_abc(chr, call = false) {
+		topmenu_set_graphic("topmenu_dict");
+		show_page(["search_form", "mainpage"], ["gramwiz_input", "suggestions", "gramwiz_suggestions", "gramwiz_output", "propertysettings", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack("#" + chr); }
+
+		let List = [];
+
+		for (let e in dict) {
+			if (remove_diacritics(dict[e]["title"].charAt(0).toUpperCase()) == chr) {
+				List.push(e);
+			}
+		}
+
+		let source = "<h2 style=\"text-align: center;\">" + chr + "</h2>";
+
+		for (let i = 0; i < List.length; i ++) {
+			let link = dict[List[i]]["key"];
+			let t0 = dict[List[i]]["title"];
+			let t1 = dict[List[i]]["tag"]["homonym"];
+			let t2 = get_sound(t0, true);
+			let t3 = dict[List[i]]["gloss"]["ko"].join("; ");
+			let t4 = dict[List[i]]["index"] - 1;
+			let t4_check = check_favourites(t4) ? "★" : "☆";
+
+			let basic = dict[List[i]]["tag"]["category"].includes("기초") ? true : false;
+			let text = basic ? `<strong>${t0}</strong>` : t0;
+
+			source += `<p><span style="font-family: 'Charis SIL'"><a class="add_favourites" id="ABC_fav_${t4.toString().padStart(5, '0')}" onclick="add_favourites(${t4})">${t4_check}</a></span>&nbsp;<a onclick="link('${link}')">${text}<sup>${t1}</sup></a> <span class="IPA">[${t2}]</span> : ${t3}</p>`;
+		}
+
+		document.getElementById("mainpage").innerHTML = source;
+	}
+</script>
+
+<!-- Load Cookies -->
+<script>
+	//switch default state
+	let properties = {
+		useReadingFont : localStorage.getItem('properties_useReadingFont'),
+		darkMode : localStorage.getItem('properties_darkMode'),
+		showHangulInsteadOfIPA : localStorage.getItem('properties_showHangulInsteadOfIPA'),
+		showOriginalScript : localStorage.getItem('properties_showOriginalScript'),
+		preciseHangul : localStorage.getItem('properties_preciseHangul')
+	}
+
+	if (properties.useReadingFont === null) {
+		localStorage.setItem('properties_useReadingFont', false);
+		properties.useReadingFont = false;
+	}
+	else {
+		properties.useReadingFont = !(properties.useReadingFont === "false");
+	}
+
+	if (properties.darkMode === null) {
+		localStorage.setItem('properties_darkMode', false);
+		properties.darkMode = false;
+	}
+	else {
+		properties.darkMode = !(properties.darkMode === "false");
+	}
+
+	if (properties.showHangulInsteadOfIPA === null) {
+		localStorage.setItem('properties_showHangulInsteadOfIPA', true);
+		properties.showHangulInsteadOfIPA = true;
+	}
+	else {
+		properties.showHangulInsteadOfIPA = (properties.showHangulInsteadOfIPA === "true");
+	}
+
+	if (properties.showOriginalScript === null) {
+		localStorage.setItem('properties_showOriginalScript', false);
+		properties.showOriginalScript = false;
+	}
+	else {
+		properties.showOriginalScript = !(properties.showOriginalScript === "false");
+	}
+
+	if (properties.preciseHangul === null) {
+		localStorage.setItem('properties_preciseHangul', false);
+		properties.preciseHangul = false;
+	}
+	else {
+		properties.preciseHangul = !(properties.preciseHangul === "false");
+	}
+
+	//favourites
+	let favourites = localStorage.getItem('favourites');
+	if (favourites) {
+		favourites = JSON.parse(favourites);
+	}
+	else {
+		favourites = [];
+	}
+</script>
+
+<!-- Properties -->
+<script>
+	function load_property(call = false) {
+		topmenu_set_graphic("topmenu_properties");
+
+		show_page(["propertysettings"], ["search_form", "gramwiz_input", "suggestions", "gramwiz_suggestions", "mainpage", "gramwiz_output", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack("#property"); }
+
+		switch_default();
+	}
+
+	//for additional switches ↓ adjust these
+
+	//js - default
+	function switch_default() {
+		document.getElementById("useReadingFont").checked = properties.useReadingFont;
+		document.getElementById("darkMode").checked = properties.darkMode;
+		document.getElementById("showHangulInsteadOfIPA").checked = properties.showHangulInsteadOfIPA;
+		document.getElementById("showOriginalScript").checked = properties.showOriginalScript;
+		document.getElementById("preciseHangul").checked = properties.preciseHangul;
+	}
+
+	//js - role
+	function switch_useReadingFont() {
+		properties.useReadingFont = document.getElementById("useReadingFont").checked ? true : false;
+		localStorage.setItem('properties_useReadingFont', properties.useReadingFont);
+	}
+	document.getElementById("useReadingFont").addEventListener('change', switch_useReadingFont);
+
+	function switch_darkMode() {
+		properties.darkMode = document.getElementById("darkMode").checked ? true : false;
+		localStorage.setItem('properties_darkMode', properties.darkMode);
+		color_swap();
+	}
+	document.getElementById("darkMode").addEventListener('change', switch_darkMode);
+
+	function switch_showHangulInsteadOfIPA() {
+		properties.showHangulInsteadOfIPA = document.getElementById("showHangulInsteadOfIPA").checked ? true : false;
+		localStorage.setItem('properties_showHangulInsteadOfIPA', properties.showHangulInsteadOfIPA);
+	}
+	document.getElementById("showHangulInsteadOfIPA").addEventListener('change', switch_showHangulInsteadOfIPA);
+
+	function switch_showOriginalScript() {
+		properties.showOriginalScript = document.getElementById("showOriginalScript").checked ? true : false;
+		localStorage.setItem('properties_showOriginalScript', properties.showOriginalScript);
+	}
+	document.getElementById("showOriginalScript").addEventListener('change', switch_showOriginalScript);
+
+	function switch_preciseHangul() {
+		properties.preciseHangul = document.getElementById("preciseHangul").checked ? true : false;
+		localStorage.setItem('properties_preciseHangul', properties.preciseHangul);
+	}
+	document.getElementById("preciseHangul").addEventListener('change', switch_preciseHangul);
+</script>
+
+<!-- Load Fonts -->
+<script>
+	if (properties.useReadingFont == true) {
+		const newFont = new FontFace('font_ko', 'url(resources/fonts/MaruBuri-Light.ttf)');
+		newFont.load().then(function(loadedFont) {
+			document.fonts.add(loadedFont);
+		}).catch(function(error) {
+			console.log('Font Load Error: ' + error);
+		});
+	}
+	else {
+		if (properties.useReadingFont == true) {
+		const newFont = new FontFace('font_ko', 'url(resources/fonts/onglyph_very.ttf)');
+		newFont.load().then(function(loadedFont) {
+			document.fonts.add(loadedFont);
+		}).catch(function(error) {
+			console.log('Font Load Error: ' + error);
+		});
+	}
+	}
+</script>
+
+<!-- 앞으로 & 뒤로 가기 -->
+<script>
+	let Undo = []; let Redo = []; let Page = "#main";
+
+	function undo_stack(text) {
+		Undo.push(Page);
+		Page = text;
+		Redo = [];
+
+		undo_graphic();
+	}
+
+	//call undo & stack redo
+	function undo_call() {
+		if (Undo.length == 0) { return 0; }
+
+		//stack redo
+		Redo.push(Page);
+
+		//call undo
+		Page = Undo.pop();
+
+		//load
+		load_adfb(Page);
+
+		undo_graphic();
+	}
+
+	function redo_call() {
+		if (Redo.length == 0) { return 0; }
+
+		//stack undo
+		Undo.push(Page);
+
+		//call redo
+		Page = Redo.pop();
+
+		//load
+		load_adfb(Page);
+
+		undo_graphic();
+	}
+
+	//graphics
+	function undo_graphic() {
+		document.getElementById("topcontrol_left").style.color = Undo.length > 0 ? color.text : color.disabled;
+		document.getElementById("topcontrol_right").style.color = Redo.length > 0 ? color.text : color.disabled;
+	}
+</script>
+
+<!-- Graphics -->
+<script>
+	let color = {};
+
+	function color_swap() {
+		if (properties.darkMode == false) {
+			color = {
+				background: 	"#FFFDF6",	//배경 색
+				shadow: 		"#CBA093",	//탑바, 푸터 등에 들어가는 약간 어두운 색
+				text: 			"#2F0102",	//본문 글자 색
+				anchor: 		"#8F3838",	//링크, hr 글자 색
+				disabled: 		"#909090",	//비활성화된 버튼 (뒤로/앞으로) 색
+				check:			"#8F3838",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
+				textbox: 		"#FDF0D7"	//검색창 텍스트박스 배경색
+			}
+		}
+		else if (properties.darkMode == true) {
+			color = {
+				background: 	"#121212",	//배경 색
+				shadow: 		"#3F3F3F",	//탑바, 푸터 등에 들어가는 약간 어두운 색
+				text: 			"#E0DFDF",	//본문 글자 색
+				anchor: 		"#D4A0A0",	//링크, hr 글자 색
+				disabled: 		"#909090",	//비활성화된 버튼 (뒤로/앞으로) 색
+				check:			"#D4A0A0",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
+				textbox: 		"#282828"	//검색창 텍스트박스 배경색
+			}
+		}
+
+		document.documentElement.style.setProperty('--color_background', color.background);
+		document.documentElement.style.setProperty('--color_shadow', color.shadow);
+		document.documentElement.style.setProperty('--color_text', color.text);
+		document.documentElement.style.setProperty('--color_anchor', color.anchor);
+		document.documentElement.style.setProperty('--color_disabled', color.disabled);
+		document.documentElement.style.setProperty('--color_check', color.check);
+		document.documentElement.style.setProperty('--color_textbox', color.textbox);
+	}
+
+	color_swap();
+
+	//
+	function topmenu_set_graphic(menu) {
+		document.getElementById("topmenu_dict").style = "background-color: transparent;";
+		document.getElementById("topmenu_gramwiz").style = "background-color: transparent;";
+		document.getElementById("topmenu_favourites").style = "background-color: transparent;";
+		document.getElementById("topmenu_properties").style = "background-color: transparent;";
+
+		document.getElementById(menu).style = "background-color: " + color.background + ";";
+	}
+
+	function show_page(array_show, array_hide = []) {
+		for (let i = 0; i < array_show.length; i ++) {
+			document.getElementById(array_show[i]).style.display = "block";
+		}
+
+		for (let i = 0; i < array_hide.length; i ++) {
+			document.getElementById(array_hide[i]).style.display = "none";
+		}
+	}
+</script>
+
+<!-- to mainpage -->
+<script>
+	function load_main(call = false) {
+		topmenu_set_graphic("topmenu_dict");
+		show_page(["search_form", "mainpage"], ["gramwiz_input", "suggestions", "gramwiz_suggestions", "gramwiz_output", "propertysettings", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack("#main"); }
+
+		let source_main = ""; let r = random_tip[Math.floor(Math.random() * random_tip.length)];
+
+		source_main += `<hr>
+			<p style="text-align: center; margin-top: 60px; font-size: 48px;"><img src="resources/main.png" style="width: 50%"></img></p>
+			<p style="text-align: center; font-family: 'font_de'; font-size: 48px;">Foclóir Gaeilge–Cóiréis</p>
+			<p style="text-align: center; font-family: 'font_de'; font-size: 48px; margin-top: -36px;">d’Fhilí Nua-Aimseartha</p>
+			<p style="text-align: center; font-size: 30px; margin-top: -24px;"><strong>«켈트어 창작사전» 무료 체험판</strong></p>
+			<p style="text-align: center; font-size: 48px; margin-top: -12px;"><strong>I</strong></p>
+			<p style="text-align: center; font-size: 24px; margin-top: -24px;"><strong>아일랜드어</strong></p>
+			<p style="text-align: left; line-height: 180%; margin-top: 36px;"><strong>팁</strong>: ${r}</p>`;
+
+		document.getElementById("mainpage").innerHTML = source_main;
+	}
+
+	window.addEventListener("load", function() {
+		load_main(true);
+	});
+</script>
+
+<!-- SCRIPT OF LANGUAGE -->
+<script src = "js/language.js"></script>		<!-- 개별 언어 설정 -->
+<script src = "js/appendix.js"></script>
+<script src = "js/adfb.js"></script>
+<script src = "js/sound.js"></script>
+<script src = "js/gramwiz.js"></script>
+
+<!-- DB Raw Data -->
+<script>
+const dict = {
+	vocabulary_00001:{key:`abhainn_f`,index:1,title:`abhainn`,class:`f`,tag:{homonym:``,category:[`자연`, `장소`],important:0},grammar:[`abhainn`, `an abhainn`, `abhann`, `na habhann`, `aibhneacha`, `na haibhneacha`, `aibhneacha`, `na n-aibhneacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`river, stream, waterway, watercourse, flume`],ko:[`강, 하천, 개울, 개천, 내, 시내, 냇물, 물길`],ex:[``],ep:``,sh:`강`}},
+	vocabulary_00002:{key:`ainm_m`,index:2,title:`ainm`,class:`m`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`ainm`, `an t-ainm`, `ainm`, `an ainm`, `ainmneacha`, `na hainmneacha`, `ainmneacha`, `na n-ainmneacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`name, title`, `reputation`, `<em>gram.</em> noun`],ko:[`이름, 성명, 명칭, 호칭, 칭호`, `평판, 세평, 명성`, `<small>(문법)</small> 명사`],ex:[``],ep:``,sh:`이름`}},
+	vocabulary_00003:{key:`airgead_m`,index:3,title:`airgead`,class:`m`,tag:{homonym:``,category:[`기초`, `자연`],important:0},grammar:[`airgead`, `an t-airgead`, `airgid`, `an airgid`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`silver, silverware`, `money, wealth`],ko:[`은<small>(銀)</small>, 백은, 은화, 은전, 은제 제품`, `돈, 재물, 재산, 부`],ex:[``],ep:``,sh:`은`}},
+	vocabulary_00004:{key:`aisling_f`,index:4,title:`aisling`,class:`f`,tag:{homonym:``,category:[``],important:0},grammar:[`aisling`, `an aisling`, `aislinge`, `na haislinge`, `aislingí`, `na haislingí`, `aislingí`, `na n-aislingí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`dream, vision, illusion, fantasy`],ko:[`꿈, 환영, 환상, 환시, 환각`],ex:[``],ep:``,sh:`환영`}},
+	vocabulary_00005:{key:`álainn_a`,index:5,title:`álainn`,class:`a`,tag:{homonym:``,category:[``],important:0},grammar:[`álainn`, `álainn`, `álainn`, `áille`, `áille`, `áille`, `áille`, `álainn`, `áille`, `is áille`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`beautiful, lovely, gorgeous, attractive, charming`],ko:[`아름답다, 곱다, 예쁘다, 사랑스럽다, 미려하다, 수려하다, 우아하다, 매력적이다`],ex:[``],ep:``,sh:`아름다운`}},
+	vocabulary_00006:{key:`am_m`,index:6,title:`am`,class:`m`,tag:{homonym:``,category:[`기초`, `자연`],important:0},grammar:[`am`, `an t-am`, `ama`, `an ama`, `amanna`, `na hamanna`, `amanna`, `na n-amanna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`time, occasion, period`],ko:[`때, 시각, 시점, 시간, 시기, 시절, 시대`],ex:[``],ep:``,sh:`시간`}},
+	vocabulary_00007:{key:`amhrán_m`,index:7,title:`amhrán`,class:`m`,tag:{homonym:``,category:[`기초`, `문화`],important:0},grammar:[`amhrán`, `an t-amhrán`, `amhráin`, `an amhráin`, `amhráin`, `na hamhráin`, `amhrán`, `na n-amhrán`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`song, lyric`],ko:[`노래, 가요, 가곡`],ex:[`<strong>Amhrán na <a onclick="link('fian')">bhFiann</a></strong>: “전사의 노래”, 아일랜드의 국가.`],ep:``,sh:`노래`}},
+	vocabulary_00008:{key:`ard_a`,index:8,title:`ard`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`ard`, `ard`, `aird`, `airde`, `arda`, `arda`, `arda`, `ard`, `airde`, `is airde`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`high, tall`, `loud`],ko:[`높다, <small>(키가)</small> 크다`, `<small>(소리가)</small> 크다, 시끄럽다`],ex:[`<strong>farraige ard</strong>: “높은 바다”, 파도가 높게 이는 바다.`],ep:``,sh:`높은`}},
+	vocabulary_00009:{key:`athair_f`,index:9,title:`athair`,class:`f`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`athair`, `an athair`, `athrach`, `na hathrach`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`father`, `ancestor, sire`],ko:[`아버지, 아빠, 부친`, `조상, 선조`],ex:[``],ep:``,sh:`아버지`}},
+	vocabulary_00010:{key:`bán_a`,index:10,title:`bán`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`bán`, `bhán`, `báin`, `báine`, `bána`, `bhána`, `bána`, `bán`, `báine`, `is báine`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`white, pale`, `fair`],ko:[`희다, 하얗다, 백색의, 창백하다`, `곱다, 아름답다, 미려하다`, `<small>(피부·머리카락 따위가)</small> 희다, 밝다`],ex:[``],ep:``,sh:`하얀`}},
+	vocabulary_00011:{key:`bard_m`,index:11,title:`bard`,class:`m`,tag:{homonym:``,category:[`문화`, `전통`],important:0},grammar:[`bard`, `an bard`, `baird`, `an bhaird`, `baird`, `na baird`, `bard`, `na mbard`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`<em>bard</em>, wandering poet`],ko:[`“바드”, 음유시인, 방랑시인`],ex:[``],ep:`주로 역사와 서사시 등을 노래하는 시인으로, <a onclick="link('file')">file</a>보다 등위가 낮다.`,sh:`음유시인`}},
+	vocabulary_00012:{key:`bás_m`,index:12,title:`bás`,class:`m`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`bás`, `an bás`, `báis`, `an bháis`, `básanna`, `na básanna`, `básanna`, `na mbásanna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`death, demise, decease`],ko:[`죽음, 사망, 서거`],ex:[``],ep:``,sh:`죽음`}},
+	vocabulary_00013:{key:`beag_a`,index:13,title:`beag`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`beag`, `bheag`, `big`, `bige`, `beaga`, `bheaga`, `beaga`, `beag`, `lú`, `is lú`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`small, minor`, `few, little`],ko:[`작다, 사소하다`, `적다, 덜하다`],ex:[``],ep:``,sh:`작은`}},
+	vocabulary_00014:{key:`Bealtaine_f`,index:14,title:`Bealtaine`,class:`f`,tag:{homonym:``,category:[`시간`, `전통`],important:0},grammar:[`Bealtaine`, `an Bhealtaine`, `Bealtaine`, `na Bealtaine`, `Bealtainí`, `na Bealtainí`, `Bealtainí`, `na mBealtainí`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`May`, `<em>Beltane</em>`],ko:[`5월`, `“발타네”, 게일 달력의 여름의 시작`],ex:[``],ep:`기독교 이전 시대에는 아일랜드 전역에서 번제를 올린 것으로 추정된다. 민간 전승에 의하면 요정의 세력이 강성해지는 시기이기도 하다.`,sh:`5월`}},
+	vocabulary_00015:{key:`bean_f`,index:15,title:`bean`,class:`f`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`bean`, `an bhean`, `mná`, `na mná`, `mná`, `na mná`, `ban`, `na mban`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`woman, female`, `wife`],ko:[`여자, 여성, 여인`, `아내, 부인, 처<small>(妻)</small>`],ex:[``],ep:`주로 인간에게만 사용한다. 직업, 호칭 앞에 붙을 때에는 ban-으로 쓰인다.`,sh:`여자`}},
+	vocabulary_00016:{key:`beatha_f`,index:16,title:`beatha`,class:`f`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`beatha`, `an bheatha`, `beatha`, `na beatha`, `beathaí`, `na beathaí`, `beathaí`, `na mbeathaí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`life, living, livelihood`],ko:[`삶, 목숨, 생명, 명맥`, `생기, 활력, 원기, 기력, 정기, 정력, 생명력`],ex:[``],ep:``,sh:`삶`}},
+	vocabulary_00017:{key:`beoir_f`,index:17,title:`beoir`,class:`f`,tag:{homonym:``,category:[``],important:0},grammar:[`beoir`, `an bheoir`, `beorach`, `na beorach`, `beoracha`, `na beoracha`, `beoracha`, `na mbeoracha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`beer, ale`],ko:[`술, 맥주`],ex:[``],ep:``,sh:`술`}},
+	vocabulary_00018:{key:`bláth_m`,index:18,title:`bláth`,class:`m`,tag:{homonym:``,category:[`식물`],important:0},grammar:[`bláth`, `an bláth`, `blátha`, `an bhlátha`, `bláthanna`, `na bláthanna`, `bláthanna`, `na mbláthanna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`flower, bloom, blossom`, `beauty`, `prosperity, flourishing, abundance`],ko:[`꽃, 화초, 화훼`, `꽃이 핌, 개화, 또는 활짝 핀 꽃`, `아름다움, 멋짐, 미<small>(美)</small>`, `번영, 번성, 번창, 풍요, 풍성, 넉넉함`],ex:[``],ep:``,sh:`꽃`}},
+	vocabulary_00019:{key:`bóthar_m`,index:19,title:`bóthar`,class:`m`,tag:{homonym:``,category:[`장소`],important:0},grammar:[`bóthar`, `an bóthar`, `bóthair`, `an bhóthair`, `bóithre`, `na bóithre`, `bóithre`, `na mbóithre`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`road, way`, `manner`],ko:[`길, 가도, 도로, 경로`, `방법, 방식, 양태`],ex:[``],ep:``,sh:`길`}},
+	vocabulary_00020:{key:`brat_m`,index:20,title:`brat`,class:`m`,tag:{homonym:``,category:[`문화`, `전통`],important:0},grammar:[`brat`, `an brat`, `brait`, `an bhrait`, `brait`, `na brait`, `brat`, `na mbrat`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`mantle, cloak, curtain`],ko:[`외투, 장막, 휘장, 망토, 커튼, 로브`],ex:[``],ep:`속옷<small>(<a onclick="link('léine')">léine</a>)</small>과 함께 아일랜드 전통 의상을 구성하는 두 부분 중 하나이다. 신분에 따라 사용할 수 있는 색상의 개수에 제한이 있으며, 가장 귀한 색은 사프란 색, 즉 노란색이다.`,sh:`외투`}},
+	vocabulary_00021:{key:`brionglóid_f`,index:21,title:`brionglóid`,class:`f`,tag:{homonym:``,category:[``],important:0},grammar:[`brionglóid`, `an bhrionglóid`, `brionglóide`, `na brionglóide`, `brionglóidí`, `na brionglóidí`, `brionglóidí`, `na mbrionglóidí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`dream, vision, illusion, fantasy`],ko:[`꿈, 환영, 환상, 공상, 몽상, 몽환`],ex:[``],ep:``,sh:`꿈`}},
+	vocabulary_00022:{key:`brónach_a`,index:22,title:`brónach`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`brónach`, `bhrónach`, `brónaigh`, `brónaí`, `brónacha`, `bhrónacha`, `brónacha`, `brónach`, `brónaí`, `is brónaí`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`sad, sorrowful, unhappy`],ko:[`슬프다, 서럽다, 구슬프다, 눈물겹다, 비통하다, 애석하다`],ex:[`<strong>scéala brónach</strong>: 슬픈 소식, 슬픈 이야기.`],ep:``,sh:`슬픈`}},
+	vocabulary_00023:{key:`bua_m`,index:23,title:`bua`,class:`m`,tag:{homonym:``,category:[``],important:0},grammar:[`bua`, `an bua`, `bua`, `an bhua`, `buanna`, `na buanna`, `buanna`, `na mbuanna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`victory, triumph`, `gift, talent, merit, virtue, superiority`],ko:[`승리, 이김, 개선<small>(凱旋)</small>`, `<small>(천부적인)</small> 재능, 재주, 장점, 특장, 우월, 우수함, 미덕`],ex:[`<strong>bua ceoil</strong>: 음악의 재능.`, `<strong>bua ó Dhia</strong>: 신께서 주신 재능.`],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> buaidh`,sh:`승리`}},
+	vocabulary_00024:{key:`buachaill_m`,index:24,title:`buachaill`,class:`m`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`buachaill`, `an buachaill`, `buachalla`, `an bhuachalla`, `buachaillí`, `na buachaillí`, `buachaillí`, `na mbuachaillí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`boy, young unmarried man`, `man-servant, male employee, lad, gilla, herdsman`],ko:[`소년, 남자아이, 미혼의 어린 남성`, `남성 하인, 시종, 일꾼, 고용인<small>(雇傭人)</small>, <small>(특히)</small> 목동, 소치기, 양치기`],ex:[``],ep:``,sh:`소년`}},
+	vocabulary_00025:{key:`buí_a`,index:25,title:`buí`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`buí`, `bhuí`, `buí`, `buí`, `buí`, `bhuí`, `buí`, `buí`, `buí`, `is buí`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`yellow`],ko:[`노랗다, 노르다, 황색의`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> buidhe`,sh:`노란`}},
+	vocabulary_00026:{key:`cailín_m`,index:26,title:`cailín`,class:`m`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`cailín`, `an cailín`, `cailín`, `an chailín`, `cailíní`, `na cailíní`, `cailíní`, `na gcailíní`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`girl, maiden, young unmarried woman`, `maid, woman-servant`],ko:[`소녀, 여자아이, 미혼의 어린 여성`, `여성 하인, 시종, 시녀, 하녀`],ex:[``],ep:``,sh:`소녀`}},
+	vocabulary_00027:{key:`cailleach_f`,index:27,title:`cailleach`,class:`f`,tag:{homonym:``,category:[`사회`, `전통`],important:0},grammar:[`cailleach`, `an chailleach`, `caillí`, `na caillí`, `cailleacha`, `na cailleacha`, `cailleach`, `na gcailleach`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`old woman, hag`, `witch`],ko:[`늙은 여성, 노파`, `<small>(민간 전승의)</small> 마녀`],ex:[``],ep:``,sh:`노파`}},
+	vocabulary_00028:{key:`capall_m`,index:28,title:`capall`,class:`m`,tag:{homonym:``,category:[`동물`],important:0},grammar:[`capall`, `an capall`, `capaill`, `an chapaill`, `capaill`, `na capaill`, `capall`, `na gcapall`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`horse, mare, steed`],ko:[`말<small>(馬)</small>, 마필`],ex:[``],ep:``,sh:`말`}},
+	vocabulary_00029:{key:`cara_m`,index:29,title:`cara`,class:`m`,tag:{homonym:``,category:[`사회`],important:0},grammar:[`cara`, `an cara`, `carad`, `an charad`, `cairde`, `na cairde`, `cairde`, `na gcairde`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`friend, comrade`],ko:[`벗, 친구, 친우, 동료, 동무, 동지`],ex:[``],ep:``,sh:`친구`}},
+	vocabulary_00030:{key:`cat_m`,index:30,title:`cat`,class:`m`,tag:{homonym:``,category:[`동물`],important:0},grammar:[`cat`, `an cat`, `cait`, `an chait`, `cait`, `na cait`, `cat`, `na gcat`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`cat, feline`],ko:[`고양이`],ex:[``],ep:``,sh:`고양이`}},
+	vocabulary_00031:{key:`cathair_f`,index:31,title:`cathair`,class:`f`,tag:{homonym:``,category:[`장소`],important:0},grammar:[`cathair`, `an chathair`, `cathrach`, `na cathrach`, `cathracha`, `na cathracha`, `cathracha`, `na gcathracha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`city, town`],ko:[`도시, 도회`],ex:[`<strong>halla cathrach</strong>: 도시 회관, 시청.`],ep:``,sh:`도시`}},
+	vocabulary_00032:{key:`ceann_m`,index:32,title:`ceann`,class:`m`,tag:{homonym:``,category:[`신체`, `장소`],important:0},grammar:[`ceann`, `an ceann`, `cinn`, `an chinn`, `cinn`, `na cinn`, `ceann`, `na gceann`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`head`, `headland, promontory`, `end, extremity`, `roof, top, summit`],ko:[`<small>(신체)</small> 머리`, `<small>(지형)</small> 물 쪽으로 튀어나온 땅, 곶`, `극단, 첨단, 선단, 극점, 극한`, `꼭대기, 지붕, 정상, 정점`],ex:[``],ep:``,sh:`머리`}},
+	vocabulary_00033:{key:`ceo_m`,index:33,title:`ceo`,class:`m`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`ceo`, `an ceo`, `ceo`, `an cheo`, `ceonna`, `na ceonna`, `ceonna`, `na gceonna`, `broad`, `strong`],sound:{hangul:[`키오`, `안 키오`, `키오`, `안 히오`, `키오나`, `나 키오나`, `키오나`, `나 기오나`, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`fog, mist, haze`],ko:[`안개, 청연, 박무, 농무, 연무, 김`],ex:[``],ep:``,sh:`안개`}},
+	vocabulary_00034:{key:`cill_f`,index:34,title:`cill`,class:`f`,tag:{homonym:``,category:[`장소`],important:0},grammar:[`cill`, `an chill`, `cille`, `na cille`, `cealla`, `na cealla`, `ceall`, `na gceall`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`church`, `churchyard, graveyard, cemetery`],ko:[`교회, 성당, 사원, 예배당, 예배소`, `<small>(교회에 딸린)</small> 묘지, 묘역, 묘소`],ex:[``],ep:`교회 공동체가 아닌 건물만을 뜻한다.`,sh:`교회`}},
+	vocabulary_00035:{key:`claíomh_m`,index:35,title:`claíomh`,class:`m`,tag:{homonym:``,category:[`도구`],important:0},grammar:[`claíomh`, `an claíomh`, `claímh`, `an chlaímh`, `claimhte`, `na claimhte`, `claimhte`, `na gclaimhte`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`sword`],ko:[`칼, 검<small>(劍)</small>, 장검`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> claidheamh`,sh:`검`}},
+	vocabulary_00036:{key:`cloch_f`,index:36,title:`cloch`,class:`f`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`cloch`, `an chloch`, `cloiche`, `na cloiche`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`stone, rock`, `testicle`],ko:[`돌, 돌멩이, 조약돌, 바위`, `비<small>(碑)</small>, 비석, 돌기둥`, `<small>(속어)</small> 고환`],ex:[``],ep:``,sh:`돌`}},
+	vocabulary_00037:{key:`cnoc_m`,index:37,title:`cnoc`,class:`m`,tag:{homonym:``,category:[`자연`, `장소`],important:0},grammar:[`cnoc`, `an cnoc`, `cnoic`, `an chnoic`, `cnoic`, `na cnoic`, `cnoc`, `na gcnoc`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`hill, mound`],ko:[`언덕, 고개, 비탈, 고지`],ex:[``],ep:``,sh:`언덕`}},
+	vocabulary_00038:{key:`coill_f`,index:38,title:`coill`,class:`f`,tag:{homonym:``,category:[`자연`, `장소`],important:0},grammar:[`coill`, `an choill`, `coille`, `na coille`, `coillte`, `na coillte`, `coillte`, `na gcoillte`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`wood, forest`],ko:[`숲, 수풀, 삼림, 산림, 임야`],ex:[``],ep:``,sh:`숲`}},
+	vocabulary_00039:{key:`cos_f`,index:39,title:`cos`,class:`f`,tag:{homonym:``,category:[`신체`],important:0},grammar:[`cos`, `an chos`, `coise`, `na coise`, `cosa`, `na cosa`, `cos`, `na gcos`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`foot, leg`],ko:[`발<small>(足)</small>, 다리<small>(脚)</small>`],ex:[``],ep:`아일랜드어는 “발”과 “다리”를 구별하지 않는다.`,sh:`다리`}},
+	vocabulary_00040:{key:`crann_m`,index:40,title:`crann`,class:`m`,tag:{homonym:``,category:[`자연`, `식물`],important:0},grammar:[`crann`, `an crann`, `crainn`, `an chrainn`, `crainn`, `na crainn`, `crann`, `na gcrann`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`tree`, `pole, pillar`, `beam, shaft`, `mast`],ko:[`나무, 목본`, `기둥, 대들보, 지주`, `막대, 장대, 자루`, `돛대`],ex:[``],ep:``,sh:`나무`}},
+	vocabulary_00041:{key:`cú_m`,index:41,title:`cú`,class:`m`,tag:{homonym:``,category:[`동물`],important:0},grammar:[`cú`, `an cú`, `cú`, `an chú`, `cúnna`, `na cúnna`, `cúnna`, `na gcúnna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`dog, hound`, `<em>fig.</em> hero, champion`],ko:[`사냥개, 번견, 맹견`, `<small>(비유)</small> 전사, 투사, 영웅`],ex:[`<strong>Cú Chulainn</strong>: “쿨란의 개”, 아일랜드 최고의 영웅 쿠 훌린.`],ep:``,sh:`사냥개`}},
+	vocabulary_00042:{key:`cuing_f`,index:42,title:`cuing`,class:`f`,tag:{homonym:``,category:[`도구`],important:0},grammar:[`cuing`, `an chuing`, `cuinge`, `na cuinge`, `cuingeacha`, `na cuingeacha`, `cuingeacha`, `na gcuingeacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`yoke, tie`, `bond, obligation`, `armour, harness`],ko:[`멍에, 굴레`, `구속, 예속, 속박, 의무, 책무, 책임`, `갑옷, 갑주`],ex:[``],ep:``,sh:`멍에`}},
+	vocabulary_00043:{key:`dearg_a`,index:43,title:`dearg`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`dearg`, `dhearg`, `deirg`, `deirge`, `dearga`, `dhearga`, `dearga`, `dearg`, `deirge`, `is deirge`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`red, scarlet, bloody, rosy, carmine`, `intense, utter, extreme, tearing, furious, raging`],ko:[`붉다, 빨갛다, 적색의, 홍색의, 장밋빛의, 핏빛의`, `격렬한, 맹렬한, 극단적인, 열정적인, 정열적인, 격노한, 분노한`],ex:[`<strong>Craobh Dhearg</strong>: “핏빛 가지”, 전설 속 울라의 도읍 아운 와하에 자리한 세 궁전 중 하나.`, `<strong>aibhleog dhearg</strong>: “붉은 숯”, 잉걸.`],ep:``,sh:`붉은`}},
+	vocabulary_00044:{key:`dóchas_m`,index:44,title:`dóchas`,class:`m`,tag:{homonym:``,category:[``],important:0},grammar:[`dóchas`, `an dóchas`, `dóchais`, `an dóchais`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`trust, belief`, `hope, expectation`],ko:[`믿음, 신뢰`, `희망, 소망, 기대`],ex:[``],ep:``,sh:`희망`}},
+	vocabulary_00045:{key:`dorcha_f`,index:45,title:`dorcha`,class:`f`,tag:{homonym:``,category:[``],important:0},grammar:[`dorcha`, `an dorcha`, `dorcha`, `na dorcha`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`darkness, blackness, pitch-black`, `obscurity`],ko:[`어둠, 암흑, 흑암, 칠흑`, `모호, 불분명`],ex:[``],ep:``,sh:`어둠`}},
+	vocabulary_00046:{key:`draoi_m`,index:46,title:`draoi`,class:`m`,tag:{homonym:``,category:[`사회`, `전통`],important:0},grammar:[`draoi`, `an draoi`, `draoi`, `an draoi`, `draoithe`, `na draoithe`, `draoithe`, `na ndraoithe`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`<em>druid</em>, wizard, magician, sage`],ko:[`“드루이드”, 현인, 현자, 제사장, 성직자, 예언가, 점술가, 마법사, 주술사`],ex:[``],ep:`기독교 이전 켈트 사회의 최고 지식인을 뜻한다.`,sh:`현인`}},
+	vocabulary_00047:{key:`droichead_m`,index:47,title:`droichead`,class:`m`,tag:{homonym:``,category:[`장소`],important:0},grammar:[`droichead`, `an droichead`, `droichid`, `an droichid`, `droichid`, `na droichid`, `droichead`, `na ndroichead`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`bridge`],ko:[`다리<small>(橋)</small>, 교량, 교각`],ex:[``],ep:``,sh:`다리`}},
+	vocabulary_00048:{key:`dubh_a`,index:48,title:`dubh`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`dubh`, `dhubh`, `duibh`, `duibhe`, `dubha`, `dhubha`, `dubha`, `dubh`, `duibhe`, `is duibhe`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`black, dark, swarthy`, `black-hearted, malevolent`, `gloomy, melancholy, dismal`],ko:[`검다, 까맣다, 시커멓다, 거뭇거뭇하다, 흑색의, 암흑의`, `어둡다, 어두컴컴하다`, `속이 검다, 음흉하다, 사악하다, 교활하다`, `음울하다, 음침하다, 우울하다, 암울하다`],ex:[`<strong>margadh dubh</strong>: “검은 시장”, 암시장.`],ep:``,sh:`검은`}},
+	vocabulary_00049:{key:`duilleog_f`,index:49,title:`duilleog`,class:`f`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`duilleog`, `an duilleog`, `duilleoige`, `na duilleoige`, `duilleoga`, `na duilleoga`, `duilleog`, `na nduilleog`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`leaf`],ko:[`잎, 나뭇잎, 잎사귀, 이파리`],ex:[``],ep:``,sh:`잎`}},
+	vocabulary_00050:{key:`duine_m`,index:50,title:`duine`,class:`m`,tag:{homonym:``,category:[`사회`],important:0},grammar:[`duine`, `an duine`, `duine`, `an duine`, `daoine`, `na daoine`, `daoine`, `na ndaoine`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`mankind, human, person`],ko:[`사람, 인간, 인류`, `백성, 신민, 평민, 인민`],ex:[``],ep:``,sh:`사람`}},
+	vocabulary_00051:{key:`éan_m`,index:51,title:`éan`,class:`m`,tag:{homonym:``,category:[`동물`],important:0},grammar:[`éan`, `an t-éan`, `éin`, `an éin`, `éin`, `na héin`, `éan`, `na n-éan`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`bird`],ko:[`새, 조류, 금조, 날짐승`],ex:[``],ep:``,sh:`새`}},
+	vocabulary_00052:{key:`Éire_f`,index:52,title:`Éire`,class:`f`,tag:{homonym:``,category:[`지명`],important:0},grammar:[`Éire`, `Éire`, `Éireann`, `na hÉireann`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`Ireland, <em>Erin</em>`],ko:[`<small>(지명)</small> 아일랜드, 에린`],ex:[``],ep:``,sh:`아일랜드`}},
+	vocabulary_00053:{key:`eite_f`,index:53,title:`eite`,class:`f`,tag:{homonym:``,category:[`신체`],important:0},grammar:[`eite`, `an eite`, `eite`, `na heite`, `eití`, `na heití`, `eití`, `na n-eití`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`wing, any wing-like stuff`, `fin`],ko:[`날개, 날갯죽지, 날개 모양의 사물`, `지느러미`],ex:[``],ep:``,sh:`날개`}},
+	vocabulary_00054:{key:`fada_a`,index:54,title:`fada`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`fada`, `fhada`, `fada`, `fada`, `fada`, `fhada`, `fada`, `fada`, `faide`, `is faide`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`long, far`],ko:[`<small>(길이가)</small> 길다, 길쭉하다, 기다랗다`, `<small>(시간이)</small> 길다, 오래다, 장시간의, 장기간의`, `<small>(거리가)</small> 멀다, 격원하다, 까마득하다`],ex:[`<strong>osna fhada</strong>: 긴 한숨.`],ep:``,sh:`긴`}},
+	vocabulary_00055:{key:`fáidh_m`,index:55,title:`fáidh`,class:`m`,tag:{homonym:``,category:[`사회`, `전통`],important:0},grammar:[`fáidh`, `an fáidh`, `fáidh`, `an fháidh`, `fáithe`, `na fáithe`, `fáithe`, `na bhfáithe`, `slender`, `strong`],sound:{hangul:[`파이`, `안 파이`, `파이`, `안 아이`, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`seer, prophet, diviner, soothsayer, sage, augur, foreteller, fortuneteller`],ko:[`예언가, 예언자, 선각자, 선지자, 점술가, 점쟁이, 현인, 현자`],ex:[``],ep:``,sh:`예언가`}},
+	vocabulary_00056:{key:`fear_m`,index:56,title:`fear`,class:`m`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`fear`, `an fear`, `fir`, `an fhir`, `fir`, `na fir`, `fear`, `na bhfear`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`man, male`, `husband`],ko:[`남자, 남성, 사내, 사나이`, `남편, 부군`, `<small>(복수형으로, 다른 명사 앞에 쓰여서)</small> 사람들, 민족, 일족, 부족`],ex:[`<strong>Fir Bholg</strong>: “가죽부대의 사람들”. 피르 볼그, «에린 침략의 서»에 등장하는 전설 속의 아일랜드 선주민.`],ep:``,sh:`남자`}},
+	vocabulary_00057:{key:`fearthainn_f`,index:57,title:`fearthainn`,class:`f`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`fearthainn`, `an fhearthainn`, `fearthainne`, `na fearthainne`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`rain, rainfall`],ko:[`비, 빗물, 강우, 강수`],ex:[``],ep:``,sh:`비`}},
+	vocabulary_00058:{key:`feilm_f`,index:58,title:`feilm`,class:`f`,tag:{homonym:``,category:[`도구`],important:0},grammar:[`feilm`, `an fheilm`, `feilme`, `na feilme`, `feilmeacha`, `na feilmeacha`, `feilmeacha`, `na bhfeilmeacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`helm, helmet, headpiece, armet`],ko:[`투구`],ex:[``],ep:``,sh:`투구`}},
+	vocabulary_00059:{key:`fia_m`,index:59,title:`fia`,class:`m`,tag:{homonym:``,category:[`동물`],important:0},grammar:[`fia`, `an fia`, `fia`, `an fhia`, `fianna`, `na fianna`, `fianna`, `na bhfianna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`deer`],ko:[`사슴, 노루`],ex:[`<strong>fia <a onclick="link('mór_a')">mór</a></strong>: 큰사슴, 엘크<small>(elk)</small>, 무스`, `<strong>fia beannach</strong>: “뿔 달린 사슴”, 수사슴`],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> fiadh`,sh:`사슴`}},
+	vocabulary_00060:{key:`fiann_f`,index:60,title:`fiann`,class:`f`,tag:{homonym:``,category:[`사회`, `문화`, `전통`],important:0},grammar:[`fiann`, `an fhiann`, `féinne`, `na féinne`, `fianna`, `na fianna`, `fiann`, `na bhfiann`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`<em>fianna</em>, roving warrior-hunter`],ko:[`방랑 전사, 유랑 전사, 전사단, 피아나`],ex:[``],ep:`단수형은 전사 개개인, 복수형은 전사단을 뜻한다. 정주지 없이 방랑하며 사냥으로 생계를 유지하는 전사단으로, 낭만의 상징이었으나 교회의 미움을 받았다. 식량이 부족하면 강도로 돌변하기도 하였다. 핀 막 쿨<small>(Fionn mac Cumhail)</small>이 유명한 피아나 단장이다.`,sh:`방랑 전사`}},
+	vocabulary_00061:{key:`file_m`,index:61,title:`file`,class:`m`,tag:{homonym:``,category:[`사회`, `전통`],important:0},grammar:[`file`, `an file`, `file`, `an fhile`, `filí`, `na filí`, `filí`, `na bhfilí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`<em>fili</em>, poet, minstrel`],ko:[`“필레”, 시인, 학자, 궁정 시인, 왕정 시인`],ex:[``],ep:`<a onclick="link('bard')">bard</a>보다 등위가 높은 시인 겸 학자이다.`,sh:`시인`}},
+	vocabulary_00062:{key:`fionn_a`,index:62,title:`fionn`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`fionn`, `fhionn`, `fionn`, `finne`, `fionna`, `fhionna`, `fionna`, `fionn`, `finne`, `is finne`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`white`, `fair, bright, clear, brilliant, fine`, `blonde`],ko:[`희다, 하얗다, 백색의`, `맑다, 밝다, 환하다, 명료하다, 깨끗하다`, `곱다, 아름답다, 미려하다, 수려하다`, `<small>(피부·머리카락 따위가)</small> 희다, 백금발의`],ex:[``],ep:`<a onclick="link('bán')">bán</a>이 “희다”를 뜻하는 가장 일반적인 단어라면, fionn은 “아름답다, 밝다” 등의 긍정적인 의미를 수반한다.`,sh:`하얀`}},
+	vocabulary_00063:{key:`fleá_f`,index:63,title:`fleá`,class:`f`,tag:{homonym:``,category:[`문화`],important:0},grammar:[`fleá`, `an fhleá`, `fleá`, `na fleá`, `fleánna`, `na fleánna`, `fleánna`, `na bhfleánna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`feast, drinking-feast, banquet`],ko:[`축제, 연회, 주연, 향연, 잔치, 술잔치`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> fleadh`,sh:`잔치`}},
+	vocabulary_00064:{key:`folt_m`,index:64,title:`folt`,class:`m`,tag:{homonym:``,category:[`신체`],important:0},grammar:[`folt`, `an folt`, `foilt`, `an fhoilt`, `foilt`, `na foilt`, `folt`, `na bhfolt`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`hair of head`],ko:[`머리카락, 머리칼, 머릿결, 머리털, 모발`],ex:[`<strong>Feidhealm Foltchaoin</strong>: “아름다운 머리카락의 펠름”. 울라의 왕녀이자, 울라의 장군 리레 부아흐의 아내.`],ep:``,sh:`머리카락`}},
+	vocabulary_00065:{key:`fuar_a`,index:65,title:`fuar`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`fuar`, `fhuar`, `fuair`, `fuaire`, `fuara`, `fhuara`, `fuara`, `fuar`, `fuaire`, `is fuaire`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`cold`, `uncooked, raw`],ko:[`춥다, 차다, 차갑다`, `날것의, 요리하지 않은`],ex:[``],ep:``,sh:`차가운`}},
+	vocabulary_00066:{key:`ga_m`,index:66,title:`ga`,class:`m`,tag:{homonym:``,category:[`도구`],important:0},grammar:[`ga`, `an ga`, `ga`, `an gha`, `gathanna`, `na gathanna`, `gathanna`, `na ngathanna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`spear, dart, javelin`],ko:[`창<small>(槍)</small>, <small>(특히)</small> 투창`],ex:[`<strong>Ga Bholg</strong>: 쿠 훌린의 투창. 수면에서 발가락 끝으로 던져야 하며, 사람의 몸에 맞으면 서른 갈래의 미늘을 뻗어 육신을 파괴한다.`],ep:`<a onclick="link('sleá')">sleá</a>보다 길이가 짧고 가벼운 창을 뜻하나, 구분이 엄밀하지는 않다.`,sh:`투창`}},
+	vocabulary_00067:{key:`gar_a`,index:67,title:`gar`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`gar`, `ghar`, `gair`, `gaire`, `gara`, `ghara`, `gara`, `gar`, `gaire`, `is gaire`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`near, close, approximate`],ko:[`가깝다, 근접하다, 멀지 않다, 거리가 짧다`],ex:[``],ep:``,sh:`가까운`}},
+	vocabulary_00068:{key:`gasta_a`,index:68,title:`gasta`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`gasta`, `ghasta`, `gasta`, `gasta`, `gasta`, `ghasta`, `gasta`, `gasta`, `gasta`, `is gasta`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`fast, quick, rapid`, `smart, clever`],ko:[`빠르다, 날쌔다, 잽싸다, 재빠르다, 신속하다, 기민하다, 민첩하다`, `똑똑하다, 영리하다, 영민하다, 명민하다, 기발하다, 총명하다`],ex:[``],ep:``,sh:`빠른`}},
+	vocabulary_00069:{key:`gealach_f`,index:69,title:`gealach`,class:`f`,tag:{homonym:``,category:[`자연`, `천문`],important:0},grammar:[`gealach`, `an ghealach`, `gealaí`, `na gealaí`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`the Moon`, `moonlight`],ko:[`달<small>(月)</small>`, `달빛, 월광`],ex:[``],ep:``,sh:`달`}},
+	vocabulary_00070:{key:`gearr_a`,index:70,title:`gearr`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`gearr`, `ghearr`, `gearr`, `giorra`, `gearra`, `ghearra`, `gearra`, `gearr`, `giorra`, `is giorra`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`short, near, close`],ko:[`<small>(길이·시간이)</small> 짧다, 짤막하다`, `<small>(거리가)</small> 가깝다, 근접하다`],ex:[``],ep:``,sh:`짧은`}},
+	vocabulary_00071:{key:`geis_f`,index:71,title:`geis`,class:`f`,tag:{homonym:``,category:[`문화`, `전통`],important:0},grammar:[`geis`, `an gheis`, `geise`, `na geise`, `geasa`, `na geasa`, `geas`, `na ngeas`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`prohibition, taboo, <em>geas</em>`],ko:[`금지, 금기, 금제, 터부`, `<small>(민속)</small> 계율, 기아스`],ex:[``],ep:`특정한 금제를 반드시 이행하여야 한다는 운명의 구속. 흔히 “금기”라고 번역되지만, “하지 말라”뿐만 아니라 “하여야 한다” 형식의 계율도 흔하다. 계율은 초자연적인 권능과 명예를 부여한다고 널리 알려져 있지만, 거꾸로 권능에 따르는 필연적인 속박이 계율이라고 해석하는 것이 적절하다. 실제 고전에서는 계율이 깨졌을 때 찾아오는 파멸이 주로 묘사되며, 계율의 이익은 드러나지 않는다. 많은 영웅이 반드시 계율을 깨야 하는 “외통수”에 걸려 파멸하거나, 계율을 지키기 위하여 무리한 행동을 한다.`,sh:`계율`}},
+	vocabulary_00072:{key:`gorm_a`,index:72,title:`gorm`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`gorm`, `ghorm`, `goirm`, `goirme`, `gorma`, `ghorma`, `gorma`, `gorm`, `goirme`, `is goirme`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`blue, azure`],ko:[`푸르다, 파랗다, 하늘빛의`],ex:[`<strong>lasair ghorm</strong>: 푸른 불꽃.`],ep:``,sh:`푸른`}},
+	vocabulary_00073:{key:`grá_m`,index:73,title:`grá`,class:`m`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`grá`, `an grá`, `grá`, `an ghrá`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`love`, `charity`],ko:[`사랑, 애정, 애착, 연심, 연모, 흠모`, `관용, 관면, 자선, 자애, 자비`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> grádh`,sh:`사랑`}},
+	vocabulary_00074:{key:`grian_f`,index:74,title:`grian`,class:`f`,tag:{homonym:``,category:[`자연`, `천문`],important:0},grammar:[`grian`, `an ghrian`, `gréine`, `na gréine`, `grianta`, `na grianta`, `grianta`, `na ngrianta`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`the Sun`, `<em>fig.</em> paragon`],ko:[`해<small>(日)</small>, 태양`, `<small>(비유)</small> 모범, 귀감, 귀경`],ex:[`<strong>éirí gréine</strong>: “태양의 떠오름”, 일출.`, `<strong>luí gréine</strong>: “태양의 누움”, 일몰.`, `<strong><a onclick="link('lá')">lá</a> gréine</strong>: “태양의 날”, 맑은 날.`],ep:``,sh:`태양`}},
+	vocabulary_00075:{key:`iníon_f`,index:75,title:`iníon`,class:`f`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`iníon`, `an iníon`, `iníne`, `na hiníne`, `iníonacha`, `na hiníonacha`, `iníonacha`, `na n-iníonacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`daughter, female offspring`],ko:[`딸, 따님, 여식, 영애`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> inghean`,sh:`딸`}},
+	vocabulary_00076:{key:`íseal_a`,index:76,title:`íseal`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`íseal`, `íseal`, `ísil`, `ísle`, `ísle`, `ísle`, `ísle`, `íseal`, `ísle`, `is ísle`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`low`, `humble, inferior`],ko:[`<small>(고저가)</small> 낮다, 나직하다, 저지의`, `<small>(신분이)</small> 낮다, 천하다, 하찮다, 미천하다, 비천하다, 한미하다, 천미하다`],ex:[``],ep:``,sh:`낮은`}},
+	vocabulary_00077:{key:`lá_m`,index:77,title:`lá`,class:`m`,tag:{homonym:``,category:[`시간`, `자연`],important:0},grammar:[`lá`, `an lá`, `lae`, `an lae`, `laethanta`, `na laethanta`, `laethanta`, `na laethanta`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`day, daytime`],ko:[`날<small>(日)</small>, 하루`, `낮<small>(晝)</small>, 낮때, 주간<small>(晝間)</small>`],ex:[``],ep:``,sh:`낮`}},
+	vocabulary_00078:{key:`lámh_f`,index:78,title:`lámh`,class:`f`,tag:{homonym:``,category:[`신체`],important:0},grammar:[`lámh`, `an lámh`, `láimhe`, `na láimhe`, `lámha`, `na lámha`, `lámh`, `na lámh`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`hand, arm`, `skill, ability, prowess, talent`, `action, dealing, engagement`, `effort, exertion, endeavour`, `guard, care, custody, protection, conservation, management`, `might, power, authority`, `control, oppression, repression, suppression`],ko:[`손, 팔`, `기술, 기능, 기량, 능력, 재능, 재주`, `일<small>(事)</small>, 노동, 행동, 행위, 동작, 착수, 대응, 대처`, `노력, 노심, 공로, 공력`, `보호, 수호, 보장, 관리, 감독`, `권능, 권위, 권력, 위엄, 위력, 위세`, `탄압, 억압, 강압, 압제`],ex:[`<strong>Nuadha <a onclick="link('airgead')">Airgead</a>lámh</strong>: “은 팔의 누아”, 다난 신족의 대왕. 마이 티랴<small>(모이투라)</small>의 첫 번째 싸움에서 한 팔을 잃고 은 의수를 달았기에 생긴 별명이다.`, `<strong>Lú Lámh<a onclick="link('fada_a')">fhada</a></strong>: “긴 팔의 루”, 다난 신족의 대왕이자 고대 켈트 종교의 지위 높은 남신. “긴 팔”은 “뛰어난 재주”를 뜻한다.`],ep:`아일랜드어는 “손”과 “팔”을 구별하지 않는다.`,sh:`손`}},
+	vocabulary_00079:{key:`laoch_m`,index:79,title:`laoch`,class:`m`,tag:{homonym:``,category:[`사회`, `기독`],important:0},grammar:[`laoch`, `an laoch`, `laoich`, `an laoich`, `laochra`, `na laochra`, `laochra`, `na laochra`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`warrior, hero, champion`, `layman`],ko:[`전사, 투사, 무사, 용사, 영웅`, `<small>(기독교)</small> 평신도`],ex:[``],ep:``,sh:`영웅`}},
+	vocabulary_00080:{key:`leabhar_m`,index:80,title:`leabhar`,class:`m`,tag:{homonym:``,category:[``],important:0},grammar:[`leabhar`, `an leabhar`, `leabhair`, `an leabhair`, `leabhair`, `na leabhair`, `leabhar`, `na leabhar`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`book, codex, document`],ko:[`책, 서적, 도서, 서첩, 서책, 문헌, 문서, 기록`],ex:[``],ep:``,sh:`책`}},
+	vocabulary_00081:{key:`léine_f`,index:81,title:`léine`,class:`f`,tag:{homonym:``,category:[`문화`, `전통`],important:0},grammar:[`léine`, `an léine`, `léine`, `na léine`, `léinte`, `na léinte`, `léinte`, `na léinte`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`shirt, tunic`],ko:[`상의, 속옷, 셔츠, 튜닉`],ex:[``],ep:`본래 외투<small>(<a onclick="link('brat')">brat</a>)</small>와 함께 아일랜드 전통 복식을 구성하는 요소로, 살갗 바로 위에 입는 속옷을 뜻한다. 일반적으로 여성의 레네는 드레스처럼 길었으며, 남성의 레네는 길이가 다양하였다. 현대에는 셔츠를 뜻한다.`,sh:`속옷`}},
+	vocabulary_00082:{key:`loch_m`,index:82,title:`loch`,class:`m`,tag:{homonym:``,category:[`장소`, `자연`],important:0},grammar:[`loch`, `an loch`, `locha`, `an locha`, `lochanna`, `na lochanna`, `lochanna`, `na lochanna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`lake, loch`],ko:[`호수, 강호, 석호, 웅덩이, 못, 연못`],ex:[``],ep:`바다와 연결된 석호<small>(潟湖)</small>도 loch라고 한다.`,sh:`호수`}},
+	vocabulary_00083:{key:`long_f`,index:83,title:`long`,class:`f`,tag:{homonym:``,category:[`도구`],important:0},grammar:[`long`, `an long`, `loinge`, `na loinge`, `longa`, `na longa`, `long`, `na long`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`ship, vessel`],ko:[`배, 선박, 선척, 함선`],ex:[``],ep:``,sh:`배`}},
+	vocabulary_00084:{key:`Lúnasa_m`,index:84,title:`Lúnasa`,class:`m`,tag:{homonym:``,category:[`시간`, `전통`],important:0},grammar:[`Lúnasa`, `an Lúnasa`, `Lúnasa`, `an Lúnasa`, `Lúnasaí`, `na Lúnasaí`, `Lúnasaí`, `na Lúnasaí`, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`August`, `<em>Lughnasadh</em>`],ko:[`8월`, `“루나사”, 게일 달력의 가을의 시작`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> Lughnasadh<br>«에린 침략의 서»에 따르면 다난 신족의 대왕 루가 양모 탈틴을 위하여 제전을 개최한 것이 유래라고 한다. 제전을 연 언덕의 이름은 탈틴이 되었으며, 오늘날 미드 현의 텔타운<small>(Teltown)</small>이다.`,sh:`8월`}},
+	vocabulary_00085:{key:`mac_m`,index:85,title:`mac`,class:`m`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`mac`, `an mac`, `mic`, `an mhic`, `mic`, `na mic`, `mac`, `na mac`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`son, male offspring`, `descendant, successor, scion, progeny`],ko:[`아들, 아드님, 영식`, `후예, 후손, 자손, 내예, 내윤`],ex:[`<strong>Mac <a onclick="link('óg')">Óg</a></strong>: “젊은 아들”, 다난 신족의 남신 이나스<small>(Aonghas)</small>의 별명.`],ep:`인명 앞에 쓰여 “~의 아들”, “~의 후손” 따위를 뜻한다. 아일랜드 남성은 전통적으로 “A의 아들 B” 형태의 이름을 사용하였다. 현대에는 “맥<small>(Mac, Mc)</small>”으로 시작하는 성씨가 여기에서 기원하였다.`,sh:`아들`}},
+	vocabulary_00086:{key:`maigh_f`,index:86,title:`maigh`,class:`f`,tag:{homonym:``,category:[`장소`, `자연`],important:0},grammar:[`maigh`, `an mhaigh`, `maighea`, `na maighea`, `maighne`, `na maighne`, `maighne`, `na maighne`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`field, plain`],ko:[`들판, 벌판, 광야`],ex:[`<strong>Maigh Meall</strong>: “환희의 언덕”, “마그 멜”로 알려진 별세계.`, `<strong>Maigh Tuireadh</strong>: 코나흐타의 들판. 다난 신족이 두 차례의 대전을 치른 장소로, 영어 명칭 모이투라<small>(Moytura)</small>로 유명하다.`],ep:``,sh:`들판`}},
+	vocabulary_00087:{key:`mall_a`,index:87,title:`mall`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`mall`, `mhall`, `mall`, `moille`, `malla`, `mhalla`, `malla`, `mall`, `moille`, `is moille`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`slow, tedious`],ko:[`느리다, 느릿느릿하다`, `늦다, 늦되다, 뒤늦다, 때늦다`, `지겹다, 지루하다, 따분하다, 무료하다, 싫증이 나다`],ex:[``],ep:``,sh:`느린`}},
+	vocabulary_00088:{key:`máthair_f`,index:88,title:`máthair`,class:`f`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`máthair`, `an mháthair`, `máthar`, `na máthar`, `máithreacha`, `na máithreacha`, `máithreacha`, `na máithreacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`mother`],ko:[`어머니, 엄마, 모친`],ex:[``],ep:``,sh:`어머니`}},
+	vocabulary_00089:{key:`mil_f`,index:89,title:`mil`,class:`f`,tag:{homonym:``,category:[``],important:0},grammar:[`mil`, `an mhil`, `meala`, `na meala`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`honey, honeydew`],ko:[`꿀, 벌꿀, 봉밀, 단물`],ex:[``],ep:``,sh:`꿀`}},
+	vocabulary_00090:{key:`mór_a`,index:90,title:`mór`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`mór`, `mhór`, `móir`, `móire`, `móra`, `mhóra`, `móra`, `mór`, `mó`, `is mó`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`big, large, huge, great, magnificent`, `many, much`],ko:[`크다, 거대하다, 대단하다, 우람하다, 굉장하다, 위대하다, 장엄하다`, `많다, 가득하다`],ex:[`<strong>Cearmaid Milbhéal</strong>: “꿀 입의 캬르마드”, 다난 신족의 남신의 이름. 다야<small>(Daghdha)</small>의 아들.`],ep:``,sh:`큰`}},
+	vocabulary_00091:{key:`muir_f`,index:91,title:`muir`,class:`f`,tag:{homonym:``,category:[`장소`, `자연`],important:0},grammar:[`muir`, `an mhuir`, `mara`, `na mara`, `mara`, `na mara`, `mara`, `na mara`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`sea, ocean`],ko:[`바다, 해양, 대양`],ex:[``],ep:``,sh:`바다`}},
+	vocabulary_00092:{key:`néal_m`,index:92,title:`néal`,class:`m`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`néal`, `an néal`, `néil`, `an néil`, `néalta`, `na néalta`, `néalta`, `na néalta`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`cloud`],ko:[`구름, 뜬구름, 부운, 유운, 비운`],ex:[``],ep:``,sh:`구름`}},
+	vocabulary_00093:{key:`neamh_f`,index:93,title:`neamh`,class:`f`,tag:{homonym:``,category:[`자연`, `기독`],important:0},grammar:[`neamh`, `an neamh`, `neimhe`, `na neimhe`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`sky, firmament, heaven`],ko:[`하늘, 대기, 천상, 창공, 창천, 궁창`, `<small>(기독교)</small> 천국, 천당`],ex:[``],ep:``,sh:`하늘`}},
+	vocabulary_00094:{key:`óg_a`,index:94,title:`óg`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`óg`, `óg`, `óig`, `óige`, `óga`, `óga`, `óga`, `óg`, `óige`, `is óige`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`young, new, fresh`],ko:[`젊다, 어리다, 연소하다`, `새롭다, 신선하다, 생생하다`],ex:[``],ep:``,sh:`젊은`}},
+	vocabulary_00095:{key:`oíche_f`,index:95,title:`oíche`,class:`f`,tag:{homonym:``,category:[`자연`, `시간`],important:0},grammar:[`oíche`, `an oíche`, `oíche`, `na hoíche`, `oícheanta`, `na hoícheanta`, `oícheanta`, `na n-oícheanta`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`night`],ko:[`밤<small>(夜)</small>, 밤중, 야간`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> oidhche`,sh:`밤`}},
+	vocabulary_00096:{key:`oighear_m`,index:96,title:`oighear`,class:`m`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`oighear`, `an t-oighear`, `oighir`, `an oighir`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`ice`],ko:[`얼음`],ex:[``],ep:``,sh:`얼음`}},
+	vocabulary_00097:{key:`oileán_m`,index:97,title:`oileán`,class:`m`,tag:{homonym:``,category:[`자연`, `장소`],important:0},grammar:[`oileán`, `an t-oileán`, `oileáin`, `an oileáin`, `oileáin`, `na hoileáin`, `oileán`, `na n-oileán`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`island, isle, islet`],ko:[`섬, 도서<small>(島嶼)</small>`],ex:[``],ep:``,sh:`섬`}},
+	vocabulary_00098:{key:`ollamh_m`,index:98,title:`ollamh`,class:`m`,tag:{homonym:``,category:[`사회`, `전통`],important:0},grammar:[`ollamh`, `an t-ollamh`, `ollaimh`, `an ollaimh`, `ollúna`, `na hollúna`, `ollúna`, `na n-ollúna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`<em>ollave</em>, master-poet`],ko:[`“올루”, 대시인, 대학자`],ex:[`<strong>ollamh <a onclick="link('éire')">Éireann</a></strong>: “아일랜드의 대학자”. 전 아일랜드의 올루들 가운데 가장 뛰어난 사람. 시인들의 추대로 선정되며, 대왕에 버금가는 영예를 누린다.`],ep:`시인<small>(<a onclick="link('file')">file</a>)</small>들 가운데 가장 현명하고 뛰어난 사람을 뜻한다.`,sh:`대학자`}},
+	vocabulary_00099:{key:`ór_m`,index:99,title:`ór`,class:`m`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`ór`, `an t-ór`, `óir`, `an óir`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`gold`],ko:[`금, 황금`],ex:[`<strong>Ór<a onclick="link('lámh')">lámh</a></strong>: “황금 손”, 코나흐타의 왕자의 이름.`],ep:``,sh:`금`}},
+	vocabulary_00100:{key:`réalta_f`,index:100,title:`réalta`,class:`f`,tag:{homonym:``,category:[`자연`, `천문`],important:0},grammar:[`réalta`, `an réalta`, `réalta`, `na réalta`, `réaltaí`, `na réaltaí`, `réaltaí`, `na réaltaí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`star`],ko:[`별<small>(星)</small>, 항성`],ex:[`<strong>réalta an mhadra</strong>: “개의 별”, 시리우스.`, `<strong>réalta eolais</strong>: “지식의 별”, 길잡이별.`, `<strong>réalta scuaibe</strong>: “휩쓰는 별”, 혜성, 유성, 별똥별.`, `<strong>réalta nua</strong>: “새로운 별”, 신성.`],ep:``,sh:`별`}},
+	vocabulary_00101:{key:`rí_f`,index:101,title:`rí`,class:`f`,tag:{homonym:``,category:[`사회`],important:0},grammar:[`rí`, `an rí`, `rí`, `na rí`, `rítheacha`, `na rítheacha`, `rítheacha`, `na rítheacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`king, prince, lord, monarch`],ko:[`왕, 임금, 제왕, 군주, 군왕, 국왕, 지도자, 지배자, 통치자`],ex:[`<strong><a onclick="link('ard')">ard</a>rí</strong>: “높은 왕”, 대왕. 수백 명의 군주가 공존하는 아일랜드 전역에서 가장 위대한 것으로 인정받은 군주.`],ep:``,sh:`왕`}},
+	vocabulary_00102:{key:`rince_m`,index:102,title:`rince`,class:`m`,tag:{homonym:``,category:[`문화`],important:0},grammar:[`rince`, `an rince`, `rince`, `an rince`, `rincí`, `na rincí`, `rincí`, `na rincí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`dance`],ko:[`춤, 춤사위, 무용, 무도`],ex:[``],ep:``,sh:`춤`}},
+	vocabulary_00103:{key:`rua_a`,index:103,title:`rua`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`rua`, `rua`, `rua`, `rua`, `rua`, `rua`, `rua`, `rua`, `rua`, `is rua`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`red, reddish-brown, russet, brown`, `wild, rough, strong, fierce, ferocious`],ko:[`빨갛다, 붉다, 검붉다, 갈색의, 갈빛의, <small>(특히 머리카락·털 따위가)</small> 붉다, 적발의`, `거칠다, 사납다, 거세다, 흉포하다, 맹렬하다, 난폭하다, 포악하다`],ex:[`<strong>madra rua</strong>: “붉은 개”, 여우`],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> ruadh`,sh:`붉은`}},
+	vocabulary_00104:{key:`rún_m`,index:104,title:`rún`,class:`m`,tag:{homonym:``,category:[``],important:0},grammar:[`rún`, `an rún`, `rúin`, `an rúin`, `rúin`, `na rúin`, `rún`, `na rún`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`secret, mystery, riddle`],ko:[`비밀, 미지, 신비, 비전, 기밀, 내밀, 비술, 불가사의, 수수께끼`],ex:[``],ep:`북유럽의 “룬 문자”와 어원이 같다.`,sh:`비밀`}},
+	vocabulary_00105:{key:`Samhain_f`,index:105,title:`Samhain`,class:`f`,tag:{homonym:``,category:[`시간`, `전통`],important:0},grammar:[`Samhain`, `an tSamhain`, `Samhna`, `na Samhna`, `Samhnacha`, `na Samhnacha`, `Samhnacha`, `na Samhnacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`November, <em>Samhain</em>`],ko:[`11월`, `“사운”, 게일 달력의 겨울의 시작`],ex:[``],ep:`할로윈의 유래로 통하며, “삼하인”이라는 잘못된 독법으로 알려져 있다. 인간계와 요정계의 통로가 열리며 요정·정령·귀신·유령 등이 대지를 배회하고 온갖 기이한 사건을 일으키는 귀기스러운 시기이다.`,sh:`11월`}},
+	vocabulary_00106:{key:`saoirse_f`,index:106,title:`saoirse`,class:`f`,tag:{homonym:``,category:[``],important:0},grammar:[`saoirse`, `an shaoirse`, `saoirse`, `na saoirse`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`liberty, freedom, independence`, `privilege, honour`],ko:[`자유, 자주, 자립, 독립`, `특권, 특전, 영광, 영예, 명예`],ex:[``],ep:`여성의 이름으로도 자주 쓰인다.`,sh:`자유`}},
+	vocabulary_00107:{key:`sciath_f`,index:107,title:`sciath`,class:`f`,tag:{homonym:``,category:[`도구`],important:0},grammar:[`sciath`, `an shciath`, `scéithe`, `na scéithe`, `sciatha`, `na sciatha`, `sciath`, `na sciath`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`shield`, `<em>lit.</em> wing`],ko:[`방패`, `날개, 날갯죽지`],ex:[``],ep:``,sh:`방패`}},
+	vocabulary_00108:{key:`sean_a`,index:108,title:`sean`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`sean`, `shean`, `sin`, `sine`, `seana`, `sheana`, `seana`, `sean`, `sine`, `is sine`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`old, aged, elder, senior, mature`, `old-fashioned, long-established, antique`],ko:[`늙다, 나이가 많다, 연로하다, 성숙하다, 원숙하다, 연장의, 고령의`, `낡다, 묵다, 옛, 예스럽다, 오래되다`],ex:[``],ep:``,sh:`늙은`}},
+	vocabulary_00109:{key:`sí_f`,index:109,title:`sí`,class:`f`,tag:{homonym:``,category:[`장소`, `전통`],important:0},grammar:[`sí`, `an shí`, `sí`, `na sí`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`<em>sid</em>, fairy-mound, elf-mound`],ko:[`“시”, 요정의 언덕, 요정의 세계, 별세계, 이세계, 요정계`],ex:[`<strong>aos sí</strong>: “요정 언덕의 백성”, 요정.`],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> sidhe`,sh:`요정 언덕`}},
+	vocabulary_00110:{key:`síofra_m`,index:110,title:`síofra`,class:`m`,tag:{homonym:``,category:[`전통`],important:0},grammar:[`síofra`, `an tsíofra`, `síofra`, `an shíofra`, `síofraí`, `na síofraí`, `síofraí`, `na síofraí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`elf, sprite, ghost`, `changeling`],ko:[`유령, 정령, 귀신`, `<small>(특히)</small> “시프라”, 체인질링`],ex:[``],ep:`인간 아기를 요정의 세계로 납치하고 그 자리에 대신 놓이는 추한 괴물이다.`,sh:`유령`}},
+	vocabulary_00111:{key:`síor_a`,index:111,title:`síor`,class:`a`,tag:{homonym:``,category:[`시간`],important:0},grammar:[`síor`, `shíor`, `sír`, `síre`, `síora`, `shíora`, `síora`, `síor`, `síre`, `is síre`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`eternal, perpetual, permanent, everlasting, perennial, endless`],ko:[`끝없다, 끊임없다, 영원하다, 영속하다, 영구적이다, 항구적이다, 항속적이다`],ex:[``],ep:``,sh:`영원한`}},
+	vocabulary_00112:{key:`sleá_f`,index:112,title:`sleá`,class:`f`,tag:{homonym:``,category:[`도구`],important:0},grammar:[`sleá`, `an shleá`, `sleá`, `na sleá`, `sleánna`, `na sleánna`, `sleánna`, `na sleánna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`spear, lance, javelin`],ko:[`창<small>(槍)</small>, 장창, 투창`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> sleagh<br><a onclick="link('ga')">ga</a>보다 길고 무거운 창을 뜻하는 경우가 많지만, 구별이 엄격하지는 않다.`,sh:`창`}},
+	vocabulary_00113:{key:`sliabh_m`,index:113,title:`sliabh`,class:`m`,tag:{homonym:``,category:[`자연`, `장소`],important:0},grammar:[`sliabh`, `an tsliabh`, `sléibhe`, `an shléibhe`, `sléibhte`, `na sléibhte`, `sléibhte`, `na sléibhte`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`mountain, summit, peak`, `moor`],ko:[`산<small>(山)</small>, 메, 산악, 산지, 산간, 산봉우리`, `황야, 황원, 황무지, 불모지`],ex:[`<strong><a onclick="link('lá')">Lá</a> an tSléibhe</strong>: “산의 날”, <small>(기독교)</small> 심판의 날, 최후의 날.`],ep:``,sh:`산`}},
+	vocabulary_00114:{key:`sneachta_m`,index:114,title:`sneachta`,class:`m`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`sneachta`, `an tsneachta`, `sneachta`, `an shneachta`, `sneachtaí`, `na sneachtaí`, `sneachtaí`, `na sneachtaí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`snow`],ko:[`눈<small>(雪)</small>, 백설, 강설, 적설`],ex:[``],ep:``,sh:`눈`}},
+	vocabulary_00115:{key:`solas_m`,index:115,title:`solas`,class:`m`,tag:{homonym:``,category:[``],important:0},grammar:[`solas`, `an tsolas`, `solais`, `an sholais`, `soilse`, `na soilse`, `soilse`, `na soilse`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`light, brightness, illumination`],ko:[`빛, 광명, 광휘, 광채`, `밝음, 비춤, 조명`],ex:[`<strong><a onclick="link('claíomh')">Claíomh</a> Solais</strong>: “빛의 검”, 신화 속의 여러 영웅이 소유한 “클라우 솔라스”로 알려진 검.`],ep:``,sh:`빛`}},
+	vocabulary_00116:{key:`sona_a`,index:116,title:`sona`,class:`a`,tag:{homonym:``,category:[``],important:0},grammar:[`sona`, `shona`, `sona`, `sona`, `sona`, `shona`, `sona`, `sona`, `sona`, `is sona`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`happy, glad`, `lucky, fortunate`],ko:[`기쁘다, 복되다, 행복하다`, `운이 좋다, 운수가 좋다`],ex:[``],ep:``,sh:`기쁜`}},
+	vocabulary_00117:{key:`súil_f`,index:117,title:`súil`,class:`f`,tag:{homonym:``,category:[`신체`],important:0},grammar:[`súil`, `an shúil`, `súile`, `na súile`, `súile`, `na súile`, `súl`, `na súl`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`eye`, `<em>fig.</em> hope, expectation`],ko:[`눈<small>(目)</small>, 눈동자, 눈망울, 눈알, 안구`, `<small>(비유)</small> 희망, 소망, 기대`],ex:[`<strong>Mionn Súla</strong>: “눈의 왕관”, 전설 속의 방패.`],ep:``,sh:`눈`}},
+	vocabulary_00118:{key:`te_a`,index:118,title:`te`,class:`a`,tag:{homonym:``,category:[``],important:0},grammar:[`te`, `the`, `te`, `te`, `teo`, `theo`, `teo`, `te`, `teo`, `is teo`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`hot, warm, heated, tepid, scorching`],ko:[`덥다, 뜨겁다, 따뜻하다, 따듯하다, 따끈하다, 온난하다, 온화하다, 고온의`],ex:[``],ep:``,sh:`뜨거운`}},
+	vocabulary_00119:{key:`teach_m`,index:119,title:`teach`,class:`m`,tag:{homonym:``,category:[`장소`, `사회`],important:0},grammar:[`teach`, `an teach`, `tí`, `an tí`, `tithe`, `na tithe`, `tithe`, `na dtithe`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`house, habitation, dwelling`, `household`],ko:[`집, 가택, 가옥, 옥려, 거처, 처소, 거주지, 주거지`, `가정, 가족, 식구`],ex:[`<strong>Teach Duinn</strong>: “돈<small>(갈색 존재)</small>의 집”, 아일랜드 남해에 있다고 하는 저승의 출입구.`],ep:``,sh:`집`}},
+	vocabulary_00120:{key:`tine_f`,index:120,title:`tine`,class:`f`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`tine`, `an tine`, `tine`, `na tine`, `tinte`, `na tinte`, `tinte`, `na dtinte`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`fire, flame`, `glow, flash, luminosity, incandescence`],ko:[`불<small>(火)</small>, 불꽃, 불길, 화염, 광염, 화재, 화마`, `광원, 조명, 섬광, 발광`],ex:[``],ep:``,sh:`불`}},
+	vocabulary_00121:{key:`tintreach_f`,index:121,title:`tintreach`,class:`f`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`tintreach`, `an tintreach`, `tintrí`, `na tintrí`, ``, ``, ``, ``, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`lightning`],ko:[`번개, 벼락, 낙뢰, 벽력, 뇌굉`],ex:[``],ep:``,sh:`번개`}},
+	vocabulary_00122:{key:`tír_f`,index:122,title:`tír`,class:`f`,tag:{homonym:``,category:[`자연`, `장소`, `사회`],important:0},grammar:[`tír`, `an tír`, `tíre`, `na tíre`, `tíortha`, `na tíortha`, `tíortha`, `na dtíortha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`land, country`, `state, nation, or its land`],ko:[`땅, 대지, 토지`, `국토, 영토, 강토, 강역, 영지`, `나라, 국가`],ex:[`<strong>Tír Chonaill</strong>: “코날<small>(Conall)</small>의 영지”, 티어코넬<small>(Tyrconnell)</small>.`, `<strong>Tír Eoghain</strong>: “온<small>(Eoghan)</small>의 영지”, 티론<small>(Tyrone)</small>.`],ep:``,sh:`땅`}},
+	vocabulary_00123:{key:`toirneach_f`,index:123,title:`toirneach`,class:`f`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`toirneach`, `an toirneach`, `toirní`, `na toirní`, `toirneacha`, `na toirneacha`, `toirneach`, `na dtoirneach`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`thunder, thunderclap`, `<em>fig.</em> anger, rage, fury, wrath, ire, furor`],ko:[`천둥, 우레, 뇌정, 뇌성, 뇌명`, `<small>(비유)</small> 분노, 분개, 격노, 격분, 노여움`],ex:[``],ep:``,sh:`천둥`}},
+	vocabulary_00124:{key:`uisce_m`,index:124,title:`uisce`,class:`m`,tag:{homonym:``,category:[`자연`],important:0},grammar:[`uisce`, `an t-uisce`, `uisce`, `an uisce`, `uiscí`, `na huiscí`, `uiscí`, `na n-uiscí`, `slender`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`water, liquid <em>i. e.</em> rain, tear, brine <em>etc.</em>`],ko:[`물<small>(水)</small>, 액체`],ex:[`<strong>uisce-<a onclick="link('beatha')">beatha</a></strong>: “생명의 물”, 생명수, 증류주. 영단어 위스키<small>(whiskey)</small>의 어원이다.`],ep:``,sh:`물`}}
+};
+
+//reverse search DB
+let db_text = ["DB_TEXT"];
+
+for (let e in dict) {
+	let t = "";
+
+	t += dict[e]["gloss"]["en"].join("").trim().replaceAll(" ", "").replace(/<.*?>/g, "") + "|";
+	t += dict[e]["gloss"]["ko"].join("").trim().replaceAll(" ", "").replace(/<.*?>/g, "") + "|";
+	t += dict[e]["gloss"]["ex"].join("").trim().replaceAll(" ", "").replace(/<.*?>/g, "") + "|";
+	t += dict[e]["gloss"]["ep"].trim().replaceAll(" ", "").replace(/<.*?>/g, "") + "|";
+
+	//hangul
+	for (let i = 0; i < dict[e]["grammar"].length; i ++) {
+		let p = dict[e]["grammar"][i];
+		if (p == "broad" || p == "slender" || p == "weak" || p == "strong" || p == "") { continue; }
+
+		t += GetHangul(p) + "|";
+	}
+
+	//hangul in examples
+	for (let i = 0; i < dict[e]["gloss"]["ex"].length; i ++) {
+		let p = dict[e]["gloss"]["ex"][i];
+		if (p == "") { continue; }
+		
+		//delete html tags
+		let m = p.match(/(?<=\<strong\>)(.+)(?=\<\/strong\>\:)/g)[0].replace(/\<.*?\>/g, "");
+		t += GetHangul(m) + "|";
+	} 
+
+	t = t.replaceAll("undefined", "");
+	t = t.replace(/\|{2,}/g, "|");
+	db_text.push(t);
+}
+</script>
+</body></html>
