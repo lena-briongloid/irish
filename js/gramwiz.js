@@ -41,15 +41,15 @@ function gramwiz_output() {
 
 	//case 1: noun + noun -> A의 B
 	if ((voc1.class == "m" || voc1.class == "f") && (voc2.class == "m" || voc2.class == "f")) {
-		//단수, 복수 주격 무관사형
+		//singular, plural nominative non-article
 		const part1 = [voc1.grammar[0], voc1.grammar[4]]
 
-		// 단수, 복수 속격 관사형; 드물게 관사형이 없는 명사가 있는데 이때는 무관사형
+		//singular, plural genitive article; if article cannot be attached then non-article
 		const part2 = voc2.grammar[3] !== "" ? [voc2.grammar[3], voc2.grammar[7]] : [voc2.grammar[2], voc2.grammar[6]]
 
 		let phrase = [`${part1[0]} ${part2[0]}`, `${part1[1]} ${part2[0]}`, `${part1[0]} ${part2[1]}`, `${part1[1]} ${part2[1]}`]
 
-		//복수 없을때
+		//no plural e. g. Éire
 		if (part1[1] == "") {
 			phrase[1] = ""; phrase[3] = "";
 		}
@@ -57,14 +57,14 @@ function gramwiz_output() {
 			phrase[2] = ""; phrase[3] = "";
 		}
 
-		//대표형
+		//representative
 		document.getElementById("text_gw_output").innerHTML = `<p>${phrase[0]} [${get_sound(phrase[0], true)}]</p><p>“${voc2.gloss.sh}의 ${voc1.gloss.sh}”</p>`;
 
-		//상세
+		//details
 		document.getElementById("text_gw_output_detail").innerHTML = `
-			<table>
+			<table style="table-layout: auto;">
 				<tr>
-					<th style="width: 10%;">&nbsp;</th>
+					<th style="min-width: 50px;">&nbsp;</th>
 					<th style="width: 30%;">${voc1.gloss.sh}</small></th>
 					<th style="width: 30%;">${voc1.gloss.sh}들</small></th>
 				</tr>
@@ -83,20 +83,18 @@ function gramwiz_output() {
 
 	//case 2: adj + noun -> A한 B
 	if ((voc1.class == "a" && (voc2.class == "m" || voc2.class == "f")) || voc2.class == "a" && (voc1.class == "m" || voc1.class == "f")) {
-		//뭐가 형용사고 뭐가 명사인지부터 판별
 		const non = voc2.class == "a" ? voc1 : voc2;
 		const adj = voc1.class == "a" ? voc1 : voc2;
 
-		//명사: 속격에 관사 있으면 관사형 취하고 안되면 안돼
+		//noun: is genitive article-attachable?
 		let part1 = [``, ``, ``, ``, ``];
-		part1[0] = non.grammar[0]; //단수 주격
-		part1[1] = non.grammar[3] != "" ? non.grammar[3] : non.grammar[2] //단수 속격
-		part1[2] = non.grammar[4]; //복수 주격
-		part1[3] = non.grammar[7] != "" ? non.grammar[7] : non.grammar[6] //복수 속격
-		part1[4] = non.grammar[1] != "" ? non.grammar[1] : non.grammar[0]; //비교급에 쓸 단수 주격 관사형
+		part1[0] = non.grammar[0]; //sing. nom.
+		part1[1] = non.grammar[3] != "" ? non.grammar[3] : non.grammar[2] //sing. gen.
+		part1[2] = non.grammar[4]; //pl. nom.
+		part1[3] = non.grammar[7] != "" ? non.grammar[7] : non.grammar[6] //pl. gen.
+		part1[4] = non.grammar[1] != "" ? non.grammar[1] : non.grammar[0]; //sing. gen. with article for comparatives
 
-		//[단수주격, 단수속격, 복수주격, 복수속격, 비교급] 순으로 구성
-		//남성, 여성 판별
+		//[sg. nom, sg. gen, pl. nom, pl. gen, comp]
 		let part2 = [];
 		if (non.class === "m") {
 			part2.push(adj.grammar[0], adj.grammar[2]);
@@ -105,35 +103,35 @@ function gramwiz_output() {
 			part2.push(adj.grammar[1], adj.grammar[3]);
 		}
 
-		//복수 주격 broad - slender
+		// pl.nom broad - slender
 		if (non.grammar[8] === "broad") {
 			part2.push(adj.grammar[4]);
 		}
 		else if (non.grammar[8] === "slender") {
 			part2.push(adj.grammar[5]);
 		}
-		else { //복수 없을때
+		else { //no plural
 			part2.push("");
 		}
 
-		//복수 속격 strong - weak
+		// pl.gen strong - weak
 		if (non.grammar[9] === "strong") {
 			part2.push(adj.grammar[6]);
 		}
 		else if (non.grammar[9] === "weak") {
 			part2.push(adj.grammar[7]);
 		}
-		else { //복수 없을때
+		else { //no plural
 			part2.push("");
 		}
 
-		//비교급
+		//comparative
 		part2.push(adj.grammar[9]);
 
-		//대표형
+		//representative
 		document.getElementById("text_gw_output").innerHTML = `<p>${part1[0] + " " + part2[0]} [${get_sound(part1[0] + " " + part2[0], true)}]</p><p>“${adj.gloss.sh} ${non.gloss.sh}”</p>`;
 
-		//상세
+		//details
 		document.getElementById("text_gw_output_detail").innerHTML = `
 			<table>
 				<tr>
@@ -162,7 +160,7 @@ function gramwiz_output() {
 	}
 }
 
-//유사도
+//evaluate similarity
 function gramwiz_suggest(text, num) {
 	topmenu_set_graphic("topmenu_gramwiz");
 
@@ -183,7 +181,7 @@ function gramwiz_suggest(text, num) {
 
 		let t = t0 + "<sup>" + t1 + "</sup>" + " <small>(" + t3 + ")</small>";
 
-		//동음이의어
+		//homonym
 		let t2 = Page.split("_")[0];
 
 		if (t0 == t2) {

@@ -12,56 +12,56 @@
 	<link rel="icon" href="resources/favicon.ico" sizes="any">
 	<style>
 		@font-face {
-		  font-family: 'font_ko';
-		  src: url('resources/fonts/onglyph_very.ttf');
-		  font-style: normal;
-		  font-weight: 400;
+			font-family: 'font_ko';
+			src: url('resources/fonts/onglyph_very.ttf');
+			font-style: normal;
+			font-weight: 400;
 		}
 		@font-face {
-		  font-family: 'font_en';
-		  src: url('resources/fonts/CormorantGaramond-Regular.ttf');
-		  font-style: normal;
-		  font-weight: 400;
+			font-family: 'font_en';
+			src: url('resources/fonts/CormorantGaramond-Regular.ttf');
+			font-style: normal;
+			font-weight: 400;
 		}
 		@font-face {
-		  font-family: 'font_en';
-		  src: url('resources/fonts/CormorantGaramond-Italic.ttf');
-		  font-style: italic;
-		  font-weight: 400;
+			font-family: 'font_en';
+			src: url('resources/fonts/CormorantGaramond-Italic.ttf');
+			font-style: italic;
+			font-weight: 400;
 		}
 		@font-face {
-		  font-family: 'font_en';
-		  src: url('resources/fonts/CormorantGaramond-Bold.ttf');
-		  font-style: normal;
-		  font-weight: 700;
+			font-family: 'font_en';
+			src: url('resources/fonts/CormorantGaramond-Bold.ttf');
+			font-style: normal;
+			font-weight: 700;
 		}
 		@font-face {
-		  font-family: 'font_en';
-		  src: url('resources/fonts/CormorantGaramond-BoldItalic.ttf');
-		  font-style: italic;
-		  font-weight: 700;
+			font-family: 'font_en';
+			src: url('resources/fonts/CormorantGaramond-BoldItalic.ttf');
+			font-style: italic;
+			font-weight: 700;
 		}
 		@font-face {
-		  font-family: 'font_ipa';
-		  src: url('resources/fonts/CharisSIL-Regular.ttf');
-		  font-style: normal;
-		  font-weight: 400;
+			font-family: 'font_ipa';
+			src: url('resources/fonts/CharisSIL-Regular.ttf');
+			font-style: normal;
+			font-weight: 400;
 		}
 		@font-face {
-		  font-family: 'font_de';
-		  src: url('resources/fonts/AlteSchwabacher.ttf');
-		  font-style: normal;
-		  font-weight: 400;
+			font-family: 'font_de';
+			src: url('resources/fonts/AlteSchwabacher.ttf');
+			font-style: normal;
+			font-weight: 400;
 		}
 
 		:root {
-		  --color_background: #000000;
-		  --color_shadow: #000001;
-		  --color_text: #000002;
-		  --color_anchor: #000003;
-		  --color_disabled: #000004;
-		  --color_check: #000005;
-		  --color_textbox: #000006;
+			--color_background: #000000;
+			--color_shadow: #000001;
+			--color_text: #000002;
+			--color_anchor: #000003;
+			--color_disabled: #000004;
+			--color_check: #000005;
+			--color_textbox: #000006;
 		}
 
 
@@ -81,7 +81,7 @@
 
 		header { position: sticky; text-align: right; margin-right: -50px; bottom: 15px; font-size: 20pt; }
 		@media (max-width: 770px) {
-		  header { position: sticky; text-align: right; margin-right: 0px; bottom: 15px; font-size: 20pt; }
+			header { position: sticky; text-align: right; margin-right: 0px; bottom: 15px; font-size: 20pt; }
 		}
 
 		.original_script { font-family: 'font_or'; }
@@ -97,8 +97,8 @@
 		.copyright { color: var(--color_anchor); }
 
 		input[type="search"]::-webkit-search-cancel-button {
-		  -webkit-appearance: none;
-		  appearance: none;
+			-webkit-appearance: none;
+			appearance: none;
 		}
 
 		div.suggestions { margin-top: -45px; }
@@ -116,7 +116,7 @@
 		}
 
 		div#topbar { xtext-shadow: var(--color_shadow) 1px 1px 0px; padding: 2px 0px; background-color: var(--color_shadow); position: sticky; top: 0; z-index: 1; border-bottom: 1px solid var(--color_anchor); }
-		div#topbar > div.inside { width: 770px; margin: 0px auto; padding: 7px 0px;  }
+		div#topbar > div.inside { width: 770px; margin: 0px auto; padding: 7px 0px;	}
 		div#topbar a { font-weight: bold; color: var(--color_anchor); }
 		div#topbar div.clear { clear: both; }
 		div#topbar a.logo_image { cursor: pointer; display: inline; margin-right: -50px; }
@@ -126,11 +126,26 @@
 		}
 
 		@media (max-width: 600px) {
-		  div#topbar span.long { display: none; }
-		  div#topbar span.short { display: inline; }
+			div#topbar span.long { display: none; }
+			div#topbar span.short { display: inline; }
 		}
 
-		div.topmenu { float: right; font-size: 24px; }
+		@media only screen and (max-width: 770px) {
+			.logo {
+				display: none;
+			}
+		}
+
+		.main-img {
+			width: 50%;
+		}
+		@media screen and (max-width: 770px) {
+			.main-img {
+				width: 90%;
+			}
+		}
+
+		div.topmenu { float: right; }
 		div.topmenu a { padding: 3px 10px; border-radius: 2px; display: block; float: left; }
 		div.topmenu a.current { background-color: var(--color_text); }
 
@@ -141,7 +156,7 @@
 		div.dropdown:hover div.submenu { display: block; }
 		div.dropdown div.submenu a { font-weight: normal; display: block; padding: 5px 10px; text-align: right; }
 		@media (max-width: 600px) {
-		  div.dropdown div.submenu { right: -200px; }
+			div.dropdown div.submenu { right: -200px; }
 		}
 
 		.search { margin: 0px 0px 65px 0px; padding: 0px; background-color: var(--color_shadow); border-radius: 0px 0px 3px 3px; box-shadow: 0px 0px 3px var(--color_text); }
@@ -155,8 +170,8 @@
 		#gramwiz_input_1 { display: inline-block; width: 48%; }
 		#gramwiz_input_2 { display: inline-block; width: 48%; }
 		@media (max-width: 770px) {
-		  #gramwiz_input_1 { display: block; width: 100%; }
-		  #gramwiz_input_2 { display: block; width: 100%; margin-top: -50px; }
+			#gramwiz_input_1 { display: block; width: 100%; }
+			#gramwiz_input_2 { display: block; width: 100%; margin-top: -50px; }
 		}
 
 		footer.footer { background-color: var(--color_shadow); font-size: 60%; border-top: 1px solid var(--color_anchor); border-bottom: 1px solid var(--color_anchor); }
@@ -167,78 +182,78 @@
 		}
 
 		label {
-		  display: inline-flex;
-		  align-items: center;
-		  gap: 0.5rem;
-		  cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			cursor: pointer;
 		}
 
 		[type="checkbox"] {
-		  appearance: none;
-		  position: relative;
-		  border: max(2px, 0.16em) solid gray;
-		  border-radius: 2em;
-		  width: 3.6em;
-		  height: 2em;
+			appearance: none;
+			position: relative;
+			border: max(2px, 0.16em) solid gray;
+			border-radius: 2em;
+			width: 3.6em;
+			height: 2em;
 		}
 
 		[type="checkbox"]::before {
-		  content: "";
-		  position: absolute;
-		  left: 0;
-		  width: 1.6em;
-		  height: 1.6em;
-		  border-radius: 50%;
-		  transform: scale(0.8);
-		  background-color: gray;
-		  transition: left 250ms linear;
+			content: "";
+			position: absolute;
+			left: 0;
+			width: 1.6em;
+			height: 1.6em;
+			border-radius: 50%;
+			transform: scale(0.8);
+			background-color: gray;
+			transition: left 250ms linear;
 		}
 
 		[type="checkbox"]:checked {
-		  background-color: var(--color_check);
-		  border-color: var(--color_check);
+			background-color: var(--color_check);
+			border-color: var(--color_check);
 		}
 
 		[type="checkbox"]:checked::before {
-		  background-color: white;
-		  left: 1.6em;
+			background-color: white;
+			left: 1.6em;
 		}
 
 		[type="checkbox"]:disabled {
-		  border-color: lightgray;
-		  opacity: 0.7;
-		  cursor: not-allowed;
+			border-color: lightgray;
+			opacity: 0.7;
+			cursor: not-allowed;
 		}
 
 		[type="checkbox"]:disabled:before {
-		  background-color: lightgray;
+			background-color: lightgray;
 		}
 
 		[type="checkbox"]:disabled + span {
-		  opacity: 0.7;
-		  cursor: not-allowed;
+			opacity: 0.7;
+			cursor: not-allowed;
 		}
 
 		[type="checkbox"]:focus-visible {
-		  outline-offset: max(3.2px, 0.16em);
-		  outline: max(2px, 0.1em) solid var(--color_textbox);
+			outline-offset: max(3.2px, 0.16em);
+			outline: max(2px, 0.1em) solid var(--color_textbox);
 		}
 
 		[type="checkbox"]:enabled:hover {
-		  box-shadow: 0 0 0 max(4px, 0.32em) lightgray;
+			box-shadow: 0 0 0 max(4px, 0.32em) lightgray;
 		}
 
 		fieldset {
-		  border: none;
-		  display: flex;
-		  flex-direction: column;
-		  gap: 0.8rem;
+			border: none;
+			display: flex;
+			flex-direction: column;
+			gap: 0.8rem;
 		}
 
 		*,
 		*::before,
 		*::after {
-		  box-sizing: border-box;
+			box-sizing: border-box;
 		}
 	</style>
 </head>
@@ -252,8 +267,8 @@
 			<a href="#top" id="topmenu_favourites" onclick="load_favourites(0)"><span>책갈피</span></a>
 			<a href="#top" id="topmenu_properties" onclick = "load_property()"><span>설정</span></a>
 			<span>&nbsp;&nbsp;</span>
-			<a href="#top" style = "color: #909090;" id = "topcontrol_left" onclick='undo_call()'>◀<span class="long"> 뒤로</span><span class="short"></span></a>&nbsp;
-			<a href="#top" style = "color: #909090;" id = "topcontrol_right" onclick='redo_call()'><span class="long">앞으로 </span><span class="short"></span>▶</a>
+			<a href="#top" id="topcontrol_left" onclick='undo_call()'>◀<span class="long"> 뒤로</span><span class="short"></span></a>&nbsp;
+			<a href="#top" id="topcontrol_right" onclick='redo_call()'><span class="long">앞으로 </span><span class="short"></span>▶</a>
 		</div>
 
 		<div class="dropdown">
@@ -471,6 +486,10 @@
 <!-- -----------------------------JAVASCRIPT----------------------------- -->
 <!-- -------------------------------------------------------------------- -->
 
+<script>
+	const lang_code = "gle";
+</script>
+
 <!-- input diacritics with mouse clicks and auto-change -->
 <script>
 	document.querySelectorAll(".char_input").forEach(link => {
@@ -578,12 +597,12 @@
 		}
 
 		//cookies
-		localStorage.setItem("gle_favourites", JSON.stringify(favourites));
+		localStorage.setItem(lang_code + "_favourites", JSON.stringify(favourites));
 	}
 
 	function clear_favourites() {
 		favourites = [];
-		localStorage.setItem("gle_favourites", JSON.stringify(favourites));
+		localStorage.setItem(lang_code + "_favourites", JSON.stringify(favourites));
 		load_favourites(true);
 	}
 
@@ -688,8 +707,8 @@
 	}
 </script>
 
-<!-- All words start with A, B, C... -->
 <script>
+	// All words start with A, B, C...
 	function load_abc(chr, call = false) {
 		topmenu_set_graphic("topmenu_dict");
 		show_page(["search_form", "mainpage"], ["gramwiz_input", "suggestions", "gramwiz_suggestions", "gramwiz_output", "propertysettings", "not_found", "ADFB", "includes", "abc"]);
@@ -719,6 +738,66 @@
 			let text = basic ? `<strong>${t0}</strong>` : t0;
 
 			source += `<p><span style="font-family: 'Charis SIL'"><a class="add_favourites" id="ABC_fav_${t4.toString().padStart(5, '0')}" onclick="add_favourites(${t4})">${t4_check}</a></span>&nbsp;<a onclick="link('${link}')">${text}<sup>${t1}</sup></a> <span class="IPA">[${t2}]</span> : ${t3}</p>`;
+		}
+
+		document.getElementById("mainpage").innerHTML = source;
+	}
+
+	// All words with specific tag
+	function load_tag(tagCode, call = false) {
+		topmenu_set_graphic("topmenu_dict");
+		show_page(["search_form", "mainpage"], ["gramwiz_input", "suggestions", "gramwiz_suggestions", "gramwiz_output", "propertysettings", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack("#tag_" + tagCode); }
+		let source = "";
+
+		if (tagCode !== "all") {
+			let List = [];
+
+			for (let e in dict) {
+				const T = dict[e]["tag"]["category"];
+				for (let i = 0; i < T.length; i ++) {
+					const T0 = T[i]; const T1 = tag_code[tag_link.indexOf(T0)];
+					if (T1 == tagCode) {
+						List.push(e); continue;
+					}
+				}
+			}
+
+			source = `<h2 style="text-align: center;">“${tag_flav[tag_code.indexOf(tagCode)]}” 카테고리의 단어 목록</h2>`;
+
+			for (let i = 0; i < List.length; i ++) {
+				let link = dict[List[i]]["key"];
+				let t0 = dict[List[i]]["title"];
+				let t1 = dict[List[i]]["tag"]["homonym"];
+				let t2 = get_sound(t0, true);
+				let t3 = dict[List[i]]["gloss"]["ko"].join("; ");
+				let t4 = dict[List[i]]["index"] - 1;
+				let t4_check = check_favourites(t4) ? "★" : "☆";
+
+				let text = t0; //don't emphasize basic
+
+				source += `<p><span style="font-family: 'Charis SIL'"><a class="add_favourites" id="ABC_fav_${t4.toString().padStart(5, '0')}" onclick="add_favourites(${t4})">${t4_check}</a></span>&nbsp;<a onclick="link('${link}')">${text}<sup>${t1}</sup></a> <span class="IPA">[${t2}]</span> : ${t3}</p>`;
+			}
+		}
+		else {
+			source = `<h2 style="text-align: center;">단어 카테고리 목록</h2>`;
+
+			for (let i = 0; i < tag_code.length; i ++) {
+				const p = 5;
+				if (i % p == 0) {
+					source += `<p style="text-align: center;">`;
+				}
+
+				source += `<a onclick="load_tag('${tag_code[i]}')">${tag_flav[i]}</a>`;
+
+				if (i != tag_code.length - 1 && i % p != p - 1) {
+					source += `&nbsp;·&nbsp;`
+				}
+				else {
+					source += `</p>`;
+				}
+			}
 		}
 
 		document.getElementById("mainpage").innerHTML = source;
@@ -784,8 +863,6 @@
 	else {
 		favourites = [];
 	}
-
-	favourites=[];
 </script>
 
 <!-- Properties -->
@@ -853,6 +930,7 @@
 		}).catch(function(error) {
 			console.log('Font Load Error: ' + error);
 		});
+		document.body.style.fontSize = "22px";
 	}
 	else {
 		if (properties.useReadingFont == true) {
@@ -862,6 +940,7 @@
 		}).catch(function(error) {
 			console.log('Font Load Error: ' + error);
 		});
+		document.body.style.fontSize = "24px";
 	}
 	}
 </script>
@@ -923,13 +1002,13 @@
 	function color_swap() {
 		if (properties.darkMode == false) {
 			color = {
-				background: 	"#FFFDF6",	//배경 색
-				shadow: 		"#CBA093",	//탑바, 푸터 등에 들어가는 약간 어두운 색
-				text: 			"#2F0102",	//본문 글자 색
-				anchor: 		"#8F3838",	//링크, hr 글자 색
-				disabled: 		"#909090",	//비활성화된 버튼 (뒤로/앞으로) 색
-				check:			"#8F3838",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
-				textbox: 		"#FDF0D7"	//검색창 텍스트박스 배경색
+				background: 	"#F6FFFD",	//배경 색
+				shadow: 		"#339F48",	//탑바, 푸터 등에 들어가는 약간 어두운 색
+				text: 			"#2F1301",	//본문 글자 색
+				anchor: 		"#FF8121",	//링크, hr 글자 색
+				disabled: 		"#505050",	//비활성화된 버튼 (뒤로/앞으로) 색
+				check:			"#FF8121",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
+				textbox: 		"#D7FDDE"	//검색창 텍스트박스 배경색
 			}
 		}
 		else if (properties.darkMode == true) {
@@ -937,9 +1016,9 @@
 				background: 	"#121212",	//배경 색
 				shadow: 		"#3F3F3F",	//탑바, 푸터 등에 들어가는 약간 어두운 색
 				text: 			"#E0DFDF",	//본문 글자 색
-				anchor: 		"#D4A0A0",	//링크, hr 글자 색
+				anchor: 		"#FFBA8C",	//링크, hr 글자 색
 				disabled: 		"#909090",	//비활성화된 버튼 (뒤로/앞으로) 색
-				check:			"#D4A0A0",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
+				check:			"#FFBA8C",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
 				textbox: 		"#282828"	//검색창 텍스트박스 배경색
 			}
 		}
@@ -987,10 +1066,10 @@
 		let source_main = ""; let r = random_tip[Math.floor(Math.random() * random_tip.length)];
 
 		source_main += `<hr>
-			<p style="text-align: center; margin-top: 60px; font-size: 48px;"><img src="resources/main.png" style="width: 50%"></img></p>
+			<p style="text-align: center; margin-top: 60px; font-size: 48px;"><img class="main-img" src="resources/main.png"></img></p>
 			<p style="text-align: center; font-family: 'font_de'; font-size: 48px;">Foclóir Gaeilge–Cóiréis</p>
 			<p style="text-align: center; font-family: 'font_de'; font-size: 48px; margin-top: -36px;">d’Fhilí Nua-Aimseartha</p>
-			<p style="text-align: center; font-size: 30px; margin-top: -24px;"><strong>«켈트어 창작사전» 무료 체험판</strong></p>
+			<p style="text-align: center; font-size: 30px; margin-top: -24px;"><strong>«켈트어 창작사전»</strong></p>
 			<p style="text-align: center; font-size: 48px; margin-top: -12px;"><strong>I</strong></p>
 			<p style="text-align: center; font-size: 24px; margin-top: -24px;"><strong>아일랜드어</strong></p>
 			<p style="text-align: left; line-height: 180%; margin-top: 36px;"><strong>팁</strong>: ${r}</p>`;
@@ -1097,7 +1176,7 @@ const dict = {
 	vocabulary_00082:{key:`loch_m`,index:82,title:`loch`,class:`m`,tag:{homonym:``,category:[`장소`, `자연`],important:0},grammar:[`loch`, `an loch`, `locha`, `an locha`, `lochanna`, `na lochanna`, `lochanna`, `na lochanna`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`lake, loch`],ko:[`호수, 강호, 석호, 웅덩이, 못, 연못`],ex:[``],ep:`바다와 연결된 석호<small>(潟湖)</small>도 loch라고 한다.`,sh:`호수`}},
 	vocabulary_00083:{key:`long_f`,index:83,title:`long`,class:`f`,tag:{homonym:``,category:[`도구`],important:0},grammar:[`long`, `an long`, `loinge`, `na loinge`, `longa`, `na longa`, `long`, `na long`, `broad`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`ship, vessel`],ko:[`배, 선박, 선척, 함선`],ex:[``],ep:``,sh:`배`}},
 	vocabulary_00084:{key:`Lúnasa_m`,index:84,title:`Lúnasa`,class:`m`,tag:{homonym:``,category:[`시간`, `전통`],important:0},grammar:[`Lúnasa`, `an Lúnasa`, `Lúnasa`, `an Lúnasa`, `Lúnasaí`, `na Lúnasaí`, `Lúnasaí`, `na Lúnasaí`, ``, ``],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`August`, `<em>Lughnasadh</em>`],ko:[`8월`, `“루나사”, 게일 달력의 가을의 시작`],ex:[``],ep:`<em title='1958년 정서법 개정 이전의 구식 철자입니다.'><u>old</u>.</em> Lughnasadh<br>«에린 침략의 서»에 따르면 다난 신족의 대왕 루가 양모 탈틴을 위하여 제전을 개최한 것이 유래라고 한다. 제전을 연 언덕의 이름은 탈틴이 되었으며, 오늘날 미드 현의 텔타운<small>(Teltown)</small>이다.`,sh:`8월`}},
-	vocabulary_00085:{key:`mac_m`,index:85,title:`mac`,class:`m`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`mac`, `an mac`, `mic`, `an mhic`, `mic`, `na mic`, `mac`, `na mac`, `slender`, `weak`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`son, male offspring`, `descendant, successor, scion, progeny`],ko:[`아들, 아드님, 영식`, `후예, 후손, 자손, 내예, 내윤`],ex:[`<strong>Mac <a onclick="link('óg')">Óg</a></strong>: “젊은 아들”, 다난 신족의 남신 이나스<small>(Aonghas)</small>의 별명.`],ep:`인명 앞에 쓰여 “~의 아들”, “~의 후손” 따위를 뜻한다. 아일랜드 남성은 전통적으로 “A의 아들 B” 형태의 이름을 사용하였다. 현대에는 “맥<small>(Mac, Mc)</small>”으로 시작하는 성씨가 여기에서 기원하였다.`,sh:`아들`}},
+	vocabulary_00085:{key:`mac_m`,index:85,title:`mac`,class:`m`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`mac`, `an mac`, `mic`, `an mhic`, `mic`, `na mic`, `mac`, `na mac`, `slender`, `weak`],sound:{hangul:[`막`, `안 막`, `믹`, `안 빅`, `믹`, `나 믹`, `막`, `나 막`, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`son, male offspring`, `descendant, successor, scion, progeny`],ko:[`아들, 아드님, 영식`, `후예, 후손, 자손, 내예, 내윤`],ex:[`<strong>Mac <a onclick="link('óg')">Óg</a></strong>: “젊은 아들”, 다난 신족의 남신 이나스<small>(Aonghas)</small>의 별명.`],ep:`인명 앞에 쓰여 “~의 아들”, “~의 후손” 따위를 뜻한다. 아일랜드 남성은 전통적으로 “A의 아들 B” 형태의 이름을 사용하였다. 현대에는 “맥<small>(Mac, Mc)</small>”으로 시작하는 성씨가 여기에서 기원하였다.`,sh:`아들`}},
 	vocabulary_00086:{key:`maigh_f`,index:86,title:`maigh`,class:`f`,tag:{homonym:``,category:[`장소`, `자연`],important:0},grammar:[`maigh`, `an mhaigh`, `maighea`, `na maighea`, `maighne`, `na maighne`, `maighne`, `na maighne`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`field, plain`],ko:[`들판, 벌판, 광야`],ex:[`<strong>Maigh Meall</strong>: “환희의 언덕”, “마그 멜”로 알려진 별세계.`, `<strong>Maigh Tuireadh</strong>: 코나흐타의 들판. 다난 신족이 두 차례의 대전을 치른 장소로, 영어 명칭 모이투라<small>(Moytura)</small>로 유명하다.`],ep:``,sh:`들판`}},
 	vocabulary_00087:{key:`mall_a`,index:87,title:`mall`,class:`a`,tag:{homonym:``,category:[`기초`],important:0},grammar:[`mall`, `mhall`, `mall`, `moille`, `malla`, `mhalla`, `malla`, `mall`, `moille`, `is moille`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`slow, tedious`],ko:[`느리다, 느릿느릿하다`, `늦다, 늦되다, 뒤늦다, 때늦다`, `지겹다, 지루하다, 따분하다, 무료하다, 싫증이 나다`],ex:[``],ep:``,sh:`느린`}},
 	vocabulary_00088:{key:`máthair_f`,index:88,title:`máthair`,class:`f`,tag:{homonym:``,category:[`기초`, `사회`],important:0},grammar:[`máthair`, `an mháthair`, `máthar`, `na máthar`, `máithreacha`, `na máithreacha`, `máithreacha`, `na máithreacha`, `broad`, `strong`],sound:{hangul:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``],ipa:[``, ``, ``, ``, ``, ``, ``, ``, ``, ``]},gloss:{en:[`mother`],ko:[`어머니, 엄마, 모친`],ex:[``],ep:``,sh:`어머니`}},

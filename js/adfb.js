@@ -143,8 +143,9 @@ function load_adfb(call = false) {
 			let t0 = tag[i]; let t1 = "";
 			if (tag_link.includes(t0)) {
 				t1 = tag_flav[tag_link.indexOf(t0)];
+				t2 = tag_code[tag_link.indexOf(t0)];
 			}
-			source_gram += `<a onclick="link('${"tag:" + t0}')">${t1}</a>&nbsp;`
+			source_gram += `<a onclick="load_tag('${t2}')">${t1}</a>&nbsp;`
 			if (i < tag.length - 1) { source_gram += "·&nbsp;"; }
 		}
 		source_gram += `</p>`;
@@ -163,19 +164,19 @@ function load_adfb(call = false) {
 
 		if (word_class == "m" || word_class == "f") {
 			source_gram += `
-			<table style="margin-left: 30px; margin-top: -30px;">
+			<table style="table-layout: auto; margin-left: 30px; margin-top: -30px;">
 					<tr>
-						<th>&nbsp;</th>
+						<th style="min-width: 50px;">&nbsp;</th>
 						<th>단수<small> (하나)</small></th>
 						<th>복수<small> (둘 이상)</small></th>
 					</tr>
 					<tr>
-						<th>주격<small> (~이·가)</small></th>
+						<th style="line-height: 100%;"><p>주격</p><p><small>(~이·가)</small></p></th>
 						<td><p><strong>${gram[0]}</strong></p><p class="original_script>${LattoOrg(gram[0])}</p><p class="IPA"><small>${sound[0]}</small></p></td>
 						<td><p><strong>${gram[4]}</strong></p><p class="original_script>${LattoOrg(gram[4])}</p><p class="IPA"><small>${sound[4]}</small></p></td>
 					</tr>
 					<tr>
-						<th>속격<small> (~의)</small></th>
+						<th style="line-height: 100%;"><p>속격</p><p><small>(~의)</small></p></th>
 						<td><p><strong>${gram[2]}</strong></p><p class="original_script>${LattoOrg(gram[2])}</p><p class="IPA"><small>${sound[2]}</small></p></td>
 						<td><p><strong>${gram[6]}</strong></p><p class="original_script>${LattoOrg(gram[6])}</p><p class="IPA"><small>${sound[6]}</small></p></td>
 					</tr>
@@ -187,24 +188,24 @@ function load_adfb(call = false) {
 		source_gram += "<p><details><summary style=\"font-size: 18px;\">문법 정보 보기</summary></p><p>";
 
 		source_gram += `
-			<table style="margin-left: 30px; margin-top: -30px;">
+			<table style="table-layout: auto; margin-left: 30px; margin-top: -30px;">
 					<tr>
-						<th>&nbsp;</th>
+						<th style="min-width: 50px;">&nbsp;</th>
 						<th>주격<small> (~이·가)</small></th>
 						<th>속격<small> (~의)</small></th>
 					</tr>
 					<tr>
-						<th>남성 단수<small> (하나)</small></th>
+						<th style="line-height: 100%;"><p>남성 단수</p><p><small>(하나)</small></p></th>
 						<td><p><strong>${gram[0]}</strong></p><p class="original_script>${LattoOrg(gram[0])}</p><p class="IPA"><small>${sound[0]}</small></p></td>
 						<td><p><strong>${gram[2]}</strong></p><p class="original_script>${LattoOrg(gram[2])}</p><p class="IPA"><small>${sound[2]}</small></p></td>
 					</tr>
 					<tr>
-						<th>여성 단수<small> (하나)</small></th>
+						<th style="line-height: 100%;"><p>여성 단수</p><p><small>(하나)</small></p></th>
 						<td><p><strong>${gram[1]}</strong></p><p class="original_script>${LattoOrg(gram[1])}</p><p class="IPA"><small>${sound[1]}</small></p></td>
 						<td><p><strong>${gram[3]}</strong></p><p class="original_script>${LattoOrg(gram[3])}</p><p class="IPA"><small>${sound[3]}</small></p></td>
 					</tr>
 					<tr>
-						<th>복수<small> (둘 이상)</small></th>
+						<th style="line-height: 100%;"><p>복수</p><p><small>(둘 이상)</small></p></th>
 						<td><p><strong>${gram[4]}</strong></p><p class="original_script>${LattoOrg(gram[4])}</p><p class="IPA"><small>${sound[4]}</small></p></td>
 						<td><p><strong>${gram[6]}</strong></p><p class="original_script>${LattoOrg(gram[6])}</p><p class="IPA"><small>${sound[6]}</small></p></td>
 					</tr>
@@ -529,6 +530,9 @@ function load_query_command(text, call) {
 	}
 	else if (text.includes("#") && text.length == 2 && text.charAt(1).toUpperCase() == text.charAt(1)) {
 		load_abc(text.charAt(1), call); return true;
+	}
+	else if (text.includes("#") && text.includes("tag_")) {
+		load_tag(text.replaceAll("#tag_", ""), call); return true;
 	}
 	else if (text.includes("#appendix")) {
 		load_appendix(text, call); return true;

@@ -22,6 +22,7 @@ const InputAft = ["á", "é", "í", "ó", "ú", "a", "e", "i", "o", "u", "Á", "
 //semantic tags
 const tag_flav = ["기초", "인명", "지명", "자연", "천문", "도구", "문화", "동물", "식물", "사회", "신체", "과학", "장소", "시간", "숫자", "게일 전통", "기독교"];
 const tag_link = ["기초", "인명", "지명", "자연", "천문", "도구", "문화", "동물", "식물", "사회", "신체", "과학", "장소", "시간", "숫자", "전통", "기독"];
+const tag_code = ["basic", "personal", "endonym", "nature", "astronomy", "tools", "culture", "zoology", "botany", "social", "body", "science", "place", "time", "number", "traditional", "christianism"];
 
 //secondary scripts
 function LattoOrg(text) {
@@ -36,5 +37,5 @@ for (let i = 0; i < InitialAlphabets.length; i ++) {
 	AlphabetListInnerHTML += `<a href="#top" onclick="load_abc(this.innerText)">${InitialAlphabets[i].toUpperCase()}</a> ・ `
 }
 AlphabetListInnerHTML += `</p>`;
-AlphabetListInnerHTML = AlphabetListInnerHTML.replace(" ・ </p>", "</p>");
+AlphabetListInnerHTML = AlphabetListInnerHTML.replace(" ・ </p>", ` ・ <a href="#top" onclick="load_tag('all')">태그</a></p>`);
 document.getElementById("AlphabetList").innerHTML = AlphabetListInnerHTML;

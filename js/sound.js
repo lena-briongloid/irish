@@ -285,12 +285,7 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "bʲ"
 		}
 		else if (part == "bh" || part == "bhf" || part == "mh" || part == "v") {
-			//it means it's initial
-			if (IPA[i - 1] == " " || /^[\s]/.test(IPA[i - 1].split("").reverse().join(""))) {
-				IPA[i] = "v"
-			} else {
-				IPA[i] = "w"
-			}
+			IPA[i] = "w"
 		}
 		else if (part == "BH" || part == "BHF" || part == "MH" || part == "V") {
 			IPA[i] = "vʲ"
@@ -479,7 +474,16 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 	for (let i = 0; i < Parse.length; i ++) {
 		if (Parse[i].toLowerCase() == "th" && IPA[i] == "h") {
 			if (/^[bwvkcxçɣdtfɡɟʤlmnɾŋɲpsʃzʒ]/.test(IPA[i + 1]) && (/ː/.test(IPA[i - 1]) || /(au̯)|(ai̯)|(iə)|(ia)|(uə)|(ua)/.test(IPA[i - 1]) )) {
-				IPA[i] = ""
+				IPA[i] = "";
+			}
+		}
+	}
+
+	//for initial wr, wl etc.
+	for (let i = 0; i < Parse.length; i ++) {
+		if (IPA[i] == "w") {
+			if (IPA[i - 1] == " " && (/[aeiouəɛɪɔʊ]/.test(IPA[i + 1]) == false)) {
+				IPA[i] = "v";
 			}
 		}
 	}
@@ -488,7 +492,7 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 	for (let i = 0; i < Parse.length; i ++) {
 		if (IPA[i] == "ŋ") {
 			if (IPA[i - 1] != " " && (/[aeiouəɛɪɔʊ]/.test(IPA[i + 1]))) {
-				IPA[i] = "ŋɡ"
+				IPA[i] = "ŋɡ";
 			}
 		}
 	}
