@@ -659,15 +659,13 @@
 			const rawN = favourites[i] + 1;
 			const padN = "vocabulary_" + String(rawN).padStart(5, '0');
 
-			console.log("padN:", padN);
-			console.log("dict:", dict);
-			console.log("dict[padN]:", dict[padN]);
+			console.log(favourites);
 
 			let newOption = document.createElement('option');
 			newOption.value = dict[padN]?.key;
 			newOption.textContent = dict[padN]?.title;
 
-			let l = dict[padN]["gloss"]["ko"];
+			let l = dict[padN]?.gloss.ko;
 			l = l.join("; ")
 			newOption.label = l.replace(/\<.*?\>/g, "");
 
