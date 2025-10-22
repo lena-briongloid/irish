@@ -659,6 +659,10 @@
 			const rawN = favourites[i] + 1;
 			const padN = "vocabulary_" + String(rawN).padStart(5, '0');
 
+			console.log("padN:", padN);
+			console.log("dict:", dict);
+			console.log("dict[padN]:", dict[padN]);
+
 			let newOption = document.createElement('option');
 			newOption.value = dict[padN]?.key;
 			newOption.textContent = dict[padN]?.title;
