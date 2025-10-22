@@ -578,12 +578,12 @@
 		}
 
 		//cookies
-		localStorage.setItem("favourites", JSON.stringify(favourites));
+		localStorage.setItem("gle_favourites", JSON.stringify(favourites));
 	}
 
 	function clear_favourites() {
 		favourites = [];
-		localStorage.setItem("favourites", JSON.stringify(favourites));
+		localStorage.setItem("gle_favourites", JSON.stringify(favourites));
 		load_favourites(true);
 	}
 
@@ -659,8 +659,6 @@
 			const rawN = favourites[i] + 1;
 			const padN = "vocabulary_" + String(rawN).padStart(5, '0');
 
-			console.log(favourites);
-
 			let newOption = document.createElement('option');
 			newOption.value = dict[padN]?.key;
 			newOption.textContent = dict[padN]?.title;
@@ -731,15 +729,15 @@
 <script>
 	//switch default state
 	let properties = {
-		useReadingFont : localStorage.getItem('properties_useReadingFont'),
-		darkMode : localStorage.getItem('properties_darkMode'),
-		showHangulInsteadOfIPA : localStorage.getItem('properties_showHangulInsteadOfIPA'),
-		showOriginalScript : localStorage.getItem('properties_showOriginalScript'),
-		preciseHangul : localStorage.getItem('properties_preciseHangul')
+		useReadingFont : localStorage.getItem('gle_properties_useReadingFont'),
+		darkMode : localStorage.getItem('gle_properties_darkMode'),
+		showHangulInsteadOfIPA : localStorage.getItem('gle_properties_showHangulInsteadOfIPA'),
+		showOriginalScript : localStorage.getItem('gle_properties_showOriginalScript'),
+		preciseHangul : localStorage.getItem('gle_properties_preciseHangul')
 	}
 
 	if (properties.useReadingFont === null) {
-		localStorage.setItem('properties_useReadingFont', false);
+		localStorage.setItem('gle_properties_useReadingFont', false);
 		properties.useReadingFont = false;
 	}
 	else {
@@ -747,7 +745,7 @@
 	}
 
 	if (properties.darkMode === null) {
-		localStorage.setItem('properties_darkMode', false);
+		localStorage.setItem('gle_properties_darkMode', false);
 		properties.darkMode = false;
 	}
 	else {
@@ -755,7 +753,7 @@
 	}
 
 	if (properties.showHangulInsteadOfIPA === null) {
-		localStorage.setItem('properties_showHangulInsteadOfIPA', true);
+		localStorage.setItem('gle_properties_showHangulInsteadOfIPA', true);
 		properties.showHangulInsteadOfIPA = true;
 	}
 	else {
@@ -763,7 +761,7 @@
 	}
 
 	if (properties.showOriginalScript === null) {
-		localStorage.setItem('properties_showOriginalScript', false);
+		localStorage.setItem('gle_properties_showOriginalScript', false);
 		properties.showOriginalScript = false;
 	}
 	else {
@@ -771,7 +769,7 @@
 	}
 
 	if (properties.preciseHangul === null) {
-		localStorage.setItem('properties_preciseHangul', false);
+		localStorage.setItem('gle_properties_preciseHangul', false);
 		properties.preciseHangul = false;
 	}
 	else {
@@ -779,13 +777,15 @@
 	}
 
 	//favourites
-	let favourites = localStorage.getItem('favourites');
+	let favourites = localStorage.getItem('gle_favourites');
 	if (favourites) {
 		favourites = JSON.parse(favourites);
 	}
 	else {
 		favourites = [];
 	}
+
+	favourites=[];
 </script>
 
 <!-- Properties -->
@@ -814,32 +814,32 @@
 	//js - role
 	function switch_useReadingFont() {
 		properties.useReadingFont = document.getElementById("useReadingFont").checked ? true : false;
-		localStorage.setItem('properties_useReadingFont', properties.useReadingFont);
+		localStorage.setItem('gle_properties_useReadingFont', properties.useReadingFont);
 	}
 	document.getElementById("useReadingFont").addEventListener('change', switch_useReadingFont);
 
 	function switch_darkMode() {
 		properties.darkMode = document.getElementById("darkMode").checked ? true : false;
-		localStorage.setItem('properties_darkMode', properties.darkMode);
+		localStorage.setItem('gle_properties_darkMode', properties.darkMode);
 		color_swap();
 	}
 	document.getElementById("darkMode").addEventListener('change', switch_darkMode);
 
 	function switch_showHangulInsteadOfIPA() {
 		properties.showHangulInsteadOfIPA = document.getElementById("showHangulInsteadOfIPA").checked ? true : false;
-		localStorage.setItem('properties_showHangulInsteadOfIPA', properties.showHangulInsteadOfIPA);
+		localStorage.setItem('gle_properties_showHangulInsteadOfIPA', properties.showHangulInsteadOfIPA);
 	}
 	document.getElementById("showHangulInsteadOfIPA").addEventListener('change', switch_showHangulInsteadOfIPA);
 
 	function switch_showOriginalScript() {
 		properties.showOriginalScript = document.getElementById("showOriginalScript").checked ? true : false;
-		localStorage.setItem('properties_showOriginalScript', properties.showOriginalScript);
+		localStorage.setItem('gle_properties_showOriginalScript', properties.showOriginalScript);
 	}
 	document.getElementById("showOriginalScript").addEventListener('change', switch_showOriginalScript);
 
 	function switch_preciseHangul() {
 		properties.preciseHangul = document.getElementById("preciseHangul").checked ? true : false;
-		localStorage.setItem('properties_preciseHangul', properties.preciseHangul);
+		localStorage.setItem('gle_properties_preciseHangul', properties.preciseHangul);
 	}
 	document.getElementById("preciseHangul").addEventListener('change', switch_preciseHangul);
 </script>
