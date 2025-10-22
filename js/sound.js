@@ -285,7 +285,12 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "bʲ"
 		}
 		else if (part == "bh" || part == "bhf" || part == "mh" || part == "v") {
-			IPA[i] = "w"
+			//it means it's initial
+			if (IPA[i - 1] == " " || /^[\s]/.test(IPA[i - 1].split("").reverse().join(""))) {
+				IPA[i] = "v"
+			} else {
+				IPA[i] = "w"
+			}
 		}
 		else if (part == "BH" || part == "BHF" || part == "MH" || part == "V") {
 			IPA[i] = "vʲ"
