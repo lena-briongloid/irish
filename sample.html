@@ -271,7 +271,7 @@
 			<a href="#top" id="topcontrol_right" onclick='redo_call()'><span class="long">앞으로 </span><span class="short"></span>▶</a>
 		</div>
 
-		<div class="dropdown">
+		<div class="dropdown" style="display:none;">
 			<span class="title">부록&nbsp;▼</span>
 			<div class="submenu" id="submenu" style="text-align: right;">
 				<a href="#top" id="appdendix_1" onclick="load_appendix(1)"></a>
@@ -1002,12 +1002,12 @@
 	function color_swap() {
 		if (properties.darkMode == false) {
 			color = {
-				background: 	"#FFFDF6",	//배경 색
+				background: 	"#f6fffd",	//배경 색
 				shadow: 		"#E4E4E4",	//탑바, 푸터 등에 들어가는 약간 어두운 색
-				text: 			"#2F0102",	//본문 글자 색
-				anchor: 		"#F86458",	//링크, hr 글자 색
-				disabled: 		"#909090",	//비활성화된 버튼 (뒤로/앞으로) 색
-				check:			"#F86458",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
+				text: 			"#112313",	//본문 글자 색
+				anchor: 		"#238f38",	//링크, hr 글자 색
+				disabled: 		"#F0F0F0",	//비활성화된 버튼 (뒤로/앞으로) 색
+				check:			"#238f38",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
 				textbox: 		"#F7F7F7"	//검색창 텍스트박스 배경색
 			}
 		}
@@ -1016,9 +1016,9 @@
 				background: 	"#121212",	//배경 색
 				shadow: 		"#2F2F2F",	//탑바, 푸터 등에 들어가는 약간 어두운 색
 				text: 			"#E0DFDF",	//본문 글자 색
-				anchor: 		"#FF9800",	//링크, hr 글자 색
-				disabled: 		"#909090",	//비활성화된 버튼 (뒤로/앞으로) 색
-				check:			"#FFBA8C",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
+				anchor: 		"#238f38",	//링크, hr 글자 색
+				disabled: 		"#202020",	//비활성화된 버튼 (뒤로/앞으로) 색
+				check:			"#238f38",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
 				textbox: 		"#181818"	//검색창 텍스트박스 배경색
 			}
 		}
@@ -1030,6 +1030,12 @@
 		document.documentElement.style.setProperty('--color_disabled', color.disabled);
 		document.documentElement.style.setProperty('--color_check', color.check);
 		document.documentElement.style.setProperty('--color_textbox', color.textbox);
+
+		const E = document.getElementsByClassName("top_shadow");
+		[...E].forEach(e => {
+			e.style.textShadow = `-1px 0px ${color.shadow}, 0px 1px ${color.shadow}, 1px 0px ${color.shadow}, 0px -1px ${color.shadow}`;
+			e.style.color = color.text;
+		});
 	}
 
 	color_swap();
