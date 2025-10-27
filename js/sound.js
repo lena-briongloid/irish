@@ -116,7 +116,7 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 		}
 
 		if (part == "A" || part == "AI" || part == "EA" || part == "EAI") {
-			if (/^(rd)|(rl)|(rn)|(rr)|(ll)|(nn)|(m)/.test(follow)) {
+			if (/^(rd|rl|rn|rr|ll|nn|m)/.test(follow)) {
 				IPA[i] = "aː"
 			} else {
 				IPA[i] = "a"
@@ -135,9 +135,9 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "iː"
 		}
 		else if (part == "E" || part == "EI") {
-			if (/^(rd)|(rl)|(rn)|(nn)/.test(follow)) {
+			if (/^(rd|rl|rn|nn)/.test(follow)) {
 				IPA[i] = "eː"
-			} else if (/^(m)|(mh)|(n)/.test(follow)) {
+			} else if (/^(m|mh|n)/.test(follow)) {
 				IPA[i] = "e"
 			} else {
 				IPA[i] = "ɛ"
@@ -153,7 +153,7 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "oː"
 		}
 		else if (part == "I") {
-			if (/^(ll)|(nn)|(m)/.test(follow)) {
+			if (/^(ll|nn|m)/.test(follow)) {
 				IPA[i] = "iː"
 			} else {
 				IPA[i] = "ɪ"
@@ -184,9 +184,9 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "uː"
 		}
 		else if (part == "O") {
-			if (/^(rd)|(rl)|(rn)/.test(follow)) {
+			if (/^(rd|rl|rn)/.test(follow)) {
 				IPA[i] = "oː"
-			} else if (/^(nn)|(m)|(ng)/.test(follow)) {
+			} else if (/^(nn|m|ng)/.test(follow)) {
 				IPA[i] = "oː"
 			} else {
 				IPA[i] = "ɔ"
@@ -199,10 +199,10 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "oː"
 		}
 		else if (part == "OI") {
-			if (/^(rd)|(rl)|(rn)/.test(follow)) {
+			if (/^(rd|rl|rn)/.test(follow)) {
 				IPA[i] = "oː";
 			}
-			else if (/^(ch)|(r)|(s)/.test(follow)) {
+			else if (/^(ch|r|s)/.test(follow)) {
 				IPA[i] = "ɔ";
 			}
 			else {
@@ -210,14 +210,14 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			}
 		}
 		else if (part == "oi") {
-			if (/^(ch)|(r)|(s)/.test(follow)) {
+			if (/^(ch|r|s)/.test(follow)) {
 				IPA[i] = forHangulOnly == false ? "ə" : "o";
 			} else {
 				IPA[i] = forHangulOnly == false ? "ə" : "i";
 			}
 		}
 		else if (part == "U") {
-			if (/^(rd)|(rl)|(rn)/.test(follow)) {
+			if (/^(rd|rl|rn)/.test(follow)) {
 				IPA[i] = "uː"
 			} else {
 				IPA[i] = "ʊ"
@@ -233,7 +233,7 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "uː.aː"
 		}
 		else if (part == "UI") {
-			if (/^(rd)|(rl)|(rn)|(ll)|(m)|(nn)/.test(follow)) {
+			if (/^(rd|rl|rn|ll|nn|m)/.test(follow)) {
 				IPA[i] = "iː"
 			} else {
 				IPA[i] = "ɪ"
