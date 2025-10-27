@@ -18,7 +18,7 @@ const SourceAppendix3 = `<div style="line-height: 200%;">
 
 const dict_tip = [
 	`역방향 검색은 전자사전의 필수 교양! 검색 창에 한국어 단어, 또는 한글 발음을 입력해 보세요.`,
-	`표제어 오른쪽의 별☆을 클릭해 보셨나요? 책갈피에 단어를 끼워서 기억해 두세요.`,
+	`표제어 오른쪽의 별<span class="emp" style="font-family:'font_en';">☆</span>을 클릭해 보셨나요? 책갈피에 단어를 끼워서 기억해 두세요.`,
 	`책갈피에 끼워 둔 단어를 문법 마법사에서 선택하실 수 있어요!`,
 	`영어 해석을 검색하고 싶으시다면 검색어 앞에 “en:”을 넣어 보세요.`,
 	`검색, 즐겨찾기 등의 단어 목록에서 <a onclick="link('tag:기초')"><strong>“기초”</strong> 태그가 붙은 단어</a>는 <strong>굵은 글씨</strong>로 표시됩니다!`

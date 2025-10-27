@@ -129,7 +129,7 @@ function load_adfb(call = false) {
 
 	let t4 = document.getElementById("ADFB_head_favourites");
 	let t4_check = check_favourites(index - 1) ? "★" : "☆";
-	t4.innerHTML = "&nbsp;&nbsp;<span><a class=\"add_favourites\" onclick=\"add_favourites(" + (index - 1) + ")\">" + t4_check + "</a></span>"
+	t4.innerHTML = `&nbsp;&nbsp;<a class="add_favourites" onclick="add_favourites(${index - 1})"><span class="emp">${t4_check}</span></a>`;
 
 ///////////////////////////////////
 //tags
@@ -365,7 +365,7 @@ function load_query_rv(text, lang) {
 		const basic = dict[padN]["tag"]["category"].includes("기초") ? true : false;
 		const text = basic ? `<strong>${t2}</strong>` : t2;
 
-		source += `<p><a class="add_favourites" id="ABC_fav_${List[i][0].toString().padStart(5, '0')}" onclick="add_favourites(${List[i][0]})" style="font-family: 'Charis SIL'">${check}</a>&nbsp;<a onclick="link('${t1}')">${text}</a>&nbsp;<span class="IPA">[${t3}]&nbsp;:&nbsp;&nbsp;${List[i][1]}</p></span>`;
+		source += `<p><a class="add_favourites" id="ABC_fav_${List[i][0].toString().padStart(5, '0')}" onclick="add_favourites(${List[i][0]})" style="font-family: 'Charis SIL'"><span class="emp">${check}</span></a>&nbsp;<a onclick="link('${t1}')">${text}</a>&nbsp;<span class="IPA">[${t3}]&nbsp;:&nbsp;&nbsp;${List[i][1]}</p></span>`;
 	}
 
 	document.getElementById("includes_search").innerHTML = source;
@@ -411,7 +411,7 @@ function load_query_tag(text) {
 		const basic = dict[padN]["tag"]["category"].includes("기초") ? true : false;
 		const text = basic ? `<strong>${t2}</strong>` : t2;
 
-		source += `<p><a class="add_favourites" id="ABC_fav_${List[i][0].toString().padStart(5, '0')}" onclick="add_favourites(${List[i][0]})" style="font-family: 'Charis SIL'">${check}</a>&nbsp;<a onclick="link('${t1}')">${text}</a>&nbsp;<span class="IPA">[${t3}]&nbsp;:&nbsp;&nbsp;${List[i][1]}</p></span>`;
+		source += `<p><a class="add_favourites" id="ABC_fav_${List[i][0].toString().padStart(5, '0')}" onclick="add_favourites(${List[i][0]})" style="font-family: 'Charis SIL'"><span class="emp">${check}</span></a>&nbsp;<a onclick="link('${t1}')">${text}</a>&nbsp;<span class="IPA">[${t3}]&nbsp;:&nbsp;&nbsp;${List[i][1]}</p></span>`;
 	}
 
 	document.getElementById("includes_search").innerHTML = source;

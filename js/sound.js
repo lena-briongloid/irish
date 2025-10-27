@@ -5,14 +5,27 @@ function ParseText(text) {
 	text = text.replace(/['’",;:!\.\?\(\)\-]/g, "")
 
 	//special words
-	text = text.replace(/(?<=[ ])(is)(?=[ ])/gi, "ઇ");
-	text = text.replace(/^(is)(?=[ ])/gi, "ઇ");
+	text = text.replace(/(?<=^|\s)(is)(?=$|\s)/gi, "ઇ");
+
+	//silent fh
 	text = text.replace(/fh/gi, "");
+
+	//eclipsis and prothesis
+	text = text.replace(/(?<=^|\s)(mb)(?![h])/gi, "m");
+	text = text.replace(/(?<=^|\s)(gc)(?![h])/gi, "g");
+	text = text.replace(/(?<=^|\s)(nd)(?![h])/gi, "n");
+	text = text.replace(/(?<=^|\s)(bhf)(?![h])/gi, "bh");
+	text = text.replace(/(?<=^|\s)(bp)(?![h])/gi, "b");
+	text = text.replace(/(?<=^|\s)(dt)(?![h])/gi, "d");
+	text = text.replace(/(?<=^|\s)(ts)(?![h])/gi, "t");
+
+	//split nch, ngh
+	text = text.replace(/(n)(ch|gh)/gi, "n.$2");
 
 	//long -> silenced -> else
 	let LngRegex = /(aei|aoi|ae|ao|aío|eái|iái|iói|iúi|oío|uái|uío|uói|ái|aí|éa|éi|eá|ío|iá|ió|iú|ói|oí|úi|uá|uí|uó|á|é|í|ó|ú)/i;
 	let ComRegex = /(aighea|eabhai|eadhai|eaghai|eamhai|eidhea|eighea|eobhai|eodhai|eoghai|eomhai|iumhai|oidhea|oighea|abhai|adhai|aghai|aidhe|aighe|amhai|eabha|eadha|eagha|eamha|eidhi|eighi|eobha|eodha|eogha|eomha|iumha|obhai|odhai|oghai|oidhi|oighi|omhai|umhai|abha|adha|agha|aidh|aigh|amha|eabh|eadh|eagh|eamh|eidh|eigh|eobh|eodh|eogh|eomh|iubh|iumh|obha|odha|ogha|oidh|oigh|omha|uigh|umha|abh|adh|agh|amh|idh|igh|obh|odh|ogh|omh|ubh|umh|eoi|eo)/i;
-	let ElsRegex = /(ઇ|eai|iai|uai|ai|ei|ea|ia|io|iu|oi|ua|ui|a|e|i|o|u|bhf|bh|bp|ch|dh|dt|fh|gc|gh|ll|mb|mh|nc|nd|ng|nn|ph|rr|sh|th|ts|b|c|d|f|g|h|j|l|m|n|p|r|s|t|v|z|\s|\t+|\|)/i;
+	let ElsRegex = /(ઇ|eai|iai|uai|ai|ei|ea|ia|io|iu|oi|ua|ui|a|e|i|o|u|bh|ch|dh|fh|gh|ll|mh|nc|ng|nn|ph|rr|sh|th|b|c|d|f|g|h|j|l|m|n|p|r|s|t|v|z|\.|\s|\t+|\|)/i;
 
 	let P1 = text.split(LngRegex);
 
@@ -35,33 +48,12 @@ function ParseText(text) {
 
 	//silent parts
 	for (let i = 0; i < Parse.length; i ++) {
-		if (Parse[i - 1] != " " && ["dh", "gh", "fh"].includes(Parse[i])) {
+		if (Parse[i - 1] != " " && [".", "dh", "gh", "fh"].includes(Parse[i])) {
 			Parse.splice(i, 1);
 		}
 	}
 
 	Parse = markSlender(Parse); Parse = markStress(Parse);
-	
-	//split nch, nd, ngh
-	for (let i = 0; i < Parse.length; i++) {
-		const current = Parse[i];
-		const prev = Parse[i - 1];
-		const next = Parse[i + 1];
-
-		if ((current === "nd" || current === "ND" ) && prev !== " ") {
-			Parse[i] = current[0];
-			Parse.splice(i + 1, 0, current[1]);
-		}
-		else if (current.toLowerCase() === "nc" && next?.toLowerCase() === "h") {
-			Parse[i] = current[0];
-			Parse[i + 1] = current[1] + next;
-		}
-		else if (current.toLowerCase() === "ng" && next?.toLowerCase() === "h") {
-			Parse[i] = current[0];
-			Parse[i + 1] = current[1] + next;
-		}
-	}
-
 	return Parse;
 }
 
@@ -207,16 +199,18 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "oː"
 		}
 		else if (part == "OI") {
-			if (/^(cht)|(rs)|(rt)|(s)/.test(follow)) {
-				IPA[i] = "ɔ";
-			} else if (/^(rd)|(rl)|(rn)/.test(follow)) {
+			if (/^(rd)|(rl)|(rn)/.test(follow)) {
 				IPA[i] = "oː";
-			} else {
+			}
+			else if (/^(ch)|(r)|(s)/.test(follow)) {
+				IPA[i] = "ɔ";
+			}
+			else {
 				IPA[i] = "ɪ";
 			}
 		}
 		else if (part == "oi") {
-			if (/^(cht)|(rs)|(rt)|(s)|(rd)|(rl)|(rn)/.test(follow)) {
+			if (/^(ch)|(r)|(s)/.test(follow)) {
 				IPA[i] = forHangulOnly == false ? "ə" : "o";
 			} else {
 				IPA[i] = forHangulOnly == false ? "ə" : "i";
@@ -593,68 +587,12 @@ function markStress(T) {
 	return T;
 }
 
-function get_sound(arg0, arg1, split = true) { //don't split for some languages
-	if (arg0.trim() == "") { return ""; }
-
-	//splitable?
-	if (arg0.includes(" ") && split === true) {
-		let argtemp = arg0;
-		argtemp = argtemp.replace(/(?<=[ ])(is )/gi, "ઇ").replace(/^(is )/gi, "ઇ");
-		argtemp = argtemp.replace(/(?<=[ ])(an )/gi, "ઠ").replace(/^(an )/gi, "ઠ");
-		argtemp = argtemp.replace(/(?<=[ ])(na )/gi, "ઙ").replace(/^(na )/gi, "ઙ");
-
-		let arg_split = argtemp.split(" ");
-		if (arg_split.length >= 2) {
-			for (let i = 0; i < arg_split.length; i ++) {
-				arg_split[i] = arg_split[i].replaceAll("ઇ", "is ");
-				arg_split[i] = arg_split[i].replaceAll("ઠ", "an ");
-				arg_split[i] = arg_split[i].replaceAll("ઙ", "na ");
-			}
-
-			let result_split = [];
-			for (let i = 0; i < arg_split.length; i ++) {
-				result_split.push(get_sound(arg_split[i], arg1));
-			}
-			return result_split.join(" ");
-		}
-	}
-
-	if (properties.showHangulInsteadOfIPA) {
-		for (let e in dict) {
-			if (dict[e]["grammar"].includes(arg0)) {
-				const sound = dict[e]["sound"]["hangul"][dict[e]["grammar"].indexOf(arg0)];
-				if (sound !== "") {
-					return sound;
-				}
-				else {
-					break;
-				}
-			}
-		}
-		return GetHangul(arg0);
-	}
-	else {
-		for (let e in dict) {
-			if (dict[e]["grammar"].includes(arg0)) {
-				const sound = dict[e]["sound"]["ipa"][dict[e]["grammar"].indexOf(arg0)];
-				if (sound !== "") {
-					return sound;
-				}
-				else {
-					break;
-				}
-			}
-		}
-		return GetIPA(arg0, arg1);
-	}
-}
-
 function GetHangul(text) {
 	let ipa = " " + GetIPA(text, false, true) + " ";
 
 	ipa = ipa.replaceAll(".", "");
-	ipa = ipa.replaceAll("ʲəvʲ", "ib"); //cinbh
-	ipa = ipa.replaceAll("əw", "u"); //leanbh
+	ipa = ipa.replaceAll("nʲvʲ", "nib"); //cinbh
+	ipa = ipa.replaceAll("nw", "nu"); //leanbh
 
 	const rep_basic = {
 		"ː": "", "ə": "",
@@ -751,5 +689,61 @@ function HanCoda(syllable, coda) {
 	}
 	else {
 		return "쀿";
+	}
+}
+
+function get_sound(arg0, arg1, split = true) { //don't split for some languages
+	if (arg0.trim() == "") { return ""; }
+
+	//splitable?
+	if (arg0.includes(" ") && split === true) {
+		let argtemp = arg0;
+		argtemp = argtemp.replace(/(?<=[ ])(is )/gi, "ઇ").replace(/^(is )/gi, "ઇ");
+		argtemp = argtemp.replace(/(?<=[ ])(an )/gi, "ઠ").replace(/^(an )/gi, "ઠ");
+		argtemp = argtemp.replace(/(?<=[ ])(na )/gi, "ઙ").replace(/^(na )/gi, "ઙ");
+
+		let arg_split = argtemp.split(" ");
+		if (arg_split.length >= 2) {
+			for (let i = 0; i < arg_split.length; i ++) {
+				arg_split[i] = arg_split[i].replaceAll("ઇ", "is ");
+				arg_split[i] = arg_split[i].replaceAll("ઠ", "an ");
+				arg_split[i] = arg_split[i].replaceAll("ઙ", "na ");
+			}
+
+			let result_split = [];
+			for (let i = 0; i < arg_split.length; i ++) {
+				result_split.push(get_sound(arg_split[i], arg1));
+			}
+			return result_split.join(" ");
+		}
+	}
+
+	if (properties.showHangulInsteadOfIPA) {
+		for (let e in dict) {
+			if (dict[e]["grammar"].includes(arg0)) {
+				const sound = dict[e]["sound"]["hangul"][dict[e]["grammar"].indexOf(arg0)];
+				if (sound !== "") {
+					return sound;
+				}
+				else {
+					break;
+				}
+			}
+		}
+		return GetHangul(arg0);
+	}
+	else {
+		for (let e in dict) {
+			if (dict[e]["grammar"].includes(arg0)) {
+				const sound = dict[e]["sound"]["ipa"][dict[e]["grammar"].indexOf(arg0)];
+				if (sound !== "") {
+					return sound;
+				}
+				else {
+					break;
+				}
+			}
+		}
+		return GetIPA(arg0, arg1);
 	}
 }

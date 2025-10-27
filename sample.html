@@ -60,7 +60,7 @@
 			--color_text: #000002;
 			--color_anchor: #000003;
 			--color_disabled: #000004;
-			--color_check: #000005;
+			--color_emphasize: #000005;
 			--color_textbox: #000006;
 		}
 
@@ -72,6 +72,8 @@
 		a:hover { text-decoration: underline; }
 
 		.add_favourites:hover { text-decoration: none; }
+
+		.emp { color: var(--color_emphasize); }
 
 		hr { border : solid 1px var(--color_anchor); }
 
@@ -210,8 +212,8 @@
 		}
 
 		[type="checkbox"]:checked {
-			background-color: var(--color_check);
-			border-color: var(--color_check);
+			background-color: var(--color_anchor);
+			border-color: var(--color_anchor);
 		}
 
 		[type="checkbox"]:checked::before {
@@ -267,11 +269,11 @@
 			<a href="#top" id="topmenu_favourites" onclick="load_favourites(0)"><span>책갈피</span></a>
 			<a href="#top" id="topmenu_properties" onclick = "load_property()"><span>설정</span></a>
 			<span>&nbsp;&nbsp;</span>
-			<a href="#top" id="topcontrol_left" onclick='undo_call()'>◀<span class="long"> 뒤로</span><span class="short"></span></a>&nbsp;
-			<a href="#top" id="topcontrol_right" onclick='redo_call()'><span class="long">앞으로 </span><span class="short"></span>▶</a>
+			<a class="top_shadow" href="#top" id="topcontrol_left" onclick='undo_call()' style="text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;">◀<span class="long"> 뒤로</span><span class="short"></span></a>&nbsp;
+			<a class="top_shadow" href="#top" id="topcontrol_right" onclick='redo_call()' style="text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;"><span class="long">앞으로 </span><span class="short"></span>▶</a>
 		</div>
 
-		<div class="dropdown" style="display:none;">
+		<div class="dropdown">
 			<span class="title">부록&nbsp;▼</span>
 			<div class="submenu" id="submenu" style="text-align: right;">
 				<a href="#top" id="appdendix_1" onclick="load_appendix(1)"></a>
@@ -345,7 +347,7 @@
 	</div>
 
 	<div id="mainpage">
-		<p>mainpage</p>
+		<p>로딩중! 잠깐만 기다려주세요 ^^;</p>
 	</div>
 
 	<div id="propertysettings" style="display: none;">
@@ -588,12 +590,12 @@
 		//graphics
 		let t4 = document.getElementById("ADFB_head_favourites");
 		let t4_check = check_favourites(index) ? "★" : "☆";
-		t4.innerHTML = "&nbsp;&nbsp;<span><a class=\"add_favourites\" onclick=\"add_favourites(" + index + ")\">" + t4_check + "</a></span>"
+		t4.innerHTML = `&nbsp;&nbsp;<a class="add_favourites" onclick="add_favourites(${index})"><span class="emp">${t4_check}</span></a>`;
 
 		let t5 = document.getElementById("ABC_fav_" + index.toString().padStart(5, '0'));
 		if (t5 != null) {
 			let t5_check = check_favourites(index) ? "★" : "☆";
-			t5.innerHTML = t5_check;
+			t5.innerHTML = `<span class="emp">${t5_check}</span>`;
 		}
 
 		//cookies
@@ -607,6 +609,7 @@
 	}
 
 	function check_favourites(index) {
+		console.log(favourites)
 		if (favourites.includes(index)) {
 			return true;
 		}
@@ -636,7 +639,7 @@
 
 			let check = check_favourites(favourites[i]) ? "★" : "☆";
 
-			source_main += `<p><a class="add_favourites" id="ABC_fav_${favourites[i].toString().padStart(5, '0')}" onclick="add_favourites(${favourites[i]})" style="font-family: 'Charis SIL';">${check}</a><strong># ${((i + 1).toString())}. <a onclick="link('${dict[padN]["key"]}')">${dict[padN]["title"]}</a></strong>&nbsp;<span class="IPA">[${get_sound(dict[padN]["title"], true)}]</span>&nbsp;:&nbsp;&nbsp;${dict[padN]["gloss"]["ko"].join("; ")}</p>`;
+			source_main += `<p><a class="add_favourites" id="ABC_fav_${favourites[i].toString().padStart(5, '0')}" onclick="add_favourites(${favourites[i]})" style="font-family: 'Charis SIL';"><span class="emp">${check}</span></a><strong># ${((i + 1).toString())}. <a onclick="link('${dict[padN]["key"]}')">${dict[padN]["title"]}</a></strong>&nbsp;<span class="IPA">[${get_sound(dict[padN]["title"], true)}]</span>&nbsp;:&nbsp;&nbsp;${dict[padN]["gloss"]["ko"].join("; ")}</p>`;
 		}
 
 		source_main += "<br><hr><p style=\"text-align:right;\"><strong><a onclick=\"clear_favourites()\">책갈피 전부 삭제 <em>(클릭하면 되돌릴 수 없어요!)</em></a></strong></p>";
@@ -737,7 +740,7 @@
 			let basic = dict[List[i]]["tag"]["category"].includes("기초") ? true : false;
 			let text = basic ? `<strong>${t0}</strong>` : t0;
 
-			source += `<p><span style="font-family: 'Charis SIL'"><a class="add_favourites" id="ABC_fav_${t4.toString().padStart(5, '0')}" onclick="add_favourites(${t4})">${t4_check}</a></span>&nbsp;<a onclick="link('${link}')">${text}<sup>${t1}</sup></a> <span class="IPA">[${t2}]</span> : ${t3}</p>`;
+			source += `<p><span style="font-family: 'Charis SIL'"><a class="add_favourites" id="ABC_fav_${t4.toString().padStart(5, '0')}" onclick="add_favourites(${t4})"><span class="emp">${t4_check}</span></a></span>&nbsp;<a onclick="link('${link}')">${text}<sup>${t1}</sup></a> <span class="IPA">[${t2}]</span> : ${t3}</p>`;
 		}
 
 		document.getElementById("mainpage").innerHTML = source;
@@ -777,7 +780,7 @@
 
 				let text = t0; //don't emphasize basic
 
-				source += `<p><span style="font-family: 'Charis SIL'"><a class="add_favourites" id="ABC_fav_${t4.toString().padStart(5, '0')}" onclick="add_favourites(${t4})">${t4_check}</a></span>&nbsp;<a onclick="link('${link}')">${text}<sup>${t1}</sup></a> <span class="IPA">[${t2}]</span> : ${t3}</p>`;
+				source += `<p><span style="font-family: 'Charis SIL'"><a class="add_favourites" id="ABC_fav_${t4.toString().padStart(5, '0')}" onclick="add_favourites(${t4})"><span class="emp">${t4_check}</span></a></span>&nbsp;<a onclick="link('${link}')">${text}<sup>${t1}</sup></a> <span class="IPA">[${t2}]</span> : ${t3}</p>`;
 			}
 		}
 		else {
@@ -1007,7 +1010,7 @@
 				text: 			"#112313",	//본문 글자 색
 				anchor: 		"#238f38",	//링크, hr 글자 색
 				disabled: 		"#F0F0F0",	//비활성화된 버튼 (뒤로/앞으로) 색
-				check:			"#238f38",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
+				emphasize:		"#E29841",	//즐겨찾기 ★색
 				textbox: 		"#F7F7F7"	//검색창 텍스트박스 배경색
 			}
 		}
@@ -1018,7 +1021,7 @@
 				text: 			"#E0DFDF",	//본문 글자 색
 				anchor: 		"#238f38",	//링크, hr 글자 색
 				disabled: 		"#202020",	//비활성화된 버튼 (뒤로/앞으로) 색
-				check:			"#238f38",	//환경설정 체크박스 색, anchor랑 같게 하는 것 추천
+				emphasize:		"#E29841",	//즐겨찾기 ★색
 				textbox: 		"#181818"	//검색창 텍스트박스 배경색
 			}
 		}
@@ -1028,7 +1031,7 @@
 		document.documentElement.style.setProperty('--color_text', color.text);
 		document.documentElement.style.setProperty('--color_anchor', color.anchor);
 		document.documentElement.style.setProperty('--color_disabled', color.disabled);
-		document.documentElement.style.setProperty('--color_check', color.check);
+		document.documentElement.style.setProperty('--color_emphasize', color.emphasize);
 		document.documentElement.style.setProperty('--color_textbox', color.textbox);
 
 		const E = document.getElementsByClassName("top_shadow");
@@ -1075,7 +1078,7 @@
 			<p style="text-align: center; margin-top: 60px; font-size: 48px;"><img class="main-img" src="resources/main.png"></img></p>
 			<p style="text-align: center; font-family: 'font_de'; font-size: 48px;">Foclóir Gaeilge–Cóiréis</p>
 			<p style="text-align: center; font-family: 'font_de'; font-size: 48px; margin-top: -36px;">d’Fhilí Nua-Aimseartha</p>
-			<p style="text-align: center; font-size: 30px; margin-top: -24px;"><strong>«켈트어 창작사전»</strong></p>
+			<p style="text-align: center; font-size: 30px; margin-top: -24px;"><strong>«켈트어 창작사전» 무료 체험판</strong></p>
 			<p style="text-align: center; font-size: 48px; margin-top: -12px;"><strong>I</strong></p>
 			<p style="text-align: center; font-size: 24px; margin-top: -24px;"><strong>아일랜드어</strong></p>
 			<p style="text-align: left; line-height: 180%; margin-top: 36px;"><strong>팁</strong>: ${r}</p>`;
