@@ -162,8 +162,20 @@ function load_adfb(call = false) {
 	if (word_class == "n" || word_class == "f" || word_class == "m") {
 		source_gram += "<p><details><summary style=\"font-size: 18px;\">문법 정보 보기</summary></p><p>";
 
-		if (word_class == "m" || word_class == "f") {
-			source_gram += `
+		let gram_art = new Array(length.gram); let sound_art = new Array(length.gram);
+		let article_attachable = false; const mgn = 12;
+		for (let i = 1; i < gram.length; i += 2) {
+			if (gram[i] != "" && gram[i] != gram[i - 1]) { //article attachable
+				article_attachable = true;
+				gram_art[i] = `<p style="margin-top: ${mgn}px;"><strong>${gram[i]}</strong></p>`;
+				sound_art[i] = `<p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[i]}</small></p>`;
+			}
+			else { //article non-attachable
+				gram_art[i] = ""; sound_art[i] = "";
+			}
+		}
+
+		source_gram += `
 			<table style="table-layout: auto; margin-left: 30px; margin-top: -30px;">
 					<tr>
 						<th style="min-width: 50px;">&nbsp;</th>
@@ -172,16 +184,20 @@ function load_adfb(call = false) {
 					</tr>
 					<tr>
 						<th style="line-height: 100%;"><p>주격</p><p><small>(~이·가)</small></p></th>
-						<td><p><strong>${gram[0]}</strong></p><p class="original_script>${LattoOrg(gram[0])}</p><p class="IPA"><small>${sound[0]}</small></p></td>
-						<td><p><strong>${gram[4]}</strong></p><p class="original_script>${LattoOrg(gram[4])}</p><p class="IPA"><small>${sound[4]}</small></p></td>
+						<td><p><strong>${gram[0]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[0]}</small></p>${gram_art[1]}${sound_art[1]}</td>
+						<td><p><strong>${gram[4]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[4]}</small></p>${gram_art[5]}${sound_art[5]}</td>
 					</tr>
 					<tr>
 						<th style="line-height: 100%;"><p>속격</p><p><small>(~의)</small></p></th>
-						<td><p><strong>${gram[2]}</strong></p><p class="original_script>${LattoOrg(gram[2])}</p><p class="IPA"><small>${sound[2]}</small></p></td>
-						<td><p><strong>${gram[6]}</strong></p><p class="original_script>${LattoOrg(gram[6])}</p><p class="IPA"><small>${sound[6]}</small></p></td>
+						<td><p><strong>${gram[2]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[2]}</small></p>${gram_art[3]}${sound_art[3]}</td>
+						<td><p><strong>${gram[6]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[6]}</small></p>${gram_art[7]}${sound_art[7]}</td>
 					</tr>
 				</table>`;
+
+		if (article_attachable) {
+			source_gram += `<p><small>&nbsp;&nbsp;※ 표의 각 칸에 수록된 두 형태는 각각 일반적인 형태와 정관사&nbsp;(영어의 the)&nbsp;를 붙인 형태입니다.</small></p>`;
 		}
+
 		source_gram +=  `</details>`;
 	}
 	else if (word_class == "a") {
@@ -492,9 +508,9 @@ function load_query_suggest(text) {
 		let link = dict[padN]["key"];
 		let t0 = dict[padN]["title"];
 		let t1 = typeof dict[padN]["tag"]["homonym"] === undefined ? "" : dict[padN]["tag"]["homonym"];
-		let t3 = GetHangul(t0);
+		let t3 = properties.showHangulInsteadOfIPA ? ` <small>(${get_sound(t0, true)})</small>` : "";
 
-		let t = t0 + "<sup>" + t1 + "</sup>" + " <small>(" + t3 + ")</small>";
+		let t = t0 + "<sup>" + t1 + "</sup>" + t3;
 
 		//homonym
 		let t2 = Page.split("_")[0];

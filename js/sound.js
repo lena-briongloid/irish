@@ -449,11 +449,15 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 			IPA[i] = "tʲ"
 		}
 		else if (part == "th" || part == "TH") {
-			//it means it's final
-			if (/^[\s]/.test(Parse[i + 1])) {
-				IPA[i] = ""
-			} else {
-				IPA[i] = "h"
+			const condition_long = /ː/.test(IPA[i - 1]);
+			const condition_diph = /au̯|au|ai̯|ai|iə|ia|uə|ua/.test(IPA[i - 1]);
+			const condition_final = /^[\s]/.test(Parse[i + 1]) || !/[aeiouáéíóú]/.test(Parse[i + 1])
+
+			if (condition_final && (condition_long || condition_diph)) {
+				IPA[i] = "";
+			}
+			else {
+				IPA[i] = "h";
 			}
 		}
 		else if (part == "z") {
@@ -461,15 +465,6 @@ function GetIPA(text, hideSyllableMark = false, forHangulOnly = false) {
 		}
 		else if (part == "Z") {
 			IPA[i] = "ʒ"
-		}
-	}
-
-	//for syllable-final th
-	for (let i = 0; i < Parse.length; i ++) {
-		if (Parse[i].toLowerCase() == "th" && IPA[i] == "h") {
-			if (/^[bwvkcxçɣdtfɡɟʤlmnɾŋɲpsʃzʒ]/.test(IPA[i + 1]) && (/ː/.test(IPA[i - 1]) || /(au̯)|(ai̯)|(iə)|(ia)|(uə)|(ua)/.test(IPA[i - 1]) )) {
-				IPA[i] = "";
-			}
 		}
 	}
 

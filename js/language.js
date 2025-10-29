@@ -20,9 +20,9 @@ const InputBef = ["a.", "e.", "i.", "o.", "u.", "á.", "é.", "í.", "ó.", "ú.
 const InputAft = ["á", "é", "í", "ó", "ú", "a", "e", "i", "o", "u", "Á", "É", "Í", "Ó", "Ú", "A", "E", "I", "O", "U"];
 
 //semantic tags
-const tag_flav = ["기초", "인명", "지명", "자연", "천문", "도구", "문화", "동물", "식물", "사회", "신체", "과학", "장소", "시간", "숫자", "게일 전통", "기독교"];
-const tag_link = ["기초", "인명", "지명", "자연", "천문", "도구", "문화", "동물", "식물", "사회", "신체", "과학", "장소", "시간", "숫자", "전통", "기독"];
-const tag_code = ["basic", "personal", "endonym", "nature", "astronomy", "tools", "culture", "zoology", "botany", "social", "body", "science", "place", "time", "number", "traditional", "christianism"];
+const tag_flav = ["기초", "인명", "지명", "자연", "천문", "도구", "문화", "동물", "식물", "사회", "신체", "과학", "예술", "장소", "시간", "숫자", "게일 전통", "기독교", "음식", "역사"];
+const tag_link = ["기초", "인명", "지명", "자연", "천문", "도구", "문화", "동물", "식물", "사회", "신체", "과학", "예술", "장소", "시간", "숫자", "전통", "기독", "음식", "역사"];
+const tag_code = ["basic", "personal", "endonym", "nature", "astronomy", "tools", "culture", "zoology", "botany", "social", "body", "science", "art", "place", "time", "number", "traditional", "christianism", "culinary", "history"];
 
 //secondary scripts
 function LattoOrg(text) {
