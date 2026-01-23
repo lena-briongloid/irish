@@ -12,8 +12,8 @@ function load_adfb(call = false) {
 	text = text.trim();
 
 	//filter bad words
-	const badSearch = ["", " ", "=", ".", ",", ";", ":", "/"];
-	if (badSearch.includes(text)) { return -1; }
+	const badSearch = /[^\s!@#$%^&*()\-_=+\[\]{}\\|;:'",.<>/?`~'"‘’“”]/g;
+	if (!text || !badSearch.test(text)) { return -1; }
 
 	//special commands
 	let query_command = load_query_command(text, call);
@@ -46,30 +46,48 @@ function load_adfb(call = false) {
 		else { undo_stack(text); }
 	}
 
-	//hangul => reverse db
-	let regexHan = /[가-힣]/;
-	if (regexHan.test(text) && !text.startsWith("tag:")) {
-		load_query_rv(text, "ko");
-		return -1;
-	}
+	//////////////////
+	//REVERSE SEARCH//
+	//////////////////
 
-	//en: command => reverse db
-	else if (text.startsWith("en:")) {
-		load_query_rv(text, "en");
-		return -1;
+	//normal korean search
+	if (/[가-힣一-龥]/.test(text) && !text.includes(":")) {
+		load_query_rv(text, "ko_normal"); return -1;
 	}
-
+	//korean gloss search
+	else if (text.startsWith("ko:") || text.startsWith("해설:")) {
+		load_query_rv(text, "ko_gloss"); return -1;
+	}
+	//korean sound search
+	else if (text.startsWith("pr:") || text.startsWith("발음:")) {
+		load_query_rv(text, "ko_sound"); return -1;
+	}
+	//english gloss search
+	else if (text.startsWith("en:") || text.startsWith("영어:")) {
+		load_query_rv(text, "en_gloss"); return -1;
+	}
+	//original language search
+	else if (text.startsWith("ga:") || text.startsWith("게일:")) {
+		load_query_rv(text, "orig_lang"); return -1;
+	}
 	//tag: command => tag search
 	else if (text.startsWith("tag:")) {
-		load_query_tag(text);
-		return -1;
+		load_query_tag(text); return -1;
 	}
+	//gloss: command => extra appendix
+	else if (text.startsWith("gloss:")) {
+		load_query_glossary(text); return -1;
+	}
+
+	//////////////////////
+	//REVERSE SEARCH END//
+	//////////////////////
 
 	let text_search = text.split("_")[0];
 	load_query_suggest(text_search); load_query_include(text_search);
 
 	topmenu_set_graphic("topmenu_dict");
-	show_page(["search_form", "suggestions"], ["propertysettings", "not_found", "ADFB", "abc", "mainpage"]);
+	show_page(["search_form", "suggestions"], ["propertysettings", "not_found", "ADFB", "abc", "mainpage", "gramwiz_input", "gramwiz_output", "gramwiz_suggestions"]);
 
 	if (index == -1) {
 		//not found
@@ -104,7 +122,7 @@ function load_adfb(call = false) {
 		t1.innerHTML = "형용사. ";
 	}
 	else if (word_class == "i") {
-		t1.innerHTML = "불변사. ";
+		t1.innerHTML = "불변사&nbsp;<em data-info='문법 마법사에 등록할 수 없는 단어입니다!\n특이한 문법 규칙이 적용될 수 있습니다.'><sup>?</sup>&nbsp;</em>. ";
 		document.getElementById("gram").innerHTML = "";
 	}
 	else if (word_class == "v") {
@@ -125,7 +143,7 @@ function load_adfb(call = false) {
 	t2.innerHTML = source_t2;
 	
 	let t3 = document.getElementById("ADFB_head_sound");
-	t3.innerHTML = "<span class=\"IPA\">[" + get_sound(vocabulary.title, true) + "]</span>";
+	t3.innerHTML = "<span class=\"IPA\">[" + get_sound(vocabulary.title) + "]</span>";
 
 	let t4 = document.getElementById("ADFB_head_favourites");
 	let t4_check = check_favourites(index - 1) ? "★" : "☆";
@@ -133,30 +151,46 @@ function load_adfb(call = false) {
 
 ///////////////////////////////////
 //tags
-	let source_gram = "";
+	let source_tag_category = ""; let source_tag_important = "";
 	
-	const tag = vocabulary.tag.category;
-	if (tag.length > 0 && tag[0] != "") {
-		source_gram += `<p><strong>태그: </strong>`;
+	const tagC = vocabulary.tag.category;
+	if (tagC.length > 0 && tagC[0] != "") {
+		source_tag_category += `<strong>태그: </strong>`;
+		const tagCSorted = tag_sort(tagC);
 
-		for (let i = 0; i < tag.length; i ++) {
-			let t0 = tag[i]; let t1 = "";
+		for (let i = 0; i < tagCSorted.length; i ++) {
+			let t0 = tagCSorted[i]; let t1 = "";
 			if (tag_link.includes(t0)) {
 				t1 = tag_flav[tag_link.indexOf(t0)];
 				t2 = tag_code[tag_link.indexOf(t0)];
 			}
-			source_gram += `<a onclick="load_tag('${t2}')">${t1}</a>&nbsp;`
-			if (i < tag.length - 1) { source_gram += "·&nbsp;"; }
+			source_tag_category += `<a onclick="load_tag('${t2}')">${t1}</a>&nbsp;`
+			if (i < tagCSorted.length - 1) { source_tag_category += "·&nbsp;"; }
 		}
-		source_gram += `</p>`;
+
+		source_tag_category += `&nbsp;&nbsp;`;
 	}
+
+	const tagI = vocabulary.tag.important;
+	if (tagI > 0) {
+		const INFO = {
+			1: `National Corpus of Irish 게일어 명사·형용사 사용 빈도 상위 1000위 이내의 단어입니다.`,
+			2: `National Corpus of Irish 게일어 명사·형용사 사용 빈도 상위 3000위 이내의 단어입니다.`,
+			3: `National Corpus of Irish 게일어 명사·형용사 사용 빈도 상위 5000위 이내의 단어입니다.`,
+			4: `National Corpus of Irish 게일어 명사·형용사 사용 빈도 상위 10000위 이내의 단어입니다.`
+		}
+
+		source_tag_important = `<strong>중요도 :</strong> <span style="font-family: 'font_ko'">${tagI}등급</span> <em data-info='${INFO[tagI]}'><strong><sup>?</sup></strong></em>`;
+	}
+
+	let source_gram = `<p>${source_tag_category}${source_tag_important}</p>`.replace("<p></p>", "");
 
 ///////////////////////////////////
 //grammar
 	//make grammar array
 	let gram = vocabulary.grammar; let sound = [];
 	for (let i = 0; i < gram.length; i ++) {
-		sound.push("[" + get_sound(gram[i], true) + "]");
+		sound.push("[" + get_sound(gram[i]) + "]");
 	}
 
 	if (word_class == "n" || word_class == "f" || word_class == "m") {
@@ -177,28 +211,40 @@ function load_adfb(call = false) {
 
 		source_gram += `
 			<table style="table-layout: auto; margin-left: 30px; margin-top: -30px;">
-					<tr>
-						<th style="min-width: 50px;">&nbsp;</th>
-						<th>단수<small> (하나)</small></th>
-						<th>복수<small> (둘 이상)</small></th>
-					</tr>
-					<tr>
-						<th style="line-height: 100%;"><p>주격</p><p><small>(~이·가)</small></p></th>
-						<td><p><strong>${gram[0]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[0]}</small></p>${gram_art[1]}${sound_art[1]}</td>
-						<td><p><strong>${gram[4]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[4]}</small></p>${gram_art[5]}${sound_art[5]}</td>
-					</tr>
-					<tr>
-						<th style="line-height: 100%;"><p>속격</p><p><small>(~의)</small></p></th>
-						<td><p><strong>${gram[2]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[2]}</small></p>${gram_art[3]}${sound_art[3]}</td>
-						<td><p><strong>${gram[6]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[6]}</small></p>${gram_art[7]}${sound_art[7]}</td>
-					</tr>
-				</table>`;
+				<tr>
+					<th style="min-width: 50px;">&nbsp;</th>
+					<th>주격<small> (~이·가)</small></th>
+					<th>속격<small> (~의)</small></th>
+				</tr>
+				<tr>
+					<th style="line-height: 100%;"><p>단수</p><p><small><span style="white-space: nowrap;">(하나)</span></small></p></th>
+					<td><p><strong>${gram[0]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[0]}</small></p>${gram_art[1]}${sound_art[1]}</td>
+					<td><p><strong>${gram[2]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[2]}</small></p>${gram_art[3]}${sound_art[3]}</td>
+				</tr>`;
+
+		if (gram[4] != "" && gram[5] != "") {
+			const plural_slender = gram[8] == "slender" ? `<em data-info="협음 복수"><sup>*</sup></em>` : "";
+
+			source_gram += `<tr>
+					<th style="line-height: 100%;"><p>복수</p><p><small><span style="white-space: nowrap;">(둘 이상)</span></small></p></th>
+					<td><p><strong>${gram[4]}</strong>${plural_slender}</p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[4]}</small></p>${gram_art[5]}${sound_art[5]}</td>
+					<td><p><strong>${gram[6]}</strong></p><p class="IPA" style="margin-top: -${mgn}px;"><small>${sound[6]}</small></p>${gram_art[7]}${sound_art[7]}</td>
+				</tr>
+			</table>`;
+		}
+		else {
+			source_gram += `</table>`;
+		}
 
 		if (article_attachable) {
 			source_gram += `<p><small>&nbsp;&nbsp;※ 표의 각 칸에 수록된 두 형태는 각각 일반적인 형태와 정관사&nbsp;(영어의 the)&nbsp;를 붙인 형태입니다.</small></p>`;
 		}
 
-		source_gram +=  `</details>`;
+		source_gram +=  `
+			<div style="line-height: 150%; margin-left: 1em;">
+			<p><strong>연음화</strong>: <strong>${irish_mutation(gram[0], "l")}</strong>&nbsp;&nbsp;<span class="IPA">[${get_sound(irish_mutation(gram[0], "l"))}]</span></p>
+			</div>
+			</details>`;
 	}
 	else if (word_class == "a") {
 		source_gram += "<p><details><summary style=\"font-size: 18px;\">문법 정보 보기</summary></p><p>";
@@ -221,14 +267,25 @@ function load_adfb(call = false) {
 						<td><p><strong>${gram[3]}</strong></p><p class="original_script>${LattoOrg(gram[3])}</p><p class="IPA"><small>${sound[3]}</small></p></td>
 					</tr>
 					<tr>
-						<th style="line-height: 100%;"><p>복수</p><p><small>(둘 이상)</small></p></th>
+						<th style="line-height: 100%;"><p>복수</p><p><small><span style="white-space: nowrap;">(둘 이상)</span></small></p></th>
 						<td><p><strong>${gram[4]}</strong></p><p class="original_script>${LattoOrg(gram[4])}</p><p class="IPA"><small>${sound[4]}</small></p></td>
 						<td><p><strong>${gram[6]}</strong></p><p class="original_script>${LattoOrg(gram[6])}</p><p class="IPA"><small>${sound[6]}</small></p></td>
 					</tr>
 				</table>
-				<p><small>&nbsp;&nbsp;※ 형용사 복수형은 함께 쓰인 명사에 따라 다소 변동할 수 있습니다. 정확한 결과물은 문법 마법사를 참조해 주세요!</small></p>
-				<p><small>&nbsp;&nbsp;</small><strong>비교급 · 최상급</strong>: <strong>${gram[9]}</strong>&nbsp;<span class="original_script>${LattoOrg(gram[9])}</span>&nbsp;<span class="IPA"><small>${sound[9]}</small></span></p>
-				`;
+				<p><small>&nbsp;&nbsp;※ 형용사 복수형은 함께 쓰인 명사에 따라 다소 변동할 수 있습니다. 정확한 결과물은 문법 마법사를 참조해 주세요!</small></p>`;
+
+		if (gram[9] != "") {
+			source_gram += `<p style="margin-left: 1em;"><strong>비교급</strong>&nbsp<small>(더욱~)</small>&nbsp·&nbsp<strong>최상급</strong>&nbsp<small>(가장~)</small>&nbsp: <strong>${gram[9]}</strong>&nbsp;<span class="original_script>${LattoOrg(gram[9])}</span>&nbsp;<span class="IPA"><small>${sound[9]}</small></span></p>`;
+		}
+
+		source_gram +=  `
+			<div style="line-height: 150%; margin-left: 1em;">
+			<p><strong>연음화</strong>: <strong>${irish_mutation(gram[0], "l")}</strong>&nbsp;&nbsp;<span class="IPA">[${get_sound(irish_mutation(gram[0], "l"))}]</span></p>
+			</div>
+			</details>`;
+	}
+	else if (word_class == "i") {
+		source_gram = "";
 	}
 
 	source_gram = source_gram.replaceAll("[]", "&nbsp;");
@@ -276,7 +333,7 @@ function load_adfb(call = false) {
 			let match = line.match(/(?<=\<strong\>)(.+)(?=\<\/strong\>\:)/g)[0];
 			match = match.replace(/\<.*?\>/g, "");
 
-			line = line.replace(`</strong>:`, `</strong> <span class="IPA">[${get_sound(match, true)}]</span> :`);
+			line = line.replace(`</strong>:`, `</strong> <span class="IPA">[${get_sound(match)}]</span> :`);
 
 			source_eex += "<strong>" + (i + 1).toString() + "</strong>. " + line + "<br>";
 		}
@@ -332,28 +389,96 @@ function load_adfb(call = false) {
 	document.getElementById("abc").innerHTML = source_abc;
 }
 
+//special commands
+function load_query_command(text, call) {
+	if (text == "#main") {
+		load_main(call); return true;
+	}
+	else if (text == "#gramwiz") {
+		load_gramwiz_main(call); return true;
+	}
+	else if (text == "#property") {
+		load_property(call); return true;
+	}
+	else if (text == "#favourites") {
+		load_favourites(call); return true;
+	}
+	else if (text.includes("#") && text.length == 2 && text.charAt(1).toUpperCase() == text.charAt(1)) {
+		load_abc(text.charAt(1), call); return true;
+	}
+	else if (text.includes("#") && text.includes("tag_")) {
+		load_tag(text.replaceAll("#tag_", ""), call); return true;
+	}
+	else if (text.includes("#appendix")) {
+		load_appendix(Number(text.replace(/[^0-9]/g, "")), call); return true;
+	}
+	else if (text.includes("#gloss")) {
+		load_query_glossary(text.replaceAll("#gloss_", "gloss:"), call); return true;
+	}
+
+	return false;
+}
+
 //reverse search
-function load_query_rv(text, lang) {
+function load_query_rv(text, code) {
 	topmenu_set_graphic("topmenu_dict");
-
 	text = text.trim().replaceAll(" ", "").toLowerCase();
-	if (lang == "en") { text = text.replace("en:", ""); }
-
 	let List = [];
 
-	for (let i = 1; i < db_text.length; i ++) {
-		let line = db_text[i].toLowerCase();
-		const padN = "vocabulary_" + String(i).padStart(5, '0');
-
-		if (line.includes(text)) {
-			let gloss = "";
-			if (lang == "ko") {
-				gloss = dict[padN]["gloss"]["ko"].join("; ");
+	if (code == "ko_normal") {
+		for (let i = 1; i < search_db.gloss.ko.length; i ++) {
+			const e1 = search_db.gloss.ko[i];
+			const e2 = search_db.exep[i];
+			const e3 = search_db.sound[i];
+			if (e1.includes(text) || e2.includes(text) || e3.includes(text)) {
+				const padN = "vocabulary_" + String(i).padStart(5, '0');
+				const gloss = dict[padN]["gloss"]["ko"].join("; ");
+				List.push([i, gloss]);
 			}
-			else if (lang == "en") {
-				gloss = dict[padN]["gloss"]["en"].join("; ");
+		}
+	}
+	else if (code == "ko_gloss") {
+		text = text.split(":")[1];
+		for (let i = 1; i < search_db.gloss.ko.length; i ++) {
+			const e = search_db.gloss.ko[i];
+			if (e.includes(text)) {
+				const padN = "vocabulary_" + String(i).padStart(5, '0');
+				const gloss = dict[padN]["gloss"]["ko"].join("; ");
+				List.push([i, gloss]);
 			}
-			List.push([i, gloss]);
+		}
+	}
+	else if (code == "ko_sound") {
+		text = text.split(":")[1];
+		for (let i = 1; i < search_db.sound.length; i ++) {
+			const e = search_db.sound[i];
+			if (e.includes(text)) {
+				const padN = "vocabulary_" + String(i).padStart(5, '0');
+				const gloss = dict[padN]["gloss"]["ko"].join("; ");
+				List.push([i, gloss]);
+			}
+		}
+	}
+	else if (code == "en_gloss") {
+		text = text.split(":")[1];
+		for (let i = 1; i < search_db.gloss.en.length; i ++) {
+			const e = search_db.gloss.en[i];
+			if (e.includes(text)) {
+				const padN = "vocabulary_" + String(i).padStart(5, '0');
+				const gloss = dict[padN]["gloss"]["en"].join("; ");
+				List.push([i, gloss]);
+			}
+		}
+	}
+	else if (code == "orig_lang") {
+		text = text.split(":")[1];
+		for (let e in dict) {
+			let title = dict[e]["title"];
+			if (title.includes(text)) {
+				const num = dict[e]["index"];
+				const gloss = dict[e]["gloss"]["ko"].join("; ");
+				List.push([num, gloss]);
+			}
 		}
 	}
 
@@ -367,7 +492,7 @@ function load_query_rv(text, lang) {
 		show_page(["includes"], ["not_found"]);
 	}
 
-	let source = "";
+	let source = `<div class="wordlist">`;
 
 	for (let i = 0; i < List.length; i ++) {
 		const rawN = List[i][0];
@@ -375,14 +500,16 @@ function load_query_rv(text, lang) {
 
 		const t1 = dict[padN]["key"];
 		const t2 = dict[padN]["title"];
-		const t3 = get_sound(t2, true);
+		const t3 = get_sound(t2);
 		
-		const check = check_favourites(List[i][0]) ? "★" : "☆";
+		const check = check_favourites(List[i][0] - 1) ? "★" : "☆";
 		const basic = dict[padN]["tag"]["category"].includes("기초") ? true : false;
 		const text = basic ? `<strong>${t2}</strong>` : t2;
 
-		source += `<p><a class="add_favourites" id="ABC_fav_${List[i][0].toString().padStart(5, '0')}" onclick="add_favourites(${List[i][0]})" style="font-family: 'Charis SIL'"><span class="emp">${check}</span></a>&nbsp;<a onclick="link('${t1}')">${text}</a>&nbsp;<span class="IPA">[${t3}]&nbsp;:&nbsp;&nbsp;${List[i][1]}</p></span>`;
+		source += `<p><a class="add_favourites" id="ABC_fav_${(List[i][0] - 1).toString().padStart(5, '0')}" onclick="add_favourites(${List[i][0]} - 1)" style="font-family: 'Charis SIL'"><span class="emp">${check}</span></a>&nbsp;<a onclick="link('${t1}')">${text}</a>&nbsp;<span class="IPA">[${t3}]</span>&nbsp;:&nbsp;&nbsp;${List[i][1]}</p>`;
 	}
+
+	source += `</div>`;
 
 	document.getElementById("includes_search").innerHTML = source;
 }
@@ -413,7 +540,7 @@ function load_query_tag(text) {
 		show_page(["includes"], ["not_found"]);
 	}
 
-	let source = "";
+	let source = `<div class="wordlist">`;
 
 	for (let i = 0; i < List.length; i ++) {
 		const rawN = List[i][0];
@@ -421,14 +548,16 @@ function load_query_tag(text) {
 
 		const t1 = dict[padN]["key"];
 		const t2 = dict[padN]["title"];
-		const t3 = get_sound(t2, true);
+		const t3 = get_sound(t2);
 		
-		const check = check_favourites(List[i][0]) ? "★" : "☆";
+		const check = check_favourites(List[i][0] - 1) ? "★" : "☆";
 		const basic = dict[padN]["tag"]["category"].includes("기초") ? true : false;
 		const text = basic ? `<strong>${t2}</strong>` : t2;
 
-		source += `<p><a class="add_favourites" id="ABC_fav_${List[i][0].toString().padStart(5, '0')}" onclick="add_favourites(${List[i][0]})" style="font-family: 'Charis SIL'"><span class="emp">${check}</span></a>&nbsp;<a onclick="link('${t1}')">${text}</a>&nbsp;<span class="IPA">[${t3}]&nbsp;:&nbsp;&nbsp;${List[i][1]}</p></span>`;
+		source += `<p><a class="add_favourites" id="ABC_fav_${(List[i][0] - 1).toString().padStart(5, '0')}" onclick="add_favourites(${List[i][0]} - 1)" style="font-family: 'Charis SIL'"><span class="emp">${check}</span></a>&nbsp;<a onclick="link('${t1}')">${text}</a>&nbsp;<span class="IPA">[${t3}]&nbsp;:&nbsp;&nbsp;${List[i][1]}</p></span>`;
 	}
+
+	source += "</div>";
 
 	document.getElementById("includes_search").innerHTML = source;
 }
@@ -446,7 +575,20 @@ function load_query_include(text, length_max = 10) {
 	}
 
 	for (let e in dict) {
-		if (dict[e]["title"].toLowerCase().includes(text.toLowerCase()) && dict[e]["key"] != Page && dict[e]["title"].length <= text.length + length_max) {
+		const title_rad = dict[e]["title"].toLowerCase();
+
+		const lowerTextRadical = text.toLowerCase();
+		const lowerTextLenited = irish_mutation(lowerTextRadical, "l")
+
+		const maxLength = text.length + length_max + 1;
+		const isNotCurrentPage = dict[e]["key"] !== Page;
+
+		const isValidMatch = isNotCurrentPage && [title_rad].some(title => {
+			const lowerTitle = title.toLowerCase();
+			return (lowerTitle.includes(lowerTextRadical) || lowerTitle.includes(lowerTextLenited)) && title.length <= maxLength;
+		});
+
+		if (isValidMatch) {
 			List.push(dict[e]["index"]);
 		}
 	}
@@ -508,7 +650,7 @@ function load_query_suggest(text) {
 		let link = dict[padN]["key"];
 		let t0 = dict[padN]["title"];
 		let t1 = typeof dict[padN]["tag"]["homonym"] === undefined ? "" : dict[padN]["tag"]["homonym"];
-		let t3 = properties.showHangulInsteadOfIPA ? ` <small>(${get_sound(t0, true)})</small>` : "";
+		let t3 = properties.showHangulInsteadOfIPA ? ` <small>(${get_sound(t0)})</small>` : "";
 
 		let t = t0 + "<sup>" + t1 + "</sup>" + t3;
 
@@ -530,103 +672,129 @@ function load_query_suggest(text) {
 	document.getElementById("suggestions_search").innerHTML = source;
 }
 
-//special commands
-function load_query_command(text, call) {
-	if (text == "#main") {
-		load_main(call); return true;
-	}
-	else if (text == "#gramwiz") {
-		load_gramwiz_main(call); return true;
-	}
-	else if (text == "#property") {
-		load_property(call); return true;
-	}
-	else if (text == "#favourites") {
-		load_favourites(call); return true;
-	}
-	else if (text.includes("#") && text.length == 2 && text.charAt(1).toUpperCase() == text.charAt(1)) {
-		load_abc(text.charAt(1), call); return true;
-	}
-	else if (text.includes("#") && text.includes("tag_")) {
-		load_tag(text.replaceAll("#tag_", ""), call); return true;
-	}
-	else if (text.includes("#appendix")) {
-		load_appendix(text, call); return true;
+//extra appendices
+function load_query_glossary(text = "", call = false) {
+	topmenu_set_graphic("topmenu_dict");
+	show_page(["search_form", "mainpage"], ["gramwiz_input", "suggestions", "gramwiz_suggestions", "gramwiz_output", "propertysettings", "not_found", "ADFB", "includes", "abc"]);
+
+	text = text.trim().replace("gloss:", "").toLowerCase();
+
+	if (!document.getElementById("mainpage").innerHTML.includes(`인명·지명 등 고유명사 일람`)) {
+		let source_main = `<h1 style="text-align: center; font-family: 'font_ko';">WEB 부록 3. 인명·지명 미니 백과사전</h1>`;
+		for (let e in glossary) {
+			source_main += `<br id="gloss_${glossary[e].index}"><hr><br><div>
+			<p style="text-align: center; font-size: 1.5em;"><strong>${glossary[e].title.en}</strong></p>
+			<p style="text-align: center; font-size: 1.5em; margin-top: -0.75em;"><strong>${glossary[e].title.ko}</strong></p>
+			<p style="margin-top: -0.75em;"><small><strong>분류</strong>: ${glossary[e].class.ko}</small></p>
+			<div style="line-height: 200%;"><style>div .a {font-weight: bold;}</style>${glossary[e].content}</div>
+			</div>`;
+		}
+		document.getElementById("mainpage").innerHTML = source_main;
 	}
 
-	return false;
+	window.location.hash = "gloss_" + text;
 }
 
 function find_similars(text, howManySimilars = 10) {
-	let List = [];
+	if (!text) return [-1];
 
+	const target = normalizeWord(text);
+	const scoredList = [];
+
+	//calc
 	for (let e in dict) {
-		//filter exactly same word
+		// filter perfect-exact
 		if (Page.toLowerCase() == dict[e]["key"].toLowerCase()) {
-			List.push(0); continue;
+			continue;
 		}
 
-		let word1 = remove_diacritics(dict[e]["title"].toLowerCase());
-		let word2 = remove_diacritics(text.toLowerCase());
+		const word1 = normalizeWord(dict[e]["title"] || "");
+		const word2 = target;
+		const score = calculateSimilarity(word1, word2);
 
-		let word_long = ""; let word_short = "";
-		if (word1.length >= word2.length) { word_long = word1; word_short = word2; }
-		else { word_long = word2; word_short = word1; }
-		let len = word_long.length
-
-		//compare
-		let l1 = 0;
-
-		for (let j = 0; j < len; j ++) {
-			let chr1 = word_long.charAt(j);
-			let chr2 = word_short.charAt(j);
-
-			if (chr1 == "" || chr2 == "") { continue; }
-			if (chr1 == chr2) { l1 ++; }
-			if ((chr1 == "'" && chr2 == "’") || (chr2 == "'" && chr1 == "’")) { l1 ++; }
-
-			let sq = false;
-
-			for (let k = 0; k < DiacriticsTuple.length; k ++) {
-				if ((chr1 == DiacriticsTuple[k][0] && chr2 == DiacriticsTuple[k][1]) || (chr1 == DiacriticsTuple[k][1] && chr2 == DiacriticsTuple[k][0])) {
-					sq = true; break;
-				}
-			}
-			
-			if (sq) { l1 += 0.5; }
+		if (score > 0) {
+			scoredList.push({ index: dict[e]["index"], score: score });
 		}
-
-		l1 /= len;
-
-		//including?
-		let l2 = 0;
-
-		if (word_long.includes(word_short)) {
-			l2 = word_short.length / word_long.length;
-		}
-
-		let likeliness = Math.max(l1, l2);
-
-		List.push(likeliness);
 	}
 
-	//most similar ones
-	let Index = [-1]; let IndexMax = 1;
+	//sort
+	scoredList.sort((a, b) => b.score - a.score);
 
-	while (Index.length <= howManySimilars) {
-		let ind = 0; let max = 0;
-
-		for (let i = 0; i < List.length; i ++) {
-			if (List[i] > max && List[i] <= IndexMax && !Index.includes(i)) {
-				ind = i; max = List[i];
-			}
-		}
-
-		if (max == 0) { break; }
-
-		Index.push(ind); IndexMax = max;
+	let Index = [-1];
+	
+	//extract
+	for (let i = 0; i < Math.min(scoredList.length - 1, howManySimilars); i++) {
+		Index.push(scoredList[i].index - 1);
 	}
 
-	let IndexRemoveDuplicate = Array.from(new Set(Index));
-	return IndexRemoveDuplicate;
+	return Array.from(new Set(Index));
+}
+
+function normalizeWord(str) {
+	return str.toLowerCase()
+		.replace(/['’]/g, "'")
+		.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+// Levenshtein Distance
+function calculateSimilarity(s1, s2) {
+	if (s1 === s2) return 1;
+	
+	//plus-score for initial mutation
+	let mutationScore = 0;
+	if (typeof irish_mutation === "function") {
+		const mutatedS1 = normalizeWord(irish_mutation(s1, "l"));
+		const mutatedS2 = normalizeWord(irish_mutation(s2, "l"));
+
+		if (s2.includes(mutatedS1)) {
+			// s1=cat, s2=chat
+			mutationScore = Math.max(mutationScore, mutatedS1.length / s2.length);
+		}
+		if (s1.includes(mutatedS2)) {
+			// s1=chat, s2=cat
+			mutationScore = Math.max(mutationScore, mutatedS2.length / s1.length);
+		}
+	}
+
+	// normal inclusion
+	let inclusion = 0;
+	if (s1.includes(s2) || s2.includes(s1)) {
+		inclusion = Math.min(s1.length, s2.length) / Math.max(s1.length, s2.length);
+	}
+
+	// calc levenshtein dist.
+	const len1 = s1.length, len2 = s2.length;
+	const matrix = Array(len2 + 1).fill(null).map(() => Array(len1 + 1).fill(null));
+
+	for (let i = 0; i <= len1; i++) matrix[0][i] = i;
+	for (let j = 0; j <= len2; j++) matrix[j][0] = j;
+
+	for (let j = 1; j <= len2; j++) {
+		for (let i = 1; i <= len1; i++) {
+			const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
+			matrix[j][i] = Math.min(
+				matrix[j][i - 1] + 1,
+				matrix[j - 1][i] + 1,
+				matrix[j - 1][i - 1] + cost
+			);
+		}
+	}
+
+	const distance = matrix[len2][len1];
+	const levenshtein = 1 - (distance / Math.max(len1, len2));
+
+	/*
+	Score Weights
+	mutationScore * 0.95
+	inclusion * 0.8
+	*/
+	return Math.max(levenshtein, inclusion * 0.8, mutationScore * 0.95);
+}
+
+function load_random() {
+	const L = search_db.gloss.ko.length;
+	const r = Math.floor(Math.random() * L) + 1;
+	const key = Object.values(dict).find(e => e.index === r).key;
+	document.getElementById("text").value = key;
+	load_adfb(false);
 }

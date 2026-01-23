@@ -3,7 +3,7 @@ function gramwiz_input(num) {
 	const text = document.getElementById(form).value.trim();
 
 	//filter bad words
-	if (/[ \=\.\,\;가-힣]/.test(text)) { return -1; }
+	if (/[\=\.\,\;가-힣]/.test(text)) { return -1; }
 
 	//is the input exactly matching?
 	const isExact = Object.values(dict).find(e => e.key === text) !== undefined;
@@ -32,33 +32,90 @@ function gramwiz_input(num) {
 }
 
 function gramwiz_output() {
-	//잘못 호출됐을 때 바로 리턴
+	//erronous call -> return
 	if (gramwizInput[1] === undefined || gramwizInput[2] === undefined) {
 		return -1;
 	}
 
 	const voc1 = gramwizInput[1]; const voc2 = gramwizInput[2];
 
+	//case error: one of the words is indeclinable
+	if (voc1.class == "i" || voc2.class == "i") {
+		document.getElementById("text_gw_output").innerHTML = `?!`
+		document.getElementById("text_gw_output_detail").innerHTML = `<p style="margin-top: -1em;">두 단어 중 하나 이상이 활용 불가능한 단어여서 합성할 수 없습니다.</p><p>단어의 분류가 <strong>“불변사 (i)”</strong>가 아닌지 확인해 보세요!</p>`;
+		return -1;
+	}
+
 	//case 1: noun + noun -> A의 B
 	if ((voc1.class == "m" || voc1.class == "f") && (voc2.class == "m" || voc2.class == "f")) {
-		//singular, plural nominative non-article
-		const part1 = [voc1.grammar[0], voc1.grammar[4]]
+		//use article? if voc1 is compound then article = 1
+		let article = document.getElementById("gramwizArticle").checked || voc1.title.includes(" ") ? 1 : 0;
+		const ban_genitive_lenition_nom = [`cuid`, `easpa`, `iomarca`, `lámh`, `adharc`, `crúb`];
+		const ban_genitive_lenition_gen = [`bean`, `fear`, `duine`];
 
-		//singular, plural genitive article; if article cannot be attached then non-article
-		const part2 = voc2.grammar[3] !== "" ? [voc2.grammar[3], voc2.grammar[7]] : [voc2.grammar[2], voc2.grammar[6]]
+		let gramwiz_result = ["", "", "", ""];
 
-		let phrase = [`${part1[0]} ${part2[0]}`, `${part1[1]} ${part2[0]}`, `${part1[0]} ${part2[1]}`, `${part1[1]} ${part2[1]}`]
-
-		//no plural e. g. Éire
-		if (part1[1] == "") {
-			phrase[1] = ""; phrase[3] = "";
+		function Join(a, b, lenition = false) {
+			if (voc1.grammar[a] == "" || voc2.grammar[b] == "") {
+				return "";
+			}
+			else {
+				const left = voc1.grammar[a]
+				const right = lenition ? irish_mutation(voc2.grammar[b], "l") : voc2.grammar[b];
+				return `${left} ${right}`;
+			}
 		}
-		else if (part2[1] == "") {
-			phrase[2] = ""; phrase[3] = "";
+
+		//B is compound -> article = 1
+		let b_is_comp = false;
+		for (let i = 0; i < voc2.grammar.length; i += 2) {
+			if (voc2.grammar[i].includes(" ")) {
+				b_is_comp = true; break;
+			}
+		}
+		if (b_is_comp) { article = 1; }
+
+
+		if (article === 1) {
+			//sg only or pl only?
+			gramwiz_result[0] = Join(0, 3, false);	gramwiz_result[1] = Join(4, 3, false);
+			gramwiz_result[2] = Join(0, 7, false);	gramwiz_result[3] = Join(4, 7, false);
+		}
+		else if (article === 0) {
+			//lenition-banned word?
+			if (ban_genitive_lenition_nom.includes(voc1.grammar[0]) || ban_genitive_lenition_gen.includes(voc2.grammar[0])) {
+				gramwiz_result[0] = Join(0, 2, false);	gramwiz_result[1] = Join(4, 2, false);
+				gramwiz_result[2] = Join(0, 6, false);	gramwiz_result[3] = Join(4, 6, false);
+			}
+			//A = sg. nom. fem.?
+			else if (voc1.class == "f") {
+				gramwiz_result[0] = Join(0, 2, true);	gramwiz_result[1] = Join(4, 2, false);
+				gramwiz_result[2] = Join(0, 6, true);	gramwiz_result[3] = Join(4, 6, false);
+			}
+			//A = slender pl.?
+			else if (voc1.grammar[8] === "slender") {
+				gramwiz_result[0] = Join(0, 2, false);	gramwiz_result[1] = Join(4, 2, true);
+				gramwiz_result[2] = Join(0, 6, false);	gramwiz_result[3] = Join(4, 6, true);
+			}
+			else {
+				gramwiz_result[0] = Join(0, 2, false);	gramwiz_result[1] = Join(4, 2, false);
+				gramwiz_result[2] = Join(0, 6, false);	gramwiz_result[3] = Join(4, 6, false);
+			}
 		}
 
 		//representative
-		document.getElementById("text_gw_output").innerHTML = `<p>${phrase[0]} [${get_sound(phrase[0], true)}]</p><p>“${voc2.gloss.sh}의 ${voc1.gloss.sh}”</p>`;
+		let representative = gramwiz_result[0];
+		for (let i = 0; i < gramwiz_result.length - 1; i ++) {
+			if (gramwiz_result[i] != "") { break; }
+			else { representative = gramwiz_result[i + 1]; }
+		}
+
+		document.getElementById("text_gw_output").innerHTML = `
+			<p>
+				${representative}&nbsp;&nbsp;
+				<span class="IPA" style="font-size: 0.75em; font-style: normal;">[${get_sound(representative)}]</span>
+			</p>
+			<p>“ ${voc2.gloss.sh}의 ${voc1.gloss.sh} ”</p>`;
 
 		//details
 		document.getElementById("text_gw_output_detail").innerHTML = `
@@ -70,91 +127,102 @@ function gramwiz_output() {
 				</tr>
 				<tr>
 					<th>${voc2.gloss.sh}의</th>
-					<td><p><strong>${phrase[0]}</strong></p><p class="original_script>${LattoOrg(phrase[0])}</p><p class="IPA"><small>[${get_sound(phrase[0], true)}]</small></p></td>
-					<td><p><strong>${phrase[1]}</strong></p><p class="original_script>${LattoOrg(phrase[1])}</p><p class="IPA"><small>[${get_sound(phrase[1], true)}]</small></p></td>
+					<td><p><strong>${gramwiz_result[0]}</strong></p><p class="original_script>${LattoOrg(gramwiz_result[0])}</p><p class="IPA"><small>[${get_sound(gramwiz_result[0])}]</small></p></td>
+					<td><p><strong>${gramwiz_result[1]}</strong></p><p class="original_script>${LattoOrg(gramwiz_result[1])}</p><p class="IPA"><small>[${get_sound(gramwiz_result[1])}]</small></p></td>
 				</tr>
 				<tr>
 					<th>${voc2.gloss.sh}들의</th>
-					<td><p><strong>${phrase[2]}</strong></p><p class="original_script>${LattoOrg(phrase[2])}</p><p class="IPA"><small>[${get_sound(phrase[2], true)}]</small></p></td>
-					<td><p><strong>${phrase[3]}</strong></p><p class="original_script>${LattoOrg(phrase[3])}</p><p class="IPA"><small>[${get_sound(phrase[3], true)}]</small></p></td>
+					<td><p><strong>${gramwiz_result[2]}</strong></p><p class="original_script>${LattoOrg(gramwiz_result[2])}</p><p class="IPA"><small>[${get_sound(gramwiz_result[2])}]</small></p></td>
+					<td><p><strong>${gramwiz_result[3]}</strong></p><p class="original_script>${LattoOrg(gramwiz_result[3])}</p><p class="IPA"><small>[${get_sound(gramwiz_result[3])}]</small></p></td>
 				</tr>
-			</table>`;
+			</table>`.replaceAll("[]", "―");
 	}
 
 	//case 2: adj + noun -> A한 B
-	if ((voc1.class == "a" && (voc2.class == "m" || voc2.class == "f")) || voc2.class == "a" && (voc1.class == "m" || voc1.class == "f")) {
+	else if ((voc1.class == "a" && (voc2.class == "m" || voc2.class == "f")) || voc2.class == "a" && (voc1.class == "m" || voc1.class == "f")) {
 		const non = voc2.class == "a" ? voc1 : voc2;
 		const adj = voc1.class == "a" ? voc1 : voc2;
 
-		//noun: is genitive article-attachable?
-		let part1 = [``, ``, ``, ``, ``];
-		part1[0] = non.grammar[0]; //sing. nom.
-		part1[1] = non.grammar[3] != "" ? non.grammar[3] : non.grammar[2] //sing. gen.
-		part1[2] = non.grammar[4]; //pl. nom.
-		part1[3] = non.grammar[7] != "" ? non.grammar[7] : non.grammar[6] //pl. gen.
-		part1[4] = non.grammar[1] != "" ? non.grammar[1] : non.grammar[0]; //sing. gen. with article for comparatives
-
-		//[sg. nom, sg. gen, pl. nom, pl. gen, comp]
-		let part2 = [];
-		if (non.class === "m") {
-			part2.push(adj.grammar[0], adj.grammar[2]);
-		}
-		else if (non.class === "f") {
-			part2.push(adj.grammar[1], adj.grammar[3]);
+		let gramwiz_result = ["0", "1", "2", "3", "4", "5", "6", "7", ""];
+		for (let i = 0; i <= 7; i ++) {
+			if (non.grammar[i] == "" || adj.grammar[i] == "") { gramwiz_result[i] = ""; }
 		}
 
-		// pl.nom broad - slender
-		if (non.grammar[8] === "broad") {
-			part2.push(adj.grammar[4]);
+		function Join(a, b) { return non.grammar[a] + " " + adj.grammar[b]; }
+
+		if (gramwiz_result[0] != "") {
+			gramwiz_result[0] = non.class == "m" ? Join(0, 0) : Join(0, 1);
 		}
-		else if (non.grammar[8] === "slender") {
-			part2.push(adj.grammar[5]);
+		if (gramwiz_result[1] != "") {
+			gramwiz_result[1] = non.class == "m" ? Join(1, 0) : Join(1, 1);
 		}
-		else { //no plural
-			part2.push("");
+		if (gramwiz_result[2] != "") {
+			gramwiz_result[2] = non.class == "m" ? Join(2, 2) : Join(2, 3);
+		}
+		if (gramwiz_result[3] != "") {
+			gramwiz_result[3] = non.class == "m" ? Join(3, 2) : Join(3, 3);
+		}
+		if (gramwiz_result[4] != "") {
+			gramwiz_result[4] = non.grammar[8] == "broad" ? Join(4, 4) : Join(4, 5);
+		}
+		if (gramwiz_result[5] != "") {
+			gramwiz_result[5] = non.grammar[8] == "broad" ? Join(5, 4) : Join(5, 5);
+		}
+		if (gramwiz_result[6] != "") {
+			gramwiz_result[6] = non.grammar[9] == "strong" ? Join(6, 6) : Join(6, 7);
+		}
+		if (gramwiz_result[7] != "") {
+			gramwiz_result[7] = non.grammar[9] == "strong" ? Join(7, 6) : Join(7, 7);
 		}
 
-		// pl.gen strong - weak
-		if (non.grammar[9] === "strong") {
-			part2.push(adj.grammar[6]);
-		}
-		else if (non.grammar[9] === "weak") {
-			part2.push(adj.grammar[7]);
-		}
-		else { //no plural
-			part2.push("");
-		}
-
-		//comparative
-		part2.push(adj.grammar[9]);
+		let comp_num = 1;
+		if (comp_num === 1 && non.grammar[1] == "") { comp_num = 0; }
+		if (comp_num === 0 && non.grammar[0] == "") { comp_num = 5; }
+		if (comp_num === 5 && non.grammar[5] == "") { comp_num = 4; }
+		let isExistComp = adj.grammar[9] != "";
+		gramwiz_result[8] = isExistComp ? Join(comp_num, 9) : "";
 
 		//representative
-		document.getElementById("text_gw_output").innerHTML = `<p>${part1[0] + " " + part2[0]} [${get_sound(part1[0] + " " + part2[0], true)}]</p><p>“${adj.gloss.sh} ${non.gloss.sh}”</p>`;
+		let representative = gramwiz_result[0];
+		for (let i = 0; i < gramwiz_result.length - 1; i ++) {
+			if (gramwiz_result[i] != "") { break; }
+			else { representative = gramwiz_result[i + 1]; }
+		}
+
+		document.getElementById("text_gw_output").innerHTML = `
+			<p>
+				${representative}&nbsp;&nbsp;
+				<span class="IPA" style="font-size: 0.75em; font-style: normal;">[${get_sound(representative)}]</span>
+			</p>
+			<p>“${adj.gloss.sh} ${non.gloss.sh}”</p>`;
 
 		//details
 		document.getElementById("text_gw_output_detail").innerHTML = `
 			<table>
 				<tr>
-					<th style="width: 10%;">&nbsp;</th>
+					<th style="min-width: 50px;">&nbsp;</th>
 					<th style="width: 30%;">${adj.gloss.sh}...</small></th>
 					<th style="width: 30%;">~의</small></th>
 				</tr>
 				<tr>
 					<th>${non.gloss.sh}</th>
-					<td><p><strong>${part1[0] + " " + part2[0]}</strong></p><p class="original_script>${LattoOrg(part1[0] + " " + part2[0])}</p><p class="IPA"><small>[${get_sound(part1[0] + " " + part2[0], true)}]</small></p></td>
-					<td><p><strong>${part1[1] + " " + part2[1]}</strong></p><p class="original_script>${LattoOrg(part1[1] + " " + part2[1])}</p><p class="IPA"><small>[${get_sound(part1[1] + " " + part2[1], true)}]</small></p></td>
+					<td><p><strong>${gramwiz_result[0]}</strong></p><p class="original_script>${LattoOrg(gramwiz_result[0])}</p><p class="IPA"><small>[${get_sound(gramwiz_result[0])}]</small></p></td>
+					<td><p><strong>${gramwiz_result[2]}</strong></p><p class="original_script>${LattoOrg(gramwiz_result[2])}</p><p class="IPA"><small>[${get_sound(gramwiz_result[2])}]</small></p></td>
 				</tr>
 				<tr>
 					<th>${non.gloss.sh}들</th>
-					<td><p><strong>${part1[2] + " " + part2[2]}</strong></p><p class="original_script>${LattoOrg(part1[2] + " " + part2[2])}</p><p class="IPA"><small>[${get_sound(part1[2] + " " + part2[2], true)}]</small></p></td>
-					<td><p><strong>${part1[3] + " " + part2[3]}</strong></p><p class="original_script>${LattoOrg(part1[3] + " " + part2[3])}</p><p class="IPA"><small>[${get_sound(part1[3] + " " + part2[3], true)}]</small></p></td>
+					<td><p><strong>${gramwiz_result[4]}</strong></p><p class="original_script>${LattoOrg(gramwiz_result[4])}</p><p class="IPA"><small>[${get_sound(gramwiz_result[4])}]</small></p></td>
+					<td><p><strong>${gramwiz_result[6]}</strong></p><p class="original_script>${LattoOrg(gramwiz_result[6])}</p><p class="IPA"><small>[${get_sound(gramwiz_result[6])}]</small></p></td>
 				</tr>
-			</table>
-			<p style="text-align:left;">&nbsp;&nbsp;<strong>더/가장 ${adj.gloss.sh} ${non.gloss.sh}</strong>: ${part1[4]} ${part2[4]} <span class="IPA"><small>[${get_sound(part1[4] + " " + part2[4], true)}]</small></span></p>`;
+			</table>`.replaceAll("[]", "―");
+
+		if (isExistComp) {
+			document.getElementById("text_gw_output_detail").innerHTML += `<p style="text-align:left;">&nbsp;&nbsp;<strong>더/가장 ${adj.gloss.sh} ${non.gloss.sh}</strong>: <strong>${gramwiz_result[8]}</strong> <span class="IPA"><small>[${get_sound(gramwiz_result[8])}]</small></span></p>`;
+		}
 	}
 
-	//case 1: adj + adj -> error
-	if (voc1.class == "a" && voc2.class == "a") {
+	//case 3: adj + adj -> error
+	else if (voc1.class == "a" && voc2.class == "a") {
 		document.getElementById("text_gw_output").innerHTML = `<small>형용사 + 명사 (A한 B) 또는 명사 + 명사 (A의 B)를 입력해 보세요!</small>`;
 		document.getElementById("text_gw_output_detail").innerHTML = "";
 	}
@@ -177,7 +245,7 @@ function gramwiz_suggest(text, num) {
 		let link = dict[padN]["key"];
 		let t0 = dict[padN]["title"];
 		let t1 = typeof dict[padN]["tag"]["homonym"] === undefined ? "" : dict[padN]["tag"]["homonym"];
-		let t3 = GetHangul(t0);
+		let t3 = sound_get_han(t0);
 
 		let t = t0 + "<sup>" + t1 + "</sup>" + " <small>(" + t3 + ")</small>";
 
@@ -237,8 +305,8 @@ function gramwiz_clear() {
 
 	document.getElementById("text_gw_input_1").value = "";
 	document.getElementById("text_gw_input_2").value = "";
-	document.getElementById("text_gw_display_1").value = "";
-	document.getElementById("text_gw_display_2").value = "";
+	document.getElementById("text_gw_display_1").innerHTML = "";
+	document.getElementById("text_gw_display_2").innerHTML = "";
 	document.getElementById("text_gw_output").innerHTML = "";
 	document.getElementById("text_gw_output_detail").innerHTML = "";
 }
