@@ -87,16 +87,30 @@ function gramwiz_output() {
 				gramwiz_result[0] = Join(0, 2, false);	gramwiz_result[1] = Join(4, 2, false);
 				gramwiz_result[2] = Join(0, 6, false);	gramwiz_result[3] = Join(4, 6, false);
 			}
-			//A = sg. nom. fem.?
-			else if (voc1.class == "f") {
+			// dlnst + dst -> no lenition
+			else if (["d", "l", "n", "s", "t"].includes(voc1.grammar[0].at(-1)) && ["d", "s", "t"].includes(voc2.grammar[0].at(0))) {
+				gramwiz_result[0] = Join(0, 2, false);	gramwiz_result[1] = Join(4, 2, false);
+				gramwiz_result[2] = Join(0, 6, false);	gramwiz_result[3] = Join(4, 6, false);
+			}
+			// XX + f -> no lenition
+			else if (voc2.grammar[0].at(0).toLowerCase() === "f") {
+				gramwiz_result[0] = Join(0, 2, false);	gramwiz_result[1] = Join(4, 2, false);
+				gramwiz_result[2] = Join(0, 6, false);	gramwiz_result[3] = Join(4, 6, false);
+			}
+			//A = sg. nom. fem.? A = slender pl.?
+			else if (voc1.class === "f" && voc1.grammar[8] === "slender") {
+				gramwiz_result[0] = Join(0, 2, true);	gramwiz_result[1] = Join(4, 2, true);
+				gramwiz_result[2] = Join(0, 6, true);	gramwiz_result[3] = Join(4, 6, true);
+			}
+			else if (voc1.class === "f" && voc1.grammar[8] !== "slender") {
 				gramwiz_result[0] = Join(0, 2, true);	gramwiz_result[1] = Join(4, 2, false);
 				gramwiz_result[2] = Join(0, 6, true);	gramwiz_result[3] = Join(4, 6, false);
 			}
-			//A = slender pl.?
-			else if (voc1.grammar[8] === "slender") {
+			else if (voc1.class !== "f" && voc1.grammar[8] === "slender") {
 				gramwiz_result[0] = Join(0, 2, false);	gramwiz_result[1] = Join(4, 2, true);
 				gramwiz_result[2] = Join(0, 6, false);	gramwiz_result[3] = Join(4, 6, true);
 			}
+
 			else {
 				gramwiz_result[0] = Join(0, 2, false);	gramwiz_result[1] = Join(4, 2, false);
 				gramwiz_result[2] = Join(0, 6, false);	gramwiz_result[3] = Join(4, 6, false);
