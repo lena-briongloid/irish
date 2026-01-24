@@ -1,7 +1,6 @@
 //LANGUAGE: IRISH
 const RVD = `24 Jan 2026`;
-//document.getElementById("RevisionDate").innerHTML = RVD;
-document.getElementById("copyright").innerHTML = document.getElementById("copyright").innerHTML.replaceAll("13 Jan 2026", RVD);
+document.getElementById("RevisionDate").innerHTML = RVD;
 
 //diacritics
 const DiacriticsBef = ["á", "é", "í", "ó", "ú", "Á", "É", "Í", "Ó", "Ú"];
