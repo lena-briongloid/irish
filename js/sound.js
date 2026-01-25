@@ -434,15 +434,22 @@ function sound_get_ipa(text, hideSyllableMark = false, forHangulOnly = null) {
 	}
 
 	//epenthesis
+	/*Bíonn ina ghuta cúnta idir an dá chonsan sna péirí seo a leanas nuair is consain leathana iad mura mbíonn guta fada rompu: (a) lb, lbh, lf, lg, lm, lmh (b) nb, nbh, nch, nf, nm (c) rb, rbh, rf, rg, rm.
+	Bíonn i ina ghuta cúnta idir an dá chonsan sna péirí seo a leanas nuair is consain chaola iad mura mbíonn guta fada rompu: (a) lb, lbh, lf, lg, lm (b) nb, nbh, nm (c) rb, rbh, rf, rg, rm.
+	*/
 	//sonorant + (non-dental sonorant or voiced obstruent); after short monovowel
-	if (forHangulOnly === false) {
-		for (let i = 0; i < Parse.length - 1; i ++) {
-			const conditionSonorantPreceed = /[lmnɾ]/.test(IPA[i].toLowerCase());
-			const conditionSonorantFollow = /[mbdɡɣwvx]/.test(IPA[i + 1].toLowerCase());
-			const conditionAfterShortVowel = !/au̯|ai̯|iə|uə|ː/.test(IPA[i - 1]);
+	for (let i = 0; i < Parse.length - 1; i ++) {
+		const cluster = Parse[i] + Parse[i + 1];
+		const conditionClusterBroad = [`lb`, `lbh`, `lf`, `lg`, `lm`, `lmh`, `nb`, `nbh`, `nch`, `nf`, `nm`, `rb`, `rbh`, `rf`, `rg`, `rm`].includes(cluster);
+		const conditionClusterSlender = [`LB`, `LBH`, `LF`, `LG`, `LM`, `NB`, `NBH`, `NM`, `RB`, `RBH`, `RF`, `RG`, `RM`].includes(cluster);
+		const conditionAfterShortVowel = !/au̯|ai̯|iə|uə|ː/.test(IPA[i - 1]);
 
-			if (conditionSonorantPreceed && conditionSonorantFollow && conditionAfterShortVowel) {
+		if (forHangulOnly === false || (forHangulOnly === true && /[ln]/i.test(Parse[i])) ) {
+			if (conditionClusterBroad && conditionAfterShortVowel) {
 				IPA[i] = IPA[i] + "ə";
+			}
+			else if (conditionClusterSlender && conditionAfterShortVowel) {
+				IPA[i] = IPA[i] + "ɪ";
 			}
 		}
 	}
@@ -475,14 +482,15 @@ function sound_get_han(text) {
 	ipa = ipa.replace(REGEX_IPA_TO_HAN_CONSONANT, matched => ARRAY_IPA_TO_HAN_CONSONANT[matched]);
 	ipa = ipa.replace(REGEX_IPA_TO_HAN_AFTERWORK, matched => ARRAY_IPA_TO_HAN_AFTERWORK[matched]);
 
-	ipa = ipa.replace(/([w])(?![aeiouj])/g, "u");
+	ipa = ipa.replace(/([w])(?![aeioujʌ])/g, "u");
+	ipa = ipa.replace(/(ʌu)(?![aeioujʌ])/g, "u");
 	ipa = ipa.replace(/ʃ/g, "si");
 
 	//attach ɯ
-	ipa = ipa.replace(/([bkdpghkprstz])(?![aeiouj])/g, "$1ɯ");
+	ipa = ipa.replace(/([bkdpghkprstz])(?![aeioujʌ])/g, "$1ɯ");
 
 	//chained liquids
-	ipa = ipa.replace(/([mnlr])([mnl])(?![aeioujɯ])/g, "$1ɯ$2");
+	ipa = ipa.replace(/([mnlr])([mnl])(?![aeioujɯʌ])/g, "$1ɯ$2");
 	ipa = ipa.replace(/( )([mn])([rl])/g, "$1$2ɯ$3");
 
 	//move initial ŋ and nr mr etc.
@@ -491,7 +499,7 @@ function sound_get_han(text) {
 	ipa = ipa.replace(/(^ŋ| ŋ)/g, "응");
 
 	//split coda l
-	ipa = ipa.replace(/(?<=[aeiouɯ])([l])(?=[aeioujɯ])/g, "lr");
+	ipa = ipa.replace(/(?<=[aeiouɯ])([l])(?=[aeioujɯʌ])/g, "lr");
 
 	//initial ua, ia -> wa, ja
 	ipa = ipa.replace(/(?<=[ aeiou])(ua)/g, "wa");
@@ -504,9 +512,9 @@ function sound_get_han(text) {
 	ipa = ipa.replace(/(.)\1+/g, '$1');
 
 	//mark syllable boundaries
-	ipa = ipa.replace(/(?<=[aeiouɯ])([mnlŋ])(?![aeioujɯ])/g, "$1\.");
+	ipa = ipa.replace(/(?<=[aeiouɯ])([mnlŋ])(?![aeioujɯʌ])/g, "$1\.");
 	ipa = ipa.replace(/([aeiouɯ])(?![mnlŋ])/g, "$1\.");
-	ipa = ipa.replace(/([aeiouɯ])([mnlŋ])([aeioujɯ])/g, "$1\.$2$3");
+	ipa = ipa.replace(/([aeiouɯ])([mnlŋ])([aeioujɯʌ])/g, "$1\.$2$3");
 
 	//to hangul syllabary
 	ipa = ipa.replace(REGEX_HAN_SYLLABARY, matched => ARRAY_HAN_SYLLABARY[matched]);
@@ -711,8 +719,9 @@ const REGEX_PARSE_ELS = new RegExp(`(${REGEX_SPECIAL_LIST.source}|${/eai|iai|uai
 
 //ipa to hangul replacements
 const ARRAY_IPA_TO_HAN_PREPROCESS = {
-	"ː": "", "ə": "", "N": "n", "L": "l", "\u0325": "",
-	"ɛ": "e", "ɪ": "i", "ɔ": "o", "ʊ": "u", "i̯": "i", "u̯": "u", "ʝ": "i",
+	"ː": "", "N": "n", "L": "l", "\u0325": "",
+	"nə": "nʌ", "lə": "lʌ",
+	"ə": "", "ɛ": "e", "ɪ": "i", "ɔ": "o", "ʊ": "u", "i̯": "i", "u̯": "u", "ʝ": "i",
 	"ɣ": "g", "ɡ": "g", "f": "p", "ʤ": "z", "ʒ": "z", "ɾ": "r", "v": "b"
 };
 const ARRAY_IPA_TO_HAN_CONSONANT = {
@@ -747,7 +756,7 @@ const REGEX_IPA_TO_HAN_AFTERWORK = new RegExp(Object.keys(ARRAY_IPA_TO_HAN_AFTER
 
 //hangul syllabary
 const ARRAY_HAN_SYLLABARY = {
-	"a": "아", "e": "에", "i": "이", "o": "오", "u": "우", "ja": "야", "je": "예", "jo": "요", "ju": "유", "ɯ": "으", "ba": "바", "be": "베", "bi": "비", "bo": "보", "bu": "부", "bja": "뱌", "bje": "볘", "bjo": "뵤", "bju": "뷰", "bɯ": "브", "da": "다", "de": "데", "di": "디", "do": "도", "du": "두", "dja": "댜", "dje": "뎨", "djo": "됴", "dju": "듀", "dɯ": "드", "ga": "가", "ge": "게", "gi": "기", "go": "고", "gu": "구", "gja": "갸", "gje": "계", "gjo": "교", "gju": "규", "gɯ": "그", "ha": "하", "he": "헤", "hi": "히", "ho": "호", "hu": "후", "hja": "흐야", "hje": "흐예", "hjo": "흐요", "hju": "흐유", "hɯ": "흐", "ka": "카", "ke": "케", "ki": "키", "ko": "코", "ku": "쿠", "kja": "캬", "kje": "켸", "kjo": "쿄", "kju": "큐", "kɯ": "크", "la": "라", "le": "레", "li": "리", "lo": "로", "lu": "루", "lja": "랴", "lje": "례", "ljo": "료", "lju": "류", "lɯ": "르", "ma": "마", "me": "메", "mi": "미", "mo": "모", "mu": "무", "mja": "먀", "mje": "몌", "mjo": "묘", "mju": "뮤", "mɯ": "므", "na": "나", "ne": "네", "ni": "니", "no": "노", "nu": "누", "nja": "냐", "nje": "녜", "njo": "뇨", "nju": "뉴", "nɯ": "느", "pa": "파", "pe": "페", "pi": "피", "po": "포", "pu": "푸", "pja": "퍄", "pje": "폐", "pjo": "표", "pju": "퓨", "pɯ": "프", "ra": "라", "re": "레", "ri": "리", "ro": "로", "ru": "루", "rja": "랴", "rje": "례", "rjo": "료", "rju": "류", "rɯ": "르", "sa": "사", "se": "세", "si": "시", "so": "소", "su": "수", "sja": "샤", "sje": "셰", "sjo": "쇼", "sju": "슈", "sɯ": "스", "ta": "타", "te": "테", "ti": "티", "to": "토", "tu": "투", "tja": "탸", "tje": "톄", "tjo": "툐", "tju": "튜", "tɯ": "트", "wa": "와", "we": "웨", "wi": "위", "wo": "워", "wu": "우", "wja": "븩", "wje": "뵥", "wjo": "뺩", "wju": "즥", "wɯ": "우", "za": "자", "ze": "제", "zi": "지", "zo": "조", "zu": "주", "zja": "자", "zje": "제", "zjo": "조", "zju": "주", "zɯ": "즈", "ʧa": "차", "ʧe": "체", "ʧi": "치", "ʧo": "초", "ʧu": "추", "ʧja": "차", "ʧje": "체", "ʧjo": "초", "ʧju": "추", "ʧɯ": "츠"
+	"a": "아", "e": "에", "i": "이", "o": "오", "u": "우", "ja": "야", "je": "예", "jo": "요", "ju": "유", "ɯ": "으", "ba": "바", "be": "베", "bi": "비", "bo": "보", "bu": "부", "bja": "뱌", "bje": "볘", "bjo": "뵤", "bju": "뷰", "bɯ": "브", "da": "다", "de": "데", "di": "디", "do": "도", "du": "두", "dja": "댜", "dje": "뎨", "djo": "됴", "dju": "듀", "dɯ": "드", "ga": "가", "ge": "게", "gi": "기", "go": "고", "gu": "구", "gja": "갸", "gje": "계", "gjo": "교", "gju": "규", "gɯ": "그", "ha": "하", "he": "헤", "hi": "히", "ho": "호", "hu": "후", "hja": "흐야", "hje": "흐예", "hjo": "흐요", "hju": "흐유", "hɯ": "흐", "ka": "카", "ke": "케", "ki": "키", "ko": "코", "ku": "쿠", "kja": "캬", "kje": "켸", "kjo": "쿄", "kju": "큐", "kɯ": "크", "la": "라", "le": "레", "li": "리", "lo": "로", "lu": "루", "lja": "랴", "lje": "례", "ljo": "료", "lju": "류", "lɯ": "르", "ma": "마", "me": "메", "mi": "미", "mo": "모", "mu": "무", "mja": "먀", "mje": "몌", "mjo": "묘", "mju": "뮤", "mɯ": "므", "na": "나", "ne": "네", "ni": "니", "no": "노", "nu": "누", "nja": "냐", "nje": "녜", "njo": "뇨", "nju": "뉴", "nɯ": "느", "pa": "파", "pe": "페", "pi": "피", "po": "포", "pu": "푸", "pja": "퍄", "pje": "폐", "pjo": "표", "pju": "퓨", "pɯ": "프", "ra": "라", "re": "레", "ri": "리", "ro": "로", "ru": "루", "rja": "랴", "rje": "례", "rjo": "료", "rju": "류", "rɯ": "르", "sa": "사", "se": "세", "si": "시", "so": "소", "su": "수", "sja": "샤", "sje": "셰", "sjo": "쇼", "sju": "슈", "sɯ": "스", "ta": "타", "te": "테", "ti": "티", "to": "토", "tu": "투", "tja": "탸", "tje": "톄", "tjo": "툐", "tju": "튜", "tɯ": "트", "wa": "와", "we": "웨", "wi": "위", "wo": "워", "wu": "우", "wja": "븩", "wje": "뵥", "wjo": "뺩", "wju": "즥", "wɯ": "우", "za": "자", "ze": "제", "zi": "지", "zo": "조", "zu": "주", "zja": "자", "zje": "제", "zjo": "조", "zju": "주", "zɯ": "즈", "ʧa": "차", "ʧe": "체", "ʧi": "치", "ʧo": "초", "ʧu": "추", "ʧja": "차", "ʧje": "체", "ʧjo": "초", "ʧju": "추", "ʧɯ": "츠", "nʌ": "너", "rʌ": "러"
 };
 const ARRAY_HAN_SYLLABARY_ALTER = {
 	"갼": "기안", "걀": "기알", "걈": "기암", "걍": "기앙", "굔": "기온", "굘": "기올", "굠": "기옴", "굥": "기옹", "균": "기운", "귤": "기울", "귬": "기움", "귱": "기웅", "냔": "니안", "냘": "니알", "냠": "니암", "냥": "니앙", "뇬": "니온", "뇰": "니올", "뇸": "니옴", "뇽": "니옹", "뉸": "니운", "뉼": "니울", "늄": "니움", "늉": "니웅", "댠": "디안", "댤": "디알", "댬": "디암", "댱": "디앙", "됸": "디온", "됼": "디올", "둄": "디옴", "둉": "디옹", "듄": "디운", "듈": "디울", "듐": "디움", "듕": "디웅", "랸": "리안", "랼": "리알", "럄": "리암", "량": "리앙", "룐": "리온", "룔": "리올", "룜": "리옴", "룡": "리옹", "륜": "리운", "률": "리울", "륨": "리움", "륭": "리웅", "먄": "미안", "먈": "미알", "먐": "미암", "먕": "미앙", "묜": "미온", "묠": "미올", "묨": "미옴", "묭": "미옹", "뮨": "미운", "뮬": "미울", "뮴": "미움", "뮹": "미웅", "뱐": "비안", "뱔": "비알", "뱜": "비암", "뱡": "비앙", "뵨": "비온", "뵬": "비올", "뵴": "비옴", "뵹": "비옹", "뷴": "비운", "뷸": "비울", "븀": "비움", "븅": "비웅", "캰": "키안", "캴": "키알", "캼": "키암", "컁": "키앙", "쿈": "키온", "쿌": "키올", "쿔": "키옴", "쿙": "키옹", "큔": "키운", "큘": "키울", "큠": "키움", "큥": "키웅", "탼": "티안", "턀": "티알", "턈": "티암", "턍": "티앙", "툔": "티온", "툘": "티올", "툠": "티옴", "툥": "티옹", "튠": "티운", "튤": "티울", "튬": "티움", "튱": "티웅", "퍈": "피안", "퍌": "피알", "퍰": "피암", "퍙": "피앙", "푠": "피온", "푤": "피올", "푬": "피옴", "푱": "피옹", "퓬": "피운", "퓰": "피울", "퓸": "피움", "퓽": "피웅", "햔": "히안", "햘": "히알", "햠": "히암", "향": "히앙", "횬": "히온", "횰": "히올", "횸": "히옴", "횽": "히옹", "휸": "히운", "휼": "히울", "흄": "히움", "흉": "히웅"
